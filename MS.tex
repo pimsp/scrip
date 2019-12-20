@@ -1,0 +1,358 @@
+\documentclass{article}
+
+\usepackage{graphicx}
+%\pagestyle{empty}
+\usepackage{dsfont}
+\usepackage{textcomp}
+\usepackage{amsmath}
+\usepackage{courier}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{amsthm}
+\usepackage{eucal}
+\usepackage{amssymb}
+%\usepackage{mdsymbol}
+\usepackage{mathrsfs}
+\usepackage{dsfont}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{caption}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{wrapfig,lipsum,booktabs}
+\usepackage{caption}
+\usepackage[square, longnamesfirst,numbers]{natbib}
+\usepackage[ruled,linesnumbered]{algorithm2e}
+
+%\usepackage{hyperref}
+\usepackage{amstext} % for \text macro
+\usepackage{array}   % for \newcolumntype macro
+\usepackage[unicode]{hyperref}
+\usepackage{verbatim}
+\usepackage{makecell}
+\usepackage{float}
+
+\newcolumntype{C}{>{$}c<{$}} % math-mode version of "l" column type
+
+\newcommand{\den}{\mathop{\mathgroup\symoperators den}\nolimits}
+\newcommand{\ggd}{\mathop{\mathgroup\symoperators ggd}\nolimits}
+\newcommand{\des}{\text{d.e.s.d.a.\ }}
+%\newcommand{\opg}{\text{d.e.s.d.a.\ }}
+\newcommand{\blokje}{\hfill $\Box$\\}
+%Om je bewijs of je antwoord af te sluiten.
+\newcommand{\header}[1]{\vspace{0.5cm}\framebox[\linewidth]{\textsc{Exercise #1}}\\}
+\newcommand{\deel}[1]{\textbf{#1)}\ }
+\newcommand{\macht}[1]{\mathcal{P}(#1)}
+\newcommand{\entier}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Lcal}{\mathcal{L}}
+\renewcommand{\O}{\mathcal{O}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\Pcal}{\mathcal{P}}
+\newcommand{\NP}{\mathcal{NP}}
+\newcommand{\NPC}{\mathcal{NPC}}
+\newcommand{\F}{\mathbb{F}}
+\renewcommand{\angle}[1]{\hspace{-2pt}\left\langle #1 \right\rangle}
+\newcommand{\rad}{\text{rad}}
+\newcommand{\x}{x}
+\newcommand{\tensor}{\otimes}
+\newcommand{\Ring}{\textbf{Rings}}
+\newcommand{\Sets}{\textbf{Sets}}
+
+\DeclareMathOperator{\mon}{mon}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\trdeg}{trdeg}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\Fun}{Fun}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\sep}{sep}
+\DeclareMathOperator{\Ann}{Ann}
+\let\S\undefined
+\DeclareMathOperator{\S}{S}
+\DeclareMathOperator{\A}{A}
+
+\frenchspacing
+
+\begingroup
+\makeatletter
+\@for\theoremstyle:=definition,remark,plain\do{%
+	\expandafter\g@addto@macro\csname th@\theoremstyle\endcsname{%
+		\addtolength{\thm@preskip}{5pt}
+		\setlength{\thm@postskip}{10pt}
+	}%
+}
+\endgroup %Zorgt voor mooie enters voor claims
+
+
+\title{A geometric approach to linear and quadratic Chabauty}
+\author{Pim Spelier}
+\date{November 2015}
+
+%\newtheoremstyle{mytheoremstyle}{5pt}{-15pt}{\itshape}{}{\bfseries}{.}{.5em}{} 
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section] % reset theorem numbering for each section
+\newtheorem{lem}[thm]{Lemma} % same for lemma's
+\newtheorem{conj}[thm]{Conjecture} % same for vermoedens
+\newtheorem{cor}[thm]{Corollary} % same for vermoedens
+\newtheorem{prop}[thm]{Proposition} % same for vermoedens
+\newtheorem{algo}[thm]{Algorithm} % same for vermoedens
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition} % definition numbers are dependent on theorem numbers
+\newtheorem{exmp}[thm]{Example} % same for example numbers
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark} % remark numbers are dependent on theorem numbers
+
+\usepackage{chngcntr}
+\counterwithin{table}{section}
+
+\newcommand{\overbar}[1]{\overline{#1}}
+
+%\setlength{\parindent}{0pt}
+%\setlength{\parskip}{\baselineskip}
+
+\newcommand\legendre[2]{
+  \genfrac(){}{}{#1}{#2}
+}
+
+\newcommand{\ord}{\operatorname{ord}}
+
+\begin{document}
+%\nocite{*}
+
+\vspace*{1em}
+
+\begin{center}
+
+{\Large\bf 
+P.\ Spelier
+} 
+
+\vspace{1em} 
+
+{\LARGE\bf 
+A geometric approach to linear and quadratic Chabauty
+} 
+
+\vspace{10em} 
+
+{\large\bf 
+Master thesis
+} 
+
+\vspace{1em}
+
+{\large\bf 
+\today
+}
+
+\vspace{10em} 
+
+{\large\bf
+\begin{tabular}{ll}
+Thesis supervisor: & prof. dr. S.J. Edixhoven\\
+\end{tabular}
+}
+
+\vfill
+
+\includegraphics{ulzegel_blauw}\\
+
+\vspace{2em}
+
+{\large\bf 
+Leiden University\\
+Mathematical Institute\\
+}
+
+\end{center}
+\thispagestyle{empty}
+\newpage
+
+\tableofcontents
+\newpage
+
+%-----------------------------------------------------------------------------------------------------------------------
+
+\section{Introduction}
+\label{section:intro}
+Say something about the problem, Faltings, et cetera
+
+Say something about Chabauty's general idea
+
+Mention Flyn, Coleman, Balakrishnan et al. and their way of doing quadratic quickly
+
+Say something about linear Chabauty geometric style
+
+Say something about quadratic Chabauty geometric style.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Linear Chabauty}
+Let $p>2$ be a prime, and $C$ be a scheme over $\Z$, proper, flat, regular with $C$ smooth over $\Z_{(p)}$ and $C_\Q$ of dimension $1$ and geometrically connected, of genus $g \geq 1$ and Mordell-Weil rank $r < g$. Assume we have a $\Q$-point $b$ in $C$, or equivalently a $\Z$-point. Let $J$ be the Jacobian of $C$; we view $C$ as a subscheme of $J$, using the map $Q \mapsto Q - b$ on points. Let $P \in C(\F_p)$ be a point such that $t := P - b \in J(\F_p)$ lies in the image of $J(\Z)$.
+
+\begin{defn}
+Let $S$ be a scheme, $T \to U$ a morphism of schemes and $x : T \to S$ an $T$-point. We define $S(U)_x$ as the morphisms from $U$ to $S$ that, after precomposing with $T \to U$, give $x$.
+\end{defn}
+
+We want to find an upper bound for the cardinality of $C(\Z)_P$
+
+% Say something about smooth schemes over Z_p, and their Z_p points
+\subsection{Points on a smooth scheme over \texorpdfstring{$\Z_p$}{Z\_p}}
+\label{subs:smoothzppoints}
+Let $X/\Z_p$ be a smooth scheme of dimension $d$, and let $x \in X(\F_p)$ be a point. Then $X(\Z_p)_x$ is in bijection with $\Z_p^d$. This bijection is given by choosing parameters at $x$; evaluating at $X(\Z_p)_x$ gives a bijection with $(p\Z_p)^d$, and then we divide by $p$. For putting up a nice framework to work in, we start with blowing up $X$ at $x$.
+%TODO: give proof and define $\Z_p\angle{z_1,...,z_r}$ as the $p$-adic completion of $\Z_p[z_1,...,z_r]$, i.e. powerseries which are polynomials modulo every power of $p$.
+
+% Blow up X at x, and look at the part where p generates the maximal ideal
+Assume, by looking at a neighborhood of $x$, that $X = \Spec A$ is affine and that $p,t_1,\dots,t_d$ generate $O_{X,x}$ with $t_1,\dots,t_d$ regular on $X$. By shrinking $X$ even more, we may assume that $t = (t_1,\dots,t_d): X \to \A^d_{\Z_p}$ is smooth and hence \'etale. Let $\Tilde{X}_x$ be the blowup of $X$ at $x$. Now consider the blowup $\Tilde{X}_x \to X$ of $X$ at $x$, and let $\Tilde{X}_x^p$ be the part where $p$ generates the maximal ideal. As $t$ is \'etale, the ideal of $X$ defining $x$ is the pullback along $t$ of the ideal of $\A^d_{\Z_p}$ defining the origin $a$ over $\F_p$. That means that the blowup $\Tilde{X}_x \to X$ is the pullback of the blowup $\Tilde{\A}^d_{\Z_p,a} \to \A^d$. Then the part $\Tilde{X}_x^p$ is the pullback of the corresponding part of $\Tilde{\A}^d_{\Z_p,a}$, i.e. $\Spec \Z_p[x_1/p,...,x_d/p]$ with the morphism $\Z_p[x_1,...,x_d] \to \Z_p[x_1/p,...,x_d/p]$ being the inclusion. That implies that $\Tilde{X}_x^p$ is $\Spec A[]$
+
+Conclude that $\Tilde{X}_x^p(Z_p)$ is in bijection with $X(Z_p)_x$
+
+Talk about the coordinate ring and its p-adic completion
+
+Say something about functoriality
+
+\subsection{From \texorpdfstring{$J(\Z)$}{J(Z)} to \texorpdfstring{$J(\Z_p)$}{J(Z\_p)}}
+For $p > 2$, we know that the torsion of $J(\Z)$ injects into $J(\F_p)$, by Proposition 2.3 of \cite{pierre2000}. Hence for $0 \in J(\F_p)$, we know $J(\Z)_0$ is as a group isomorphic to $\Z^r$ with $r$ the Mordell-Weil rank. By assumption, we also know $J(\Z)_t$ is in bijection with $J(\Z)_0$. By Subsection \ref{subs:smoothzppoints} we know $J(\Z_p)_t$ is in bijection with $\Z_p^{g}$, with the bijection given by evaluating parameters and dividing by $p$. Let $\kappa: \Z^r \to \Z_p^g$ be the map resulting from the inclusion $J(\Z)_t \to J(\Z_p)_t$. Then $\kappa$ turns out to have a special property.
+
+\begin{thm}
+\label{thm:kappanice}
+There are uniquely determined $\kappa_1,...,\kappa_g \in \Z_p\angle{z_1,...,z_r}$ such that for all $x \in \Z^r$ we have $\kappa(x) = (\kappa_1(x),...,\kappa_g(x))$ and the image $\overline{\kappa_i}$ of $\kappa_i$ in $\F_p[z_1,...,z_r]$ has degree at most $1$.
+\end{thm}
+TODO: give proof
+
+\begin{cor}
+\label{cor:closurejac}
+The map $\kappa$ extends uniquely to a continuous map $\kappa: \Z_p^r \to \Z_p^g$, given by the same power series, and the closure $\overline{J(\Z)_t} \subset J(\Z_p)_t$ is given by the image of $\Z_p^r$ under $\kappa$.
+\end{cor}
+TODO: give proof
+
+\subsection{From \texorpdfstring{$C(\Z_p)$}{C(Z\_p)} to \texorpdfstring{$J(\Z_p)$}{J(Z\_p)}}
+By Subsection \ref{subs:smoothzppoints}, we also know that $C(\Z_p)_P$ is in bijection with $\Z_p$, again with the bijection given by evaluating a parameter and dividing by $p$. Apparently the resulting function $\Z_p \to \Z_p^g$ is linear modulo $p$, i.e. there are power series $f_1,...,f_{g-1} \in \Z_p\angle{z_1,...,z_g}$ such that the image of $C(\Z_p)_P$ is exactly given by $V(f_1,...,f_{g-1})$, and all $f_i$ are linear modulo $p$. Another way to think of this, is as $C(\Z/p^2\Z)_P$ being an affine line inside $J(\Z/p^2\Z)_t$.
+TODO: give proof
+% Say something about the f_i defining C(Z_p) in J(Z_p)
+
+\subsection{Finding \texorpdfstring{$C(\Z)$}{C(Z)}}
+Clearly, as subsets of $J(\Z_p)_t$, we have the inclusion $C(\Z)_P \subset C(\Z_p)_P \cap \overline{J(\Z)_t}$. Let $\kappa^*f_1,...,\kappa^*f_{g-1}$ be the pullbacks along $\kappa$ of the $f_i$, and let $I$ be the ideal they generate inside $A := \Z_p\angle{z_1,...,z_r}$. Then $C(\Z_p)_P \cap \overline{J(\Z)_t}$ is in bijection with $\Hom(A/I,\Z_p)$. By Theorem 4.2 of Edixhoven-Lido, we just need to check whether $\overline{A}/\overline{I}$ is finite. As all $\overline{\kappa^* f_i}$ are linear, in fact, $\overline{A}/\overline{I}$ is always of the form $0$ or $\F_p[w_1,...,w_s]$ for some $s \leq r$, and $s = 0$ iff the system of linear equations $\overline{\kappa^* f_i} = 0, i \in \{1,...,g-1\}$ has a unique solution. In general, we may expect an upper bound for $|C(\Z)_P|$ of $1$ if $r \leq g-1$.
+TODO: give proof of Theorem 4.2.
+% Pull back the f_i along kappa for the final theorem
+
+\subsection{Calculations modulo \texorpdfstring{$p^2$}{p\^2}}
+Say something about how, for the right set of points $\{p_1,...,p_g\}$, the map $C^{g} \to J$ is etale at that set of points. Then say something about what that implies about $J(\Z_p)_0$ (equal to $\sum q_i - p_i$ where $q_i \in C(\Z_p)_{p_i}$), and $J(\Z/p^2\Z)_0$, which becomes isomorphic as vector spaces to $\F_p^g$, and how we can find $\kappa$ by expressing elements of $J(\Z)_0$ in that basis, and similarly $f_1,...,f_{g-1}$ by finding $P_1 - P_2$ in that basis for some $Q_1,Q_2 \in C(\Z/p^2\Z)_P$ not equal.
+
+An important part of this, is that there is a parametrisation $P_\mu, \mu \in \F_p$ of the points in $C(\Z/p^2\Z)_P$ such that $P_\mu + P_\nu = P_{\mu + \nu} + P_0$ as Cartier divisors.
+
+\section{Implementations of linear Chabauty and an explicit example}
+We now assume that $C$ is hyperelliptic, i.e. given by the degree $2g+2$ homogenisation of an equation of the form
+\[
+y^2 = f(x)
+\]
+inside $\P(1,g+1,1)$ where $f$ is a monic polynomial of degree $2g+1$ or $2g+2$. An alternative way of defining such a curve, and the one we will be using mainly, is as a glueing of two affine charts: $y^2 = f(x)$, and $w^2 = f^{r}(v)$, where $f^{r}(v)$ is the polynomial $v^{2g + 2} f(1/v)$, and a birational map between them is given by $(x,y) \mapsto (\frac{1}{x},\frac{y}{x^{-g-1}})$. We also have the coordinates $X,Y,Z$ of $\P(1,g+1,1)$, with $x = X/Z, y = Y/Z^{g+1}, v = Z/X, w = Y/X^{g+1}$, but beware; these coordinates do not behave nicely on the origin of the patch $D(Y)$. We mainly use the first chart; we call any point that lies on it an affine point of $C$. We will treat the case that $f$ has degree $2g+2$ (this can be done by translating $f$ until the constant coefficient is non-zero, and then looking at $f^r$). In that case, writing , the line at infinity $C$ looks like $Y^2 = X^{2g+2}$, i.e. $(Y-X^{g+1})(Y+X^{g+1}) = 0$, and we see there are two points $\infty_+ = (1:1:0)$ and $\infty_- = (1:-1:0)$. Finally, we note that there is an involution on $C$ given by $\sigma(x,y) = (x,-y)$ and $\sigma(v,w) = (v,-w)$.
+
+\subsection{Makdisis algorithms}
+Say something about how Makdisis algorithms work (i.e., give an introduction to the terminology) \cite{makdisi2004}.
+
+As we are using and adding on an implementation by Mascot \cite{mascot2018}, we briefly introduce his notation. This is a summary of section 2.1 in \cite{mascot2018}.
+
+We first look at representing $J(k)$ where $k$ is a field. Given a divisor $D$ on $C$, denote
+\[
+\Lcal(D) = \{f \in k(C)^\times : \div(f) + D \geq 0 \} \sqcup \{0\}.
+\]
+We pick $D_0$ an effective divisor of degree $d_0 \geq 2g+1$; in the case of hyperelliptic curves, this will be $(g+1)(\infty_+ + \infty_-)$. We set $V_n = \Lcal(nD_0)$. We let $n_Z$ be an integer $\geq 5d_0 + 1$, and assume, if necessary passing to an extension of $k$, that we have a set $Z$ of size $n_Z$ of distinct points in $C(k)$ outside the support of $D_0$; in fact, this will consist of affine points in our case. We have an evaluation map $V_5 \to k^Z$, evaluating a rational function at $Z$. By our choice of $n_Z$, this is an injective map, i.e. we can represent rational functions in $V_5$ by their values in $k^Z$. In this representation, we can even add, subtract, or multiply rational function, by respectively adding, subtracting or multiplying the correspondig vectors in $k^Z$. It is now also possible to represent subspaces of $V_5$ by giving a basis in $k^Z$.
+
+We now explain the representation of $J(k)$. Note that for any $x \in J(k)$, we have that $x + D_0$ is of degree at least $2g+1$ and hence is equivalent to an effective divisor $E \geq 0$. Then we represent $x$ by $\Lcal(2D_0 - E)$ inside $V_2$; by Riemann-Roch this is a $d_W$-dimensional subspace of $V_2$ where $d_W = d_0 + 1 - g$, and in particular we can represent it as a $n_z \times d_W$ matrix, itself representing a subspace of $k^Z$. This representation is nowhere near unique; there are many different effective divisors $E$ equivalent to $x + D_0$, and many bases for a subspace of $k^Z$.
+
+As explained in Mascots article, using this representation one can do all relevant computations in $J(k)$; adding, subtracting, finding the zero element, and most importantly: checking equality.
+
+\subsubsection{Going from \texorpdfstring{$\F_p$}{Fp} to \texorpdfstring{$\Z/p^e\Z$}{Z/peZ}}
+We now know how to compute in $J(k)$ for $k$ a field such that $C(k)$ is big enough. In practice, if we want to calculate in $J(\F_p)$, this means passing to $J(\F_q)$ for some $q = p^a$ with $a$ large enough; by the Hasse-Weil bound this will work. However, for Chabauty we want to compute inside $J(\Z/p^e\Z)$. Luckily, Mascots code takes care of this too, by passing from vector spaces over $\F_p$ to free $R$-submodules of $R^n$ with $R = Z/p^e\Z$; in fact, all submodules of $R^n$ we will be seeing are free. That means all these submodules will have good reduction, i.e. the rank remains the same when passing to $\F_p$. If the maps between such modules also have good reduction, then all kernels, images, et cetera will also have these properties, and can be calculated by Hensel lifting the kernels, images, et cetera of these maps modulo $p$. 
+
+Explain Howell modules, good subspaces of free modules over $\Z/p^e\Z$, and extensions of $\Z/p^e\Z$ (similar to $\F_q / \F_p$).
+
+\subsection{Implementing the Abel-Jacobi map}
+Say something about implementing the Abel-Jacobi map $C \to J, Q \mapsto Q - \infty_+$. Right now, information about this (the implementation and why it works) can be found in Hyper2RR.gp.
+
+Now that we can do computations with elements in the Jacobian over $\Z/p^2\Z$, it only remains to construct elements in the Jacobian. Explicitly, we want to go from a degree zero divisor to an element in Mascots representation. Since we can add elements in the Jacobian, for this it is enough to compute the Abel-Jacobi embedding
+\begin{align*}
+j_{\infty_+}: C &\to J \\
+              P &\mapsto P-\infty_+.
+\end{align*}
+We will only need $j_{\infty_+}(P)$ and $j_{\infty_-}(P)$ for affine points $P$; as the calculation of $j_{\infty_-}(P)$ is entirely similar to $j_{\infty_+}(P)$, we only focus on $j_{\infty_+}(P)$. For this, we present the following algorithm:
+
+\begin{algorithm}[H]
+\label{alg:abeljacobi}
+ \KwData{$C,J$, an affine point $P \in C(R)$ where $R = \Z/p^e\Z)$}
+ \KwResult{A space of the form $\Lcal(2D_0 - E)$ where $E-D_0 = P - \infty_+$ as divisors and $E \geq 0$}
+ $Z' \leftarrow Z \sqcup \{P\}$\;
+ $B = (b_1,\dots,b_{g+3}) \leftarrow$ a basis of $\Lcal(D_0)$\; \label{alg:abeljacobi:basisLD0}
+ \eIf{$(f^r)'(0) \not= 0$}{
+   $b_{g+4} \leftarrow \frac{X(X^{g+1} + Y)}{Z^{g+2}}$\;
+   }{
+   $b_{g+4} \leftarrow \frac{X(X^{g+1} + Y + XZ^{g})}{Z^{g+2}}$\;
+  }
+ $b_{g+4} \leftarrow xF$\;
+ $W \leftarrow$ a $(n_Z + 1)\times (g+4)$ matrix with rows being the evaluations of $B\sqcup{b_{g + 4}}$ on a point in $Z'$.\;
+ $V \leftarrow \ker(\im W \subset R^{n_Z + 1} \to R)$, the projection on the last coordinate.\;
+ %Calculate $\Lcal(D_0 + \infty_+ - P)$\;
+ $U \leftarrow \im(R^{g+4} \xrightarrow{\cdot V} R^{n_Z + 1} \to R^{n_Z})$, where the last map is the projection on the first coordinates.\;
+ $F \leftarrow \frac{X^{g+1} - Y}{Z^{g+1}}$ evaluated on $\Z$\;
+ %Evaluate the special function $F$ (see Hyper2RR.gp) on $Z$\;
+ Return $U\cdot F$\;
+ \caption{The Abel-Jacobi embedding}
+\end{algorithm}
+
+\begin{prop}
+\label{prop:abeljacobia}
+Algorithm~\ref{alg:abeljacobi} gives correct output.
+\end{prop}
+Before this proof, we start with a quick lemma.
+\begin{lem}
+\label{lem:poles2d0i+}
+The poles of $b_{g+4}$ are exactly $(g+1)(\infty_+ + \infty_-) + \infty_+$. 
+\end{lem}
+\begin{proof}
+We start by recalling that at the other affine patch, the curve $C$ is given by $w^2 = f^r(v)$ and by the assumption that $f$ is monic of degree $2g+2$ we have $f^r(0) = 1$. The points $\infty_\pm$ correspond to $(v,w) = (0,\pm 1)$ in this patch. Letting $g^r(v)$ be the polynomial $(f^r(v)-1)/v$, we can rewrite the equation for $C$ to $(w-1)(w+1) = vg^r(v)$. As the derivative of $(w-1)(w+1)$ to $w$ doesn't vanish at both of $\infty_\pm$, we see that $v$ is a uniformiser at both these points. That means that $v_{\infty_\pm}(x)$, the order of $x$ at $\infty_\pm$, is equal to $-1$.
+
+Now, if $g^r(0)$ is non-zero, then $w- \pm 1$ is also a uniformiser at $\infty_\pm$ and non-zero at $\infty_\mp$, so \[(w+1)/v^{g+2} = \frac{X(X^{g+1} - Y)}{Z^{g+2}}\] has poles exactly $(g+2)(\infty_+ + \infty_-) - \infty_-$ as we wanted to show.
+And if $g^r(0)$ is zero, then $v_{\infty_\pm}(w-\pm1)$ is at least $2$ so $w-\pm 1 + v$ is a uniformiser at $\infty_\pm$ and non-zero at $\infty_\mp$, so \[(w+1+v)/v^{g+2} = \frac{X(X^{g+1} + Y + XZ^g)}{Z^{g+2}}\] again has the right poles.
+\end{proof}
+
+
+\begin{proof}[Proof of Proposition \ref{prop:abeljacobia}]
+First note that by Riemann-Roch, the dimension of $\Lcal(D_0)$ is $g + 3$, and we also have by the proof of the previous lemma that $1,x,\dots,x^{g+1},y$ all lie in $\Lcal(D_0)$ and hence form a basis, so we can indeed find $B$ as in line~\ref{alg:abeljacobi:basisLD0}. Note that by Lemma~\ref{lem:poles2d0i+} the element $b_{g+4}$ lies in $\Lcal(D_0 + \infty_+)$ but not in $\Lcal(D_0)$, so as $\deg D_0 \geq 2g-1$, we have by a dimensional argument that $b_1,\dots,b_{g+4}$ is a basis for $\Lcal(D_0 + \infty_+)$.
+
+Evaluating $\Lcal(D_0 + \infty_+)$ on $P$ gives a linear map $\Lcal(D_0 + \infty_+) \to R$, and the kernel is exactly $\Lcal(D_0 + \infty_+ - P)$. Finally, note that the poles of $F$ are, again by the previous lemma, $g(\infty_+ + \infty_-) + \infty_-$. 
+\end{proof}
+
+Say something about how with just this map and Mascots code, one can already find the $\overline{\kappa^* f_i} $ and compute an upper bound for $C(\Z)_P$ using brute force.
+
+\subsection{Speeding up the calculations}
+Say something about how one express an element in $J(\Z/p^2\Z)_0$ on the basis in something like $O(g)$ hopefully (ignoring the time for adding,multiplying, et cetera in the Jacobian), instead of the bruteforce $O(p^g)$. This is currently done using code from Mascot. Say what the final complexity is.
+
+\subsection{An explicit example}
+Treat the example in ExChabauty.gp.
+
+\section{The Poincare torsor}
+Define and cite theorems about the Poincare Torsor
+
+\section{Quadratic Chabauty using the Poincare torsor}
+Explain how to do Chabauty in the case $r < g + \rho - 1$, where $\rho$ is the N\'eron-Severirank.
+
+\section{Implementations of quadratic Chabauty and an explicit example}
+Explain something about implementing quadratic Chabauty.
+
+\newpage
+\bibliographystyle{alpha}
+\addcontentsline{toc}{section}{References}
+\bibliography{ref}
+
+\end{document}
