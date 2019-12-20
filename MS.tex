@@ -189,7 +189,7 @@ Say something about the problem, Faltings, et cetera
 
 Say something about Chabauty's general idea
 
-Mention Flyn, Coleman, Balakrishnan et al. and their way of doing quadratic quickly
+Mention Flynn, Coleman, Kim, Balakrishnan et al. and their way of doing quadratic Chabauty
 
 Say something about linear Chabauty geometric style
 
@@ -198,10 +198,10 @@ Say something about quadratic Chabauty geometric style.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \section{Linear Chabauty}
-Let $p>2$ be a prime, and $C$ be a scheme over $\Z$, proper, flat, regular with $C$ smooth over $\Z_{(p)}$ and $C_\Q$ of dimension $1$ and geometrically connected, of genus $g \geq 1$ and Mordell-Weil rank $r < g$. Assume we have a $\Q$-point $b$ in $C$, or equivalently a $\Z$-point. Let $J$ be the Jacobian of $C$; we view $C$ as a subscheme of $J$, using the map $Q \mapsto Q - b$ on points. Let $P \in C(\F_p)$ be a point such that $t := P - b \in J(\F_p)$ lies in the image of $J(\Z)$.
+Let $p>2$ be a prime, and $C$ be a scheme over $\Z$, proper, flat, regular with $C$ smooth over $\Z_{(p)}$ and $C_\Q$ of dimension $1$ and geometrically connected, of genus $g \geq 1$ and Mordell-Weil rank $r < g$. Assume we have a $\Q$-point $b$ in $C$, or equivalently a $\Z$-point. Let $J$ be the Jacobian of $C_\Q$; we view $C_\Q$ as a subscheme of $J$, using the map $Q \mapsto Q - b$ on points. Let $P \in C(\F_p)$ be a point such that $t := P - b \in J(\F_p)$ lies in the image of $J(\Z)$.
 
 \begin{defn}
-Let $S$ be a scheme, $T \to U$ a morphism of schemes and $x : T \to S$ an $T$-point. We define $S(U)_x$ as the morphisms from $U$ to $S$ that, after precomposing with $T \to U$, give $x$.
+Let $S$ be a scheme, $T \to U$ a morphism of schemes and $x : T \to S$ a $T$-point. We define $S(U)_x$ as the morphisms from $U$ to $S$ that, after precomposing with $T \to U$, give $x$.
 \end{defn}
 
 We want to find an upper bound for the cardinality of $C(\Z)_P$
@@ -209,11 +209,11 @@ We want to find an upper bound for the cardinality of $C(\Z)_P$
 % Say something about smooth schemes over Z_p, and their Z_p points
 \subsection{Points on a smooth scheme over \texorpdfstring{$\Z_p$}{Z\_p}}
 \label{subs:smoothzppoints}
-Let $X/\Z_p$ be a smooth scheme of dimension $d$, and let $x \in X(\F_p)$ be a point. Then $X(\Z_p)_x$ is in bijection with $\Z_p^d$. This bijection is given by choosing parameters at $x$; evaluating at $X(\Z_p)_x$ gives a bijection with $(p\Z_p)^d$, and then we divide by $p$. For putting up a nice framework to work in, we start with blowing up $X$ at $x$.
+Let $X/\Z_p$ be a smooth scheme of relative dimension $d$, and let $x \in X(\F_p)$ be a point. Then $X(\Z_p)_x$ is in bijection with $\Z_p^d$. This bijection is given by choosing parameters at $x$; evaluating at $X(\Z_p)_x$ gives a bijection with $(p\Z_p)^d$, and then we divide by $p$. For putting up a nice framework to work in, we start with blowing up $X$ at $x$.
 %TODO: give proof and define $\Z_p\angle{z_1,...,z_r}$ as the $p$-adic completion of $\Z_p[z_1,...,z_r]$, i.e. powerseries which are polynomials modulo every power of $p$.
 
 % Blow up X at x, and look at the part where p generates the maximal ideal
-Assume, by looking at a neighborhood of $x$, that $X = \Spec A$ is affine and that $p,t_1,\dots,t_d$ generate $O_{X,x}$ with $t_1,\dots,t_d$ regular on $X$. By shrinking $X$ even more, we may assume that $t = (t_1,\dots,t_d): X \to \A^d_{\Z_p}$ is smooth and hence \'etale. Let $\Tilde{X}_x$ be the blowup of $X$ at $x$. Now consider the blowup $\Tilde{X}_x \to X$ of $X$ at $x$, and let $\Tilde{X}_x^p$ be the part where $p$ generates the maximal ideal. As $t$ is \'etale, the ideal of $X$ defining $x$ is the pullback along $t$ of the ideal of $\A^d_{\Z_p}$ defining the origin $a$ over $\F_p$. That means that the blowup $\Tilde{X}_x \to X$ is the pullback of the blowup $\Tilde{\A}^d_{\Z_p,a} \to \A^d$. Then the part $\Tilde{X}_x^p$ is the pullback of the corresponding part of $\Tilde{\A}^d_{\Z_p,a}$, i.e. $\Spec \Z_p[x_1/p,...,x_d/p]$ with the morphism $\Z_p[x_1,...,x_d] \to \Z_p[x_1/p,...,x_d/p]$ being the inclusion. That implies that $\Tilde{X}_x^p$ is $\Spec A[]$
+Assume, by looking at a neighborhood of $x$, that $X = \Spec A$ is affine and that $p,t_1,\dots,t_d$ generate the maximal ideal of $O_{X,x}$ with $t_1,\dots,t_d$ elements of $O_X(X)$. By shrinking $X$ even more, we may assume that $t = (t_1,\dots,t_d): X \to \A^d_{\Z_p}$ is \'etale. Now consider the blowup $\Tilde{X}_x \to X$ of $X$ at $x$, and let $\Tilde{X}_x^p$ be the part where $p$ generates the maximal ideal. As $t$ is \'etale, the ideal of $X$ defining $x$ is the pullback along $t$ of the ideal of $\A^d_{\Z_p}$ defining the origin $a$ over $\F_p$. That means that the blowup $\Tilde{X}_x \to X$ is the pullback of the blowup $\Tilde{\A}^d_{\Z_p,a} \to \A^d$. Then the part $\Tilde{X}_x^p$ is the pullback of the corresponding part of $\Tilde{\A}^d_{\Z_p,a}$, i.e. $\Spec \Z_p[x_1/p,\dots,x_d/p]$ with the morphism $\Z_p[x_1,\dots,x_d] \to \Z_p[x_1/p,\dots,x_d/p]$ being the inclusion. That implies that $\Tilde{X}_x^p$ is $\Spec A[t_1/p,\dots,t_d/p]$.
 
 Conclude that $\Tilde{X}_x^p(Z_p)$ is in bijection with $X(Z_p)_x$
 
@@ -237,7 +237,7 @@ The map $\kappa$ extends uniquely to a continuous map $\kappa: \Z_p^r \to \Z_p^g
 TODO: give proof
 
 \subsection{From \texorpdfstring{$C(\Z_p)$}{C(Z\_p)} to \texorpdfstring{$J(\Z_p)$}{J(Z\_p)}}
-By Subsection \ref{subs:smoothzppoints}, we also know that $C(\Z_p)_P$ is in bijection with $\Z_p$, again with the bijection given by evaluating a parameter and dividing by $p$. Apparently the resulting function $\Z_p \to \Z_p^g$ is linear modulo $p$, i.e. there are power series $f_1,...,f_{g-1} \in \Z_p\angle{z_1,...,z_g}$ such that the image of $C(\Z_p)_P$ is exactly given by $V(f_1,...,f_{g-1})$, and all $f_i$ are linear modulo $p$. Another way to think of this, is as $C(\Z/p^2\Z)_P$ being an affine line inside $J(\Z/p^2\Z)_t$.
+By Subsection \ref{subs:smoothzppoints}, we also know that $C(\Z_p)_P$ is in bijection with $\Z_p$, again with the bijection given by evaluating a parameter and dividing by $p$. The resulting function $\Z_p \to \Z_p^g$ is linear and non-constant modulo $p$, i.e. there are power series $f_1,...,f_{g-1} \in \Z_p\angle{z_1,...,z_g}$ such that the image of $C(\Z_p)_P$ is exactly given by $V(f_1,...,f_{g-1})$, and all $f_i$ are linear modulo $p$. Another way to think of this, is as $C(\Z/p^2\Z)_P$ being an affine line inside $J(\Z/p^2\Z)_t$.
 TODO: give proof
 % Say something about the f_i defining C(Z_p) in J(Z_p)
 
@@ -295,42 +295,43 @@ We will only need $j_{\infty_+}(P)$ and $j_{\infty_-}(P)$ for affine points $P$;
  $Z' \leftarrow Z \sqcup \{P\}$\;
  $B = (b_1,\dots,b_{g+3}) \leftarrow$ a basis of $\Lcal(D_0)$\; \label{alg:abeljacobi:basisLD0}
  \eIf{$(f^r)'(0) \not= 0$}{
-   $b_{g+4} \leftarrow \frac{X(X^{g+1} + Y)}{Z^{g+2}}$\;
+   $F \leftarrow x^{g+1} + y$\;\label{alg:abeljacobi:defF1}
    }{
-   $b_{g+4} \leftarrow \frac{X(X^{g+1} + Y + XZ^{g})}{Z^{g+2}}$\;
+   $b_{g+4} \leftarrow x^{g+1} + x^g +  y$\;\label{alg:abeljacobi:defF2}
   }
  $b_{g+4} \leftarrow xF$\;
  $W \leftarrow$ a $(n_Z + 1)\times (g+4)$ matrix with rows being the evaluations of $B\sqcup{b_{g + 4}}$ on a point in $Z'$.\;
- $V \leftarrow \ker(\im W \subset R^{n_Z + 1} \to R)$, the projection on the last coordinate.\;
+ $V \leftarrow \ker(\im W \subset R^{n_Z + 1} \to R)$, the projection on the last coordinate.\; \label{alg:abeljacobi:kerp}
  %Calculate $\Lcal(D_0 + \infty_+ - P)$\;
  $U \leftarrow \im(R^{g+4} \xrightarrow{\cdot V} R^{n_Z + 1} \to R^{n_Z})$, where the last map is the projection on the first coordinates.\;
- $F \leftarrow \frac{X^{g+1} - Y}{Z^{g+1}}$ evaluated on $\Z$\;
- %Evaluate the special function $F$ (see Hyper2RR.gp) on $Z$\;
- Return $U\cdot F$\;
+ %$F \leftarrow \frac{X^{g+1} - Y}{Z^{g+1}}$ evaluated on $\Z$\;
+ Evaluate the special function $F$ (see Hyper2RR.gp) on $Z$\;
+ Return $U\cdot \sigma(F)$\;
  \caption{The Abel-Jacobi embedding}
 \end{algorithm}
 
 \begin{prop}
-\label{prop:abeljacobia}
+\label{prop:abeljacobi}
 Algorithm~\ref{alg:abeljacobi} gives correct output.
 \end{prop}
 Before this proof, we start with a quick lemma.
 \begin{lem}
 \label{lem:poles2d0i+}
-The poles of $b_{g+4}$ are exactly $(g+1)(\infty_+ + \infty_-) + \infty_+$. 
+The poles of $F$, as defined in line~\ref{alg:abeljacobi:defF1} or \ref{alg:abeljacobi:defF2}, are exactly $g(\infty_+ + \infty_-) + \infty_+$. 
 \end{lem}
 \begin{proof}
 We start by recalling that at the other affine patch, the curve $C$ is given by $w^2 = f^r(v)$ and by the assumption that $f$ is monic of degree $2g+2$ we have $f^r(0) = 1$. The points $\infty_\pm$ correspond to $(v,w) = (0,\pm 1)$ in this patch. Letting $g^r(v)$ be the polynomial $(f^r(v)-1)/v$, we can rewrite the equation for $C$ to $(w-1)(w+1) = vg^r(v)$. As the derivative of $(w-1)(w+1)$ to $w$ doesn't vanish at both of $\infty_\pm$, we see that $v$ is a uniformiser at both these points. That means that $v_{\infty_\pm}(x)$, the order of $x$ at $\infty_\pm$, is equal to $-1$.
 
-Now, if $g^r(0)$ is non-zero, then $w- \pm 1$ is also a uniformiser at $\infty_\pm$ and non-zero at $\infty_\mp$, so \[(w+1)/v^{g+2} = \frac{X(X^{g+1} - Y)}{Z^{g+2}}\] has poles exactly $(g+2)(\infty_+ + \infty_-) - \infty_-$ as we wanted to show.
-And if $g^r(0)$ is zero, then $v_{\infty_\pm}(w-\pm1)$ is at least $2$ so $w-\pm 1 + v$ is a uniformiser at $\infty_\pm$ and non-zero at $\infty_\mp$, so \[(w+1+v)/v^{g+2} = \frac{X(X^{g+1} + Y + XZ^g)}{Z^{g+2}}\] again has the right poles.
+Now, if $g^r(0)$ is non-zero, then $w- \pm 1$ is also a uniformiser at $\infty_\pm$ and non-zero at $\infty_\mp$, so \[(w+1)/v^{g+1} = y + x^{g+1}\] has poles exactly $(g+1)(\infty_+ + \infty_-) - \infty_-$ as we wanted to show.
+And if $g^r(0)$ is zero, then $v_{\infty_\pm}(w-\pm1)$ is at least $2$ so $w-\pm 1 + v$ is a uniformiser at $\infty_\pm$ and non-zero at $\infty_\mp$, so \[(w+1+v)/v^{g+1} = y + x^{g+1} + x^{g}\] again has the right poles.
 \end{proof}
 
 
 \begin{proof}[Proof of Proposition \ref{prop:abeljacobia}]
-First note that by Riemann-Roch, the dimension of $\Lcal(D_0)$ is $g + 3$, and we also have by the proof of the previous lemma that $1,x,\dots,x^{g+1},y$ all lie in $\Lcal(D_0)$ and hence form a basis, so we can indeed find $B$ as in line~\ref{alg:abeljacobi:basisLD0}. Note that by Lemma~\ref{lem:poles2d0i+} the element $b_{g+4}$ lies in $\Lcal(D_0 + \infty_+)$ but not in $\Lcal(D_0)$, so as $\deg D_0 \geq 2g-1$, we have by a dimensional argument that $b_1,\dots,b_{g+4}$ is a basis for $\Lcal(D_0 + \infty_+)$.
+First note that by Riemann-Roch, the dimension of $\Lcal(D_0)$ is $g + 3$, and we also have by the proof of the previous lemma that $1,x,\dots,x^{g+1},y$ all lie in $\Lcal(D_0)$ and hence form a basis, so we can indeed find $B$ as in line~\ref{alg:abeljacobi:basisLD0}. Note that by Lemma~\ref{lem:poles2d0i+} the element $b_{g+4}$ lies in $\Lcal(D_0 + \infty_+)$ but not in $\Lcal(D_0)$, so as $\deg D_0 \geq 2g-1$, we have by a dimensional argument that $b_1,\dots,b_{g+4}$ is a basis for $\Lcal(D_0 + \infty_+)$; that it is in fact a basis is evident as this argument tells us it is a basis when tensored with $\F_p$.
 
-Evaluating $\Lcal(D_0 + \infty_+)$ on $P$ gives a linear map $\Lcal(D_0 + \infty_+) \to R$, and the kernel is exactly $\Lcal(D_0 + \infty_+ - P)$. Finally, note that the poles of $F$ are, again by the previous lemma, $g(\infty_+ + \infty_-) + \infty_-$. 
+Evaluating $\Lcal(D_0 + \infty_+)$ on $P$ gives a linear map $\Lcal(D_0 + \infty_+) \to R$, and the kernel is exactly $\Lcal(D_0 + \infty_+ - P)$; this is the resulting $V$ in line~\ref{alg:abeljacobi:kerp}. Then. Finally, note that the poles of $\sigma(F)$ are, again by the previous lemma, $g(\infty_+ + \infty_-) + \infty_+$; write $E$ for the divisor of zeroes of $F$; we see it has degree $2g+1$. Then we have the equality \[\Lcal(D_0 + \infty_+-P) \cdot F = \Lcal(2D_0 - E - P).\]
+This last term is in fact in Mascots representation, and trivially $P-\infty_+ = P + E - D_0$, so this represents $P-\infty_+$ in the Jacobian.
 \end{proof}
 
 Say something about how with just this map and Mascots code, one can already find the $\overline{\kappa^* f_i} $ and compute an upper bound for $C(\Z)_P$ using brute force.
