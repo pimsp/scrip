@@ -195,6 +195,8 @@ Say something about linear Chabauty geometric style
 
 Say something about quadratic Chabauty geometric style.
 
+Say how much is borrowed from the article by Bas and Guido, but with a focus on the linear part, and more explanations.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \section{Linear Chabauty}
@@ -213,7 +215,12 @@ Let $X/\Z_p$ be a smooth scheme of relative dimension $d$, and let $x \in X(\F_p
 %TODO: give proof and define $\Z_p\angle{z_1,...,z_r}$ as the $p$-adic completion of $\Z_p[z_1,...,z_r]$, i.e. powerseries which are polynomials modulo every power of $p$.
 
 % Blow up X at x, and look at the part where p generates the maximal ideal
-Assume, by looking at a neighborhood of $x$, that $X = \Spec A$ is affine and that $p,t_1,\dots,t_d$ generate the maximal ideal of $O_{X,x}$ with $t_1,\dots,t_d$ elements of $O_X(X)$. By shrinking $X$ even more, we may assume that $t = (t_1,\dots,t_d): X \to \A^d_{\Z_p}$ is \'etale. Now consider the blowup $\Tilde{X}_x \to X$ of $X$ at $x$, and let $\Tilde{X}_x^p$ be the part where $p$ generates the maximal ideal. As $t$ is \'etale, the ideal of $X$ defining $x$ is the pullback along $t$ of the ideal of $\A^d_{\Z_p}$ defining the origin $a$ over $\F_p$. That means that the blowup $\Tilde{X}_x \to X$ is the pullback of the blowup $\Tilde{\A}^d_{\Z_p,a} \to \A^d$. Then the part $\Tilde{X}_x^p$ is the pullback of the corresponding part of $\Tilde{\A}^d_{\Z_p,a}$, i.e. $\Spec \Z_p[x_1/p,\dots,x_d/p]$ with the morphism $\Z_p[x_1,\dots,x_d] \to \Z_p[x_1/p,\dots,x_d/p]$ being the inclusion. That implies that $\Tilde{X}_x^p$ is $\Spec A[t_1/p,\dots,t_d/p]$.
+Assume, by looking at a neighborhood of $x$, that $X = \Spec A$ is affine and that $p,t_1,\dots,t_d$ generate the maximal ideal of $O_{X,x}$ with $t_1,\dots,t_d$ elements of $O_X(X) = A$, also called \textit{parameters} at $x$. By shrinking $X$ even more, we may assume as $X$ is smooth that $t = (t_1,\dots,t_d): X \to \A^d_{\Z_p}$ is \'etale. Now consider the blowup $\Tilde{X}_x \to X$ of $X$ at $x$, and let $\Tilde{X}_x^p$ be the part where $p$ generates the maximal ideal. Equivalently, that is the part where $t_1,\dots,t_d$ are multiples of $p$, so informally it consists of the points that reduce to $x$ modulo $p$.
+
+As $t$ is \'etale, the ideal of $X$ defining $x$ is the pullback along $t$ of the ideal of $\A^d_{\Z_p}$ defining the origin $a$ over $\F_p$. That means that the blowup $\Tilde{X}_x \to X$ is the pullback of the blowup $\Tilde{\A}^d_{\Z_p,a} \to \A^d$. Then the part $\Tilde{X}_x^p$ is the pullback of the corresponding part of $\Tilde{\A}^d_{\Z_p,a}$, i.e. $\Spec \Z_p[\Tilde{x_1},\dots,\Tilde{x_d/p}] = \Spec \Z_p[x_1/p,\dots,x_d/p]$ with the morphism $\Z_p[x_1,\dots,x_d] \to \Z_p[\Tilde{x_1},\dots,\tilde{x_p}]$ given by $x_i \mapsto p\Tilde{x_i}$. That implies that $\Tilde{X}_x^p$ is $\Spec A[t_1/p,\dots,t_d/p]$, with the map $\Tilde{X}_x^p \to X$ given by the inclusion $A \to \Spec A[t_1/p,\dots,t_d/p]$ (remember that the $t_i$ are elements of $O_X(X) = A$). If furthermore $f$ is locally of finite type, then by (IV,17.6.3) of \cite{ega} we have an isomorphism between the $p$-adic completion $O(\Tilde{X}_x^p)$ and the completion $\Z_p\angle{\Tilde{x_1},\dots, \Tilde{x_d}}$ of $\Z_p[\Tilde{x_1},...,\Tilde{x_d}]$, with the latter completion being the ring of convergent power series, i.e.
+\[
+\Z_p\angle{\Tilde{x_1},\dots, \Tilde{x_d}} = \left\{f \in \Z_p[[\Tilde{x_1},\dots,\Tilde{x_d}]] \mid \forall n \geq 0, f + (p^n) \in \Z/p^n\Z[\Tilde{x_1},\dots,\tilde{X_d}] + (p^n) \right\}.
+\]
 
 Conclude that $\Tilde{X}_x^p(Z_p)$ is in bijection with $X(Z_p)_x$
 
@@ -274,9 +281,9 @@ We now explain the representation of $J(k)$. Note that for any $x \in J(k)$, we 
 As explained in Mascots article, using this representation one can do all relevant computations in $J(k)$; adding, subtracting, finding the zero element, and most importantly: checking equality.
 
 \subsubsection{Going from \texorpdfstring{$\F_p$}{Fp} to \texorpdfstring{$\Z/p^e\Z$}{Z/peZ}}
-We now know how to compute in $J(k)$ for $k$ a field such that $C(k)$ is big enough. In practice, if we want to calculate in $J(\F_p)$, this means passing to $J(\F_q)$ for some $q = p^a$ with $a$ large enough; by the Hasse-Weil bound this will work. However, for Chabauty we want to compute inside $J(\Z/p^e\Z)$. Luckily, Mascots code takes care of this too, by passing from vector spaces over $\F_p$ to free $R$-submodules of $R^n$ with $R = Z/p^e\Z$; in fact, all submodules of $R^n$ we will be seeing are free. That means all these submodules will have good reduction, i.e. the rank remains the same when passing to $\F_p$. If the maps between such modules also have good reduction, then all kernels, images, et cetera will also have these properties, and can be calculated by Hensel lifting the kernels, images, et cetera of these maps modulo $p$. 
+We now know how to compute in $J(k)$ for $k$ a field such that $C(k)$ is big enough. In practice, if we want to calculate in $J(\F_p)$, this means passing to $J(\F_q)$ for some $q = p^a$ with $a$ large enough; by the Hasse-Weil bound this will work. However, for Chabauty we want to compute inside $J(\Z/p^e\Z)$. Luckily, Mascots code takes care of this too, by passing from vector spaces over $\F_p$ to free $R$-submodules of $R^n$ with $R = Z/p^e\Z$; in fact, all submodules of $R^n$ we will be seeing are free. That means all these submodules will have good reduction, i.e. the rank remains the same when tensoring with $\F_p$. If the maps between such modules also have good reduction, then all kernels, images, et cetera will also have these properties, and can be calculated by Hensel lifting the kernels, images, et cetera of these maps modulo $p$.
 
-Explain Howell modules, good subspaces of free modules over $\Z/p^e\Z$, and extensions of $\Z/p^e\Z$ (similar to $\F_q / \F_p$).
+The final trick we need is extensions of $\Z/p^e\Z$. As said before, we need $n_Z$ affine points that are distinct modulo $p$, so we passed from $\F_p$ to an extension of $\F_q$. The corresponding notion of an extension of $\Z/p^e\Z$ is given by taking an irreducible polynomial $\overline{T} \in \F_p[t]$ with $\F_q \cong \F_p[t]/\overline{T}$, arbitrarily lifting $\overline{T}$ to a polynomial $T \in \Z/p^e\Z$, and looking at $R = \Z/p^e\Z[t]/T$. Again, we will only be looking at free submodules of $R^n$, so we can again do normal linear algebra over $R \tensor \F_p = \F_q$, and using Hensel to lift.
 
 \subsection{Implementing the Abel-Jacobi map}
 Say something about implementing the Abel-Jacobi map $C \to J, Q \mapsto Q - \infty_+$. Right now, information about this (the implementation and why it works) can be found in Hyper2RR.gp.
@@ -354,6 +361,6 @@ Explain something about implementing quadratic Chabauty.
 \newpage
 \bibliographystyle{alpha}
 \addcontentsline{toc}{section}{References}
-\bibliography{ref}
+\bibliography{ref.bib}
 
 \end{document}
