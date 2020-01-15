@@ -222,13 +222,13 @@ Talk about the coordinate ring and its p-adic completion
 Say something about functoriality
 
 \subsection{From \texorpdfstring{$J(\Z)$}{J(Z)} to \texorpdfstring{$J(\Z_p)$}{J(Z\_p)}}
-For $p > 2$, we know that the torsion of $J(\Z)$ injects into $J(\F_p)$, by Proposition 2.3 of \cite{pierre2000}. Hence for $0 \in J(\F_p)$, we know $J(\Z)_0$ is as a group isomorphic to $\Z^r$ with $r$ the Mordell-Weil rank. By assumption, we also know $J(\Z)_t$ is in bijection with $J(\Z)_0$. By Subsection \ref{subs:smoothzppoints} we know $J(\Z_p)_t$ is in bijection with $\Z_p^{g}$, with the bijection given by evaluating parameters and dividing by $p$. Let $\kappa: \Z^r \to \Z_p^g$ be the map resulting from the inclusion $J(\Z)_t \to J(\Z_p)_t$. Then $\kappa$ turns out to have a special property.
+For $p > 2$, we know that the torsion of $J(\Z)$ injects into $J(\F_p)$, by Proposition 2.3 of \cite{pierre2000}. Hence for $0 \in J(\F_p)$, we know $J(\Z)_0$ is as a group isomorphic to $\Z^r$ with $r$ the Mordell-Weil rank. By assumption, we also know $J(\Z)_t$ is in bijection with $J(\Z)_0$, with the bijection giving by translating with a lift of $t$. By Subsection \ref{subs:smoothzppoints} we know $J(\Z_p)_t$ is in bijection with $\Z_p^{g}$, with the bijection given by evaluating parameters and dividing by $p$. Let $\kappa: \Z^r \to \Z_p^g$ be the map resulting from the inclusion $J(\Z)_t \to J(\Z_p)_t$. Then $\kappa$ turns out to have a special property.
 
 \begin{thm}
 \label{thm:kappanice}
 There are uniquely determined $\kappa_1,...,\kappa_g \in \Z_p\angle{z_1,...,z_r}$ such that for all $x \in \Z^r$ we have $\kappa(x) = (\kappa_1(x),...,\kappa_g(x))$ and the image $\overline{\kappa_i}$ of $\kappa_i$ in $\F_p[z_1,...,z_r]$ has degree at most $1$.
 \end{thm}
-TODO: give proof
+TODO: give proof. Use formal group scheme by looking to 0.
 
 \begin{cor}
 \label{cor:closurejac}
@@ -297,7 +297,7 @@ We will only need $j_{\infty_+}(P)$ and $j_{\infty_-}(P)$ for affine points $P$;
  \eIf{$(f^r)'(0) \not= 0$}{
    $F \leftarrow x^{g+1} + y$\;\label{alg:abeljacobi:defF1}
    }{
-   $b_{g+4} \leftarrow x^{g+1} + x^g +  y$\;\label{alg:abeljacobi:defF2}
+   $F \leftarrow x^{g+1} + x^g +  y$\;\label{alg:abeljacobi:defF2}
   }
  $b_{g+4} \leftarrow xF$\;
  $W \leftarrow$ a $(n_Z + 1)\times (g+4)$ matrix with rows being the evaluations of $B\sqcup{b_{g + 4}}$ on a point in $Z'$.\;
