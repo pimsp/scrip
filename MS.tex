@@ -46,6 +46,7 @@
 \newcommand{\entier}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\G}{\mathbb{G}}
 \renewcommand{\C}{\mathbb{C}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\Lcal}{\mathcal{L}}
@@ -273,7 +274,7 @@ Take $n=1$ and $F(x,y) = x + y + xy = (1+x)(1+y)-1$, also known as the multiplic
 \end{exmp}
 %For such a formal group, by Hensels lemma it turns out that there is a unique $i_F \in R[[x]]^n$ with $F(x,i_F(x)) = F(i_F(x),x) = 0$ and then by the associativity we find $F(x,0) = F(0,x)$. Such a formal group gives rise to a coproduct $\mu: R[[x]] \to R[[x,y]]$, by sending $x_j to F_j(x,y)$ and extending continously for the $(x)$-adic topology; this works exactly because the constant term of the $F_j$ are all $0$. This coproduct, together with the antipode given by extending $x_j \mapsto i_{F,j}$ continuously and the counit $R[[x]] \to R$ sending $x$ to 0, turns $R[[x]]$ into a group object in the category consisting of $(A,I)$ where $A$ is an $R$-algebra, $I$ is an ideal of $A$ and $A$ is $I$-adically complete as in the following way.
 
-Given a smooth scheme $G$ over $\Z_p$ of relative dimension $d$, we can look at the completion along the zero section $\Hat{O}_{G,e}$. By smoothness, this is isomorphic as topological $\Z_p$-algebras to the ring of power series $\Z_p[[x_1,\dots,x_d]]$. This completion naturally gives rise to a formal scheme denoted $\Spf \Hat{O}_{G,e}$; in a categorical notion, this is a functor on finite $\Z_p$-algebras sending $A$ to $\Hom_{\text{cont}}(\Hat{O}_{G,e},A)$, but we can also think of it as a locally ringed space with $\Spec \Z_p$ as topological space, and sheaf of rings $\Hat{O}_{G,e}$. 
+Given a smooth scheme $G$ over $\Z_p$ of relative dimension $d$, we can look at the completion along the zero section $\Hat{O}_{G,e}$. By smoothness, after picking parameters, this is isomorphic as topological $\Z_p$-algebras to the ring of power series $\Z_p[[x_1,\dots,x_d]]$. This completion naturally gives rise to a formal scheme denoted $\Spf \Hat{O}_{G,e}$; in a categorical notion, this is a functor on finite $\Z_p$-algebras sending $A$ to $\Hom_{\text{cont}}(\Hat{O}_{G,e},A)$, but we can also think of it as a locally ringed space with $\Spec \Z_p$ as topological space, and sheaf of rings $\Hat{O}_{G,e}$. 
 
 If furthermore $G$ is a group scheme over $\Z_p$, then this formal scheme promotes to a formal group scheme, i.e. for every finite $\Z_p$-algebra $A$ the set $\Hom_{\text{cont}}(\Hat{O}_{G,e},A)$ gets a group structure, functorially in $A$. By functoriality, this is the same [TODO: why exactly?] as an continuous coproduct $\mu: \Hat{O}_{G,e} \to \left(\Hat{O}_{G,e}\right)^{\tensor 2}$. After choosing an isomorphism between $\Hat{O}_{G,e}$ and $\Z_p[[x_1,\dots,x_d]]$, let $F_j \in \Z_p[x,y]$ denote $\mu(x_i)$. Then it is clear that $F = (F_1,\dots,F_d)$ is a $d$-dimensional formal group scheme, and commutative if $G$ was commutative.
 \begin{exmp}
@@ -281,7 +282,7 @@ If furthermore $G$ is a group scheme over $\Z_p$, then this formal scheme promot
 Take $G = \G_m$ over $\Z_p$, i.e. $\Z_p[u,u^{-1}]$. Then the zero section $e$ is the map sending $u$ to $1$, and we can identify the completion $\Hat{O}_{G,e}$ with the power series ring $\Z_p[[u-1]] \cong \Z_p[[x]]$, sending $u-1$ to $x$. The group structure on $G$ then gives rise to the coproduct $\Z_p[[u-1]] \to \Z_p[[u-1,v-1]], u \mapsto uv$ so the coproduct on $\Z_p[[x]]$ sends $x$ to $uv-1 = (x+1)(y+1) -1 = x + y + xy$. Hence the formal group corresponding to this group scheme is exactly the multiplicative formal group from Example~\ref{exmp:gmformalgroup}.
 \end{exmp}
 
-
+TODO: explain that the formal group gives the group law on $J(\Z_p)_0$. Explain the logarithm. Prove Theorem~\ref{thm:kappanice}.
 
 \begin{cor}
 \label{cor:closurejac}
