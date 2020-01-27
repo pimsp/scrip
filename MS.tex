@@ -72,6 +72,7 @@
 \DeclareMathOperator{\Fun}{Fun}
 \DeclareMathOperator{\im}{im}
 \DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Spf}{Spf}
 \DeclareMathOperator{\sep}{sep}
 \DeclareMathOperator{\Ann}{Ann}
 \let\S\undefined
@@ -229,7 +230,7 @@ Note that by (I,2.4.4) of \cite{ega}, a $\Z_p$ point of a scheme $S$ is just an 
 \end{proof}
 
 \begin{lem}
-With $X$ as above and furthermore $t$ locally of finite type, evaluating $t$ at $X(\Z_p)_x$ gives a bijection to $(p\Z_p)^d$.
+With $X$ as above, evaluating $t$ at $X(\Z_p)_x$ gives a bijection to $(p\Z_p)^d$.
 \end{lem}
 \begin{proof}
 As $t$ is locally of finite type, by (IV,17.6.3) of \cite{ega} we have an isomorphism between the $p$-adic completion $O(\Tilde{X}_x^p)^{\wedge p}$ and the completion $\Z_p\angle{\Tilde{x_1},\dots, \Tilde{x_d}}$ of $\Z_p[\Tilde{x_1},...,\Tilde{x_d}]$, with the latter completion being the ring of convergent power series, i.e.
@@ -255,9 +256,32 @@ For $p > 2$, we know that the torsion of $J(\Z)$ injects into $J(\F_p)$, by Prop
 
 \begin{thm}
 \label{thm:kappanice}
-There are uniquely determined $\kappa_1,...,\kappa_g \in \Z_p\angle{z_1,...,z_r}$ such that for all $x \in \Z^r$ we have $\kappa(x) = (\kappa_1(x),...,\kappa_g(x))$ and the image $\overline{\kappa_i}$ of $\kappa_i$ in $\F_p[z_1,...,z_r]$ has degree at most $1$.
+There are uniquely determined $\kappa_1,\dots,\kappa_g \in \Z_p\angle{z_1,...,z_r}$ such that for all $x \in \Z^r$ we have $\kappa(x) = (\kappa_1(x),\dots,\kappa_g(x))$ and the image $\overline{\kappa_i}$ of $\kappa_i$ in $\F_p[z_1,...,z_r]$ has degree at most $1$.
 \end{thm}
-TODO: give proof. Use formal group scheme by looking to 0.
+
+We will prove this using results about formal group as defined in \citep{honda70}. To be able to use this theory, we first give some results about going from a group scheme over $\Z_p$ to a formal group.
+
+\subsubsection{From group schemes to formal groups}
+We first recall the definition of a formal group.
+\begin{defn}
+\label{defn:formalgroup}
+Let $R$ be a ring, and $n$ be a non-negative integer. Let $x,y,z$ be vectors of $n$ variables. An $n$-dimensional formal group is an element $F = (F_1,\dots,F_n) \in R[[x,y]]^n$ satisfying $F \equiv x + y \mod (x,y)^2$ and $F(F(x,y),z) = F(x,F(y,z))$. If furthermore $F(x,y) = F(y,x)$, this formal group is said to be commutative.
+\end{defn}
+\begin{exmp}
+\label{exmp:gmformalgroup}
+Take $n=1$ and $F(x,y) = x + y + xy = (1+x)(1+y)-1$, also known as the multiplicative formal group. This satisfies associativity as $F(F(x,y),z) = (1+x)(1+y)(1+z)-1 = F(x,F(y,z))$.
+\end{exmp}
+%For such a formal group, by Hensels lemma it turns out that there is a unique $i_F \in R[[x]]^n$ with $F(x,i_F(x)) = F(i_F(x),x) = 0$ and then by the associativity we find $F(x,0) = F(0,x)$. Such a formal group gives rise to a coproduct $\mu: R[[x]] \to R[[x,y]]$, by sending $x_j to F_j(x,y)$ and extending continously for the $(x)$-adic topology; this works exactly because the constant term of the $F_j$ are all $0$. This coproduct, together with the antipode given by extending $x_j \mapsto i_{F,j}$ continuously and the counit $R[[x]] \to R$ sending $x$ to 0, turns $R[[x]]$ into a group object in the category consisting of $(A,I)$ where $A$ is an $R$-algebra, $I$ is an ideal of $A$ and $A$ is $I$-adically complete as in the following way.
+
+Given a smooth scheme $G$ over $\Z_p$ of relative dimension $d$, we can look at the completion along the zero section $\Hat{O}_{G,e}$. By smoothness, this is isomorphic as topological $\Z_p$-algebras to the ring of power series $\Z_p[[x_1,\dots,x_d]]$. This completion naturally gives rise to a formal scheme denoted $\Spf \Hat{O}_{G,e}$; in a categorical notion, this is a functor on finite $\Z_p$-algebras sending $A$ to $\Hom_{\text{cont}}(\Hat{O}_{G,e},A)$, but we can also think of it as a locally ringed space with $\Spec \Z_p$ as topological space, and sheaf of rings $\Hat{O}_{G,e}$. 
+
+If furthermore $G$ is a group scheme over $\Z_p$, then this formal scheme promotes to a formal group scheme, i.e. for every finite $\Z_p$-algebra $A$ the set $\Hom_{\text{cont}}(\Hat{O}_{G,e},A)$ gets a group structure, functorially in $A$. By functoriality, this is the same [TODO: why exactly?] as an continuous coproduct $\mu: \Hat{O}_{G,e} \to \left(\Hat{O}_{G,e}\right)^{\tensor 2}$. After choosing an isomorphism between $\Hat{O}_{G,e}$ and $\Z_p[[x_1,\dots,x_d]]$, let $F_j \in \Z_p[x,y]$ denote $\mu(x_i)$. Then it is clear that $F = (F_1,\dots,F_d)$ is a $d$-dimensional formal group scheme, and commutative if $G$ was commutative.
+\begin{exmp}
+\label{exmp:gmtoformal} %TODO: nicely LaTeX Example bla, continued
+Take $G = \G_m$ over $\Z_p$, i.e. $\Z_p[u,u^{-1}]$. Then the zero section $e$ is the map sending $u$ to $1$, and we can identify the completion $\Hat{O}_{G,e}$ with the power series ring $\Z_p[[u-1]] \cong \Z_p[[x]]$, sending $u-1$ to $x$. The group structure on $G$ then gives rise to the coproduct $\Z_p[[u-1]] \to \Z_p[[u-1,v-1]], u \mapsto uv$ so the coproduct on $\Z_p[[x]]$ sends $x$ to $uv-1 = (x+1)(y+1) -1 = x + y + xy$. Hence the formal group corresponding to this group scheme is exactly the multiplicative formal group from Example~\ref{exmp:gmformalgroup}.
+\end{exmp}
+
+
 
 \begin{cor}
 \label{cor:closurejac}
