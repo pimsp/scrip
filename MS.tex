@@ -282,7 +282,11 @@ If furthermore $G$ is a group scheme over $\Z_p$, then this formal scheme promot
 Take $G = \G_m$ over $\Z_p$, i.e. $\Z_p[u,u^{-1}]$. Then the zero section $e$ is the map sending $u$ to $1$, and we can identify the completion $\Hat{O}_{G,e}$ with the power series ring $\Z_p[[u-1]] \cong \Z_p[[x]]$, sending $u-1$ to $x$. The group structure on $G$ then gives rise to the coproduct $\Z_p[[u-1]] \to \Z_p[[u-1,v-1]], u \mapsto uv$ so the coproduct on $\Z_p[[x]]$ sends $x$ to $uv-1 = (x+1)(y+1) -1 = x + y + xy$. Hence the formal group corresponding to this group scheme is exactly the multiplicative formal group from Example~\ref{exmp:gmformalgroup}.
 \end{exmp}
 
-TODO: explain that the formal group gives the group law on $J(\Z_p)_0$. Explain the logarithm. Prove Theorem~\ref{thm:kappanice}.
+This formal group tells us exactly how multiplication works on $G(\Z/p^e\Z)_0$; if we let $t = (t_1,\dots,t_d)$ denote the formal parameters giving the isomorphism $\Hat{O}_{G,e} \to \Z_p[[x_1,\dots,x_d]]$, and we represent a point $P$ in $G(\Z/p^e\Z)_0$ by their parameter values $t(P) \in p\Z/p^e\Z$, then the multiplication $p\Z/p^e\Z \times p\Z/p^e\Z \to p\Z/p^e\Z$ is exactly $F$. By taking limits, $F$ also gives the multiplication on $G(\Z_p)_0$.
+
+Now we will look at the theory of formal groups, and how that will help us.  over a $\Q$-algebra, Theorem~1 of \citep{honda70} gives the existence of 
+
+
 
 \begin{cor}
 \label{cor:closurejac}
