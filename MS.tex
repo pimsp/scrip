@@ -31,6 +31,7 @@
 \usepackage{verbatim}
 \usepackage{makecell}
 \usepackage{float}
+\usepackage{mathtools}
 
 \newcolumntype{C}{>{$}c<{$}} % math-mode version of "l" column type
 
@@ -57,6 +58,7 @@
 \newcommand{\NPC}{\mathcal{NPC}}
 \newcommand{\F}{\mathbb{F}}
 \renewcommand{\angle}[1]{\hspace{-2pt}\left\langle #1 \right\rangle}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
 \newcommand{\rad}{\text{rad}}
 \newcommand{\x}{x}
 \newcommand{\tensor}{\otimes}
@@ -243,6 +245,7 @@ By the universal property of completions, as $t$ induces the isomorphism between
 
 Note that this construction is functorial, as in the following lemma:
 \begin{lem}
+\ref{lem:smoothpointfunc}
 Given two smooth schemes $X,Y$ over $\Z_p$, two $\F_p$-point $x\in X(\F_p), y\in Y(\F_p)$, there is a natural bijection between maps $f: Y \to X$ satisfying $f(y) = x$, and morphisms $\Tilde{Y}_y^p \to \Tilde{X}_Y^p$. 
 \end{lem}
 \begin{proof}
@@ -276,6 +279,7 @@ Take $n=1$ and $F(x,y) = x + y + xy = (1+x)(1+y)-1$, also known as the multiplic
 \label{exmp:ganformalgroup}
 For any $n$, we can take $F(x,y) = x+ y$, also known as the $n$-dimensional additive formal group.
 \end{exmp}
+[TODO: add lemma about composites of power series]
 %For such a formal group, by Hensels lemma it turns out that there is a unique $i_F \in R[[x]]^n$ with $F(x,i_F(x)) = F(i_F(x),x) = 0$ and then by the associativity we find $F(x,0) = F(0,x)$. Such a formal group gives rise to a coproduct $\mu: R[[x]] \to R[[x,y]]$, by sending $x_j to F_j(x,y)$ and extending continously for the $(x)$-adic topology; this works exactly because the constant term of the $F_j$ are all $0$. This coproduct, together with the antipode given by extending $x_j \mapsto i_{F,j}$ continuously and the counit $R[[x]] \to R$ sending $x$ to 0, turns $R[[x]]$ into a group object in the category consisting of $(A,I)$ where $A$ is an $R$-algebra, $I$ is an ideal of $A$ and $A$ is $I$-adically complete as in the following way.
 
 Given a smooth scheme $G$ over $\Z_p$ of relative dimension $d$, we can look at the completion along the zero section $\Hat{O}_{G,e}$. By smoothness, after picking parameters, this is isomorphic as topological $\Z_p$-algebras to the ring of power series $\Z_p[[x_1,\dots,x_d]]$. This completion naturally gives rise to a formal scheme denoted $\Spf \Hat{O}_{G,e}$; in a categorical notion, this is a functor on finite $\Z_p$-algebras sending $A$ to $\Hom_{\text{cont}}(\Hat{O}_{G,e},A)$, but we can also think of it as a locally ringed space with $\Spec \Z_p$ as topological space, and sheaf of rings $\Hat{O}_{G,e}$. 
@@ -288,23 +292,42 @@ Take $G = \G_m$ over $\Z_p$, i.e. $\Z_p[u,u^{-1}]$. Then the zero section $e$ is
 
 This formal group tells us exactly how multiplication works on $G(\Z/p^e\Z)_0$; if we let $t = (t_1,\dots,t_d)$ denote the formal parameters giving the isomorphism $\Hat{O}_{G,e} \to \Z_p[[x_1,\dots,x_d]]$, and we represent a point $P$ in $G(\Z/p^e\Z)_0$ by their parameter values $t(P) \in p\Z/p^e\Z$, then the multiplication $p\Z/p^e\Z \times p\Z/p^e\Z \to p\Z/p^e\Z$ is exactly $F$. By taking limits, $F$ also gives the multiplication on $G(\Z_p)_0$.
 
-Now we will look at the theory of formal groups, and how that will help us. For a $n$-dimensional formal group $F$ over a ring $R$, Proposition~1.1 of \citep{honda70} gives us a canonical $R$-basis $\omega_1,\dots,\omega_n$ of the right invariant differentials; these are elements of $\bigoplus_{j=1}^n R[[x]] \d x_j$. If the formal group is furthermore commutative, then by Proposition~1.3 of \citep{honda70} these are closed, i.e. $d\omega_j = 0$. A $1$-form $d\omega = \sum_{i=1}^n f_i dx_i$ being closed means exactly that $\frac{\partial f_i}{\partial x_j} = \frac{\partial f_j}{\partial x_i}$ for all $i,j$, and then, if $R$ has no torsion, we can formally integrate $\omega$, i.e. write it as $df$ where $f \in (\Q\tensor R)[[x]]$. We make this unique by demanding that $f(0) = 0$. Writing this $f$ as $\sum_{I \in \N^n} a_I x^I$ with $I$ denoting a multi index and $a_I \in \Q\tensor R$, we see that $a_I$, although itself not necessarily lying in $R$, is close: writing $I = (I_1,\dots,I_n)$ we see that for all $j$ we must have $I_j a_I \in R$ as $f_j = \frac{\partial f}{\partial x_j} \in R[[x]]$.
+Now we will look at the theory of formal groups, and how that will help us. For a $n$-dimensional formal group $F$ over a ring $R$, Proposition~1.1 of \citep{honda70} gives us a canonical $R$-basis $\omega_1,\dots,\omega_n$ of the right invariant differentials; these are elements of $\bigoplus_{j=1}^n R[[x]] \diff x_j$. If the formal group is furthermore commutative, then by Proposition~1.3 of \citep{honda70} these are closed, i.e. $d\omega_j = 0$. A $1$-form $d\omega = \sum_{i=1}^n f_i \diff x_i$ being closed means exactly that $\frac{\partial f_i}{\partial x_j} = \frac{\partial f_j}{\partial x_i}$ for all $i,j$, and then, if $R$ has no torsion, we can formally integrate $\omega$, i.e. write it as $df$ where $f \in (\Q\tensor R)[[x]]$. We make this unique by demanding that $f(0) = 0$. Writing this $f$ as $\sum_{I \in \N^n} a_I x^I$ with $I$ denoting a multi index and $a_I \in \Q\tensor R$, we see that $a_I$, although itself not necessarily lying in $R$, is close: writing $I = (I_1,\dots,I_n)$ we see that for all $j$ we must have $I_j a_I \in R$ as $f_j = \frac{\partial f}{\partial x_j} \in R[[x]]$.
 
 In particular, we write $\log_i$ for the unique element of $(\Q\tensor R)[[x]]$ such that $d\log_i = \omega_i$. Together, these $\log_i$ give an element $\log \in R[[x]]^n$, and by Theorem~1 of \citep{honda70}, this logarithm satisfies $\log(x) = x \mod (x)^2$, and $\log(F(x,y)) = \log(x)+\log(y)$. By the first result, $\log$ has an inverse which we will call $\exp$, also given by powerseries in $(\Q\tensor R)[[x]])$, and also satisfying $\exp(x) = x \mod (x)^2$.
 \begin{exmp} %TODO: nicely LaTeX Example bla, continued
-Taking $F$ the multiplicative group as in Example~\ref{exmp:gmformalgroup}, Proposition~1.1 of \citep{honda70} gives us $\omega = \frac{1}{x+1}dx$; as a power series this is $\sum_{j \geq 0} (-x)^j$. The formal anti-derivative of this is $\log = \sum_{j \geq 1} \frac{-(-x)^j}{j}$, and Theorem $1$ will tell us what we already know in the context of analysis $\log(x + y + xy) = \log(x)+\log(y)$. Then analysis will also explicitly tell us 
+Taking $F$ the multiplicative group as in Example~\ref{exmp:gmformalgroup}, Proposition~1.1 of \citep{honda70} gives us $\omega = \frac{1}{x+1}dx$; as a power series this is $\sum_{j \geq 0} (-x)^j$. The formal anti-derivative of this is $\log = \sum_{j \geq 1} \frac{-(-x)^j}{j}$, and Theorem $1$ will tell us what we already know in the context of analysis $\log(x + y + xy) = \log(x)+\log(y)$. Then analysis will also explicitly tell us what $\exp$ looks like: namely, $\exp(x) = \sum_{j \geq 1} \frac{x^j}{j!}$.
 \end{exmp}
 
+Now we will see how we can use this formal logarithm in our case of the formal group $F_G$ stemming from a $d$-dimensional smooth group scheme $G/\Z_p$. Recall that we have a bijection $G(\Z_p)_0 \to p\Z_p^d \to \Z_p^d$ given by evaluating at parameters $t = (t_1,\dots,t_d)$ and then dividing by $p$; furthermore, recall that the group structure on $G(\Z_p)_0$ is the same as the group structure defined by $F_G$ on $p\Z_p^d$. Let $\log \in \Z_p[[x]]^d$ denote the logarithm corresponding to $F_G$, and let $\log_p$ denote the power series $\log(px)/p = (\log_1(px)/p,\dots,\log_d(px)/p)$. We then have the following little lemma to bridge the gap between power series and maps.
+\begin{lem}
+With notation as above, we have the following statements about $\log_p$:
+\begin{enumerate}
+	\item $\log_p$ lies in $\Z_p\angle{x_1,\dots,x_d}^d$, the ring of convergent power series, and hence defines a map $\log_p: \Z_p^d \to \Z_p^d$.
+	\item Letting $\oplus$ denote the group structure on $\Z_p^d$ coming from the bijection $G(\Z_p)_0 \to p\Z_p^d \to \Z_p^d$, the map $\log_p$ is a group morphism from $(\Z_p^d,\oplus)$ to $(\Z_p^d,+)$.
+	\item If $p > 2$, the map $\log_{p,i}$ reduces to $x_i$ modulo $p$ and hence $\log_p$ has an inverse $\exp_p$, which is also an element of $\Z_p\angle{x_1,\dots,x_d}$. Then this $\exp_p$ is a two-sided inverse of $\log_p$, and hence $\log_p: \Z_p^d \to \Z_p^d$ is a bijection.
+\end{enumerate} 
+\end{lem}
+\begin{proof}
+Write $\log_{i} = \sum_{I} a_{i,I} x^I$ and $log_{p,i} = \sum_I a_{i,I} p^{|I|-1} x^I$ where $I$ ranges over the multi indices. Recall that $a_{i,0} = 0$. Also, recall that although a priori the coefficients $a_I$ lie in $\Q_p$, we have $I_j a_{i,I} \in \Z_p$ for all $I$ and $i,j$. For purposes of easy estimation, this also means $|I|a_{i,I} \in \Z_p$. As we have, with no constraint on $p$, for all $n\geq $ that $c_n\coloneqq p^{n-1}/n$ lies in $\Z_p$ and converges to $0$, this means that \[ \log_{p,i} = \sum_I a_{i,I} p^{|I|-1} x^I = \sum_I |I|a_{i,I} c_{|I|} x^I\] is indeed an element of $\Z_p\angle{x_1,\dots,x_d}^n$, and hence defines a map $\Z_p^d \to \Z_p$. Hence all the $\log_{p,i}$ together give a map $\Z_p^d \to \Z_p^d$
+
+[TODO: explain why group morphism]
+
+To study $\log_p$ modulo $p$, we note that if $n\geq 3$, then $p$ actually divides $c_n$, and for $p > 2$ we even have $p|c_2$. As $\log_{p,i} = x_i \mod (x)^2$, this means that for $p > 2$ we have \[\log_{p,i} \equiv \sum_{|I| = 1} |I|a_{i,I}c_|I| x^I \equiv x_i \bmod p.\]
+[TODO: explain how the lemma gives $\exp_p \in \Z_p[[x]]^d$, and how the construction hopefully shows it is indeed a convergent power series]
+\end{proof}
+
+[TODO: proof of Theorem~\ref{thm:kappanice}, should be easy now].
 
 \begin{cor}
 \label{cor:closurejac}
 The map $\kappa$ extends uniquely to a continuous map $\kappa: \Z_p^r \to \Z_p^g$, given by the same power series, and the closure $\overline{J(\Z)_t} \subset J(\Z_p)_t$ is given by the image of $\Z_p^r$ under $\kappa$.
 \end{cor}
-TODO: give proof
+TODO: give proof. This is easy now.
 
 \subsection{From \texorpdfstring{$C(\Z_p)$}{C(Z\_p)} to \texorpdfstring{$J(\Z_p)$}{J(Z\_p)}}
 By Subsection \ref{subs:smoothzppoints}, we also know that $C(\Z_p)_P$ is in bijection with $\Z_p$, again with the bijection given by evaluating a parameter and dividing by $p$. The resulting function $\Z_p \to \Z_p^g$ is linear and non-constant modulo $p$, i.e. there are power series $f_1,...,f_{g-1} \in \Z_p\angle{z_1,...,z_g}$ such that the image of $C(\Z_p)_P$ is exactly given by $V(f_1,...,f_{g-1})$, and all $f_i$ are linear modulo $p$. Another way to think of this, is as $C(\Z/p^2\Z)_P$ being an affine line inside $J(\Z/p^2\Z)_t$.
-TODO: give proof
+TODO: give proof. This uses the functoriality of smooth $\Z_p$-points reducing to a point. That $C(\Z/p^2\Z)_P$ is an affine line inside $J(\Z/p^2\Z)_t$ can also be seen more easily, using Lemma~\ref{lem:smoothpointsfunc}. 
 % Say something about the f_i defining C(Z_p) in J(Z_p)
 
 \subsection{Finding \texorpdfstring{$C(\Z)$}{C(Z)}}
