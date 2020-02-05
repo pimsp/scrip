@@ -61,6 +61,7 @@
 \newcommand*\diff{\mathop{}\!\mathrm{d}}
 \newcommand{\rad}{\text{rad}}
 \newcommand{\x}{x}
+\newcommand{\m}{\mathfrak{m}}
 \newcommand{\tensor}{\otimes}
 \newcommand{\Ring}{\textbf{Rings}}
 \newcommand{\Sets}{\textbf{Sets}}
@@ -78,6 +79,7 @@
 \DeclareMathOperator{\Spf}{Spf}
 \DeclareMathOperator{\sep}{sep}
 \DeclareMathOperator{\Ann}{Ann}
+\DeclareMathOperator{\GL}{GL}
 \let\S\undefined
 \DeclareMathOperator{\S}{S}
 \DeclareMathOperator{\A}{A}
@@ -264,12 +266,14 @@ There are uniquely determined $\kappa_1,\dots,\kappa_g \in \Z_p\angle{z_1,...,z_
 \end{thm}
 
 We will prove this using results about formal group as defined in \citep{honda70}. To be able to use this theory, we first give some results about going from a group scheme over $\Z_p$ to a formal group.
+[TODO: introduce the "subscript zero" notation for power series with no constant term; $R[[x]]_0 = \{f: f \equiv 0 \mod x\}$].
+First we introduce some notation that will be used in this section. Let $R$ be a commutative ring, and $x = (x_1,\dots,x_n)$ and sometimes $y,z$ are vectors of variables. Then $R[[x]]$ denotes as usual the powerseries in the $x_i$, and $R[[x]]_0$ denotes those power series with constant term $0$. With $x = (x_1,\dots,x_n)$ and $y = (y,_1,\dots,y_m$), let $f \in R[[x]]^m$ and assume $f(0) = 0$. Then for $g \in R[[y]]^k$ for some $k\in\Z_{\geq 0}$, we can compose $g$ and $f$ to get $g\circ f := (g_1(f(x)),\dots,g_k(f(x)))\in R[[x]]]^k$. This definition makes sense because $f^i$ converges to $0$, so for any $a \in R^{\Z_{\geq 0}} $ the sum $\sum_i a_i f^i$ always converges. 
 
 \subsubsection{From group schemes to formal groups}
-We first recall the definition of a formal group.
+We first recall the definition of a formal group. For this entire section, $R$ is a ring, and $x,y,z$ are vectors of variables.
 \begin{defn}
 \label{defn:formalgroup}
-Let $R$ be a ring, and $n$ be a non-negative integer. Let $x,y,z$ be vectors of $n$ variables. An $n$-dimensional formal group is an element $F = (F_1,\dots,F_n) \in R[[x,y]]^n$ satisfying $F \equiv x + y \mod (x,y)^2$ and $F(F(x,y),z) = F(x,F(y,z))$. If furthermore $F(x,y) = F(y,x)$, this formal group is said to be commutative.
+Let $n$ be a non-negative integer. Let $x,y,z$ be vectors of $n$ variables. An $n$-dimensional formal group is an element $F = (F_1,\dots,F_n) \in R[[x,y]]_0^n$ satisfying $F \equiv x + y \mod (x,y)^2$ and $F(F(x,y),z) = F(x,F(y,z))$. If furthermore $F(x,y) = F(y,x)$, this formal group is said to be commutative.
 \end{defn}
 \begin{exmp}
 \label{exmp:gmformalgroup}
@@ -279,8 +283,24 @@ Take $n=1$ and $F(x,y) = x + y + xy = (1+x)(1+y)-1$, also known as the multiplic
 \label{exmp:ganformalgroup}
 For any $n$, we can take $F(x,y) = x+ y$, also known as the $n$-dimensional additive formal group.
 \end{exmp}
-[TODO: add lemma about composites of power series]
-%For such a formal group, by Hensels lemma it turns out that there is a unique $i_F \in R[[x]]^n$ with $F(x,i_F(x)) = F(i_F(x),x) = 0$ and then by the associativity we find $F(x,0) = F(0,x)$. Such a formal group gives rise to a coproduct $\mu: R[[x]] \to R[[x,y]]$, by sending $x_j to F_j(x,y)$ and extending continously for the $(x)$-adic topology; this works exactly because the constant term of the $F_j$ are all $0$. This coproduct, together with the antipode given by extending $x_j \mapsto i_{F,j}$ continuously and the counit $R[[x]] \to R$ sending $x$ to 0, turns $R[[x]]$ into a group object in the category consisting of $(A,I)$ where $A$ is an $R$-algebra, $I$ is an ideal of $A$ and $A$ is $I$-adically complete as in the following way.
+[TODO: add text explaining the following lemma]
+Note there is no mention of an inverse, but the following lemma, a formal version of the implicit function theorem, tells us that the inverse follows automatically from the definitions.
+\begin{lem}
+\label{lem:implicitfunction}
+Let $x,y$ have length $n$. Let $F \in R[[x,y]]_0^n$ such that $F \equiv Ax + By \bmod (x,y)^2$ with $B \in \GL_n(R)$. Then there's a unique $\iota \in R[[x]]_0^n$ such that $F(x,\iota(x)) = 0$. 
+\end{lem}
+\begin{proof}
+If $F$ is a polynomial, this is a special case of a multivariate version of Hensel's lemma, as in Corrolaire~2 of \cite[III,4.5]{BourbakiCA}, over $R[[x]]$ with maximal ideal $\m = (x)$, as the derivative matrix of $F(x,\iota)$ with respect to $\iota$ is $B$, which is invertible, and $\iota = 0$ gives a solution modulo $\m$. Now for $F$ any power series, let $F_j$ be the polynomial consisting of all terms in $F$ of degree at most $j$, and let $\iota_j$ be the unique power series in $R[[x]]_0^n$such that $F_j(x,\iota_j) = 0$. Note that both $\iota_j$ and $\iota_{j+1}$ are solutions to $F_j(x,\iota) \equiv 0 \mod \m^j$, so by the uniquess guaranteed by Hensel's lemma used over $R[[x]]/\m^j$, these must be equal. Hence they converge to $\iota \in R[[x]]_0^n$, which is the unique solution of $F(x,\iota(x)) = 0$.
+\end{proof}
+This has the following corollary about the inverse of a power series.
+\begin{cor}
+\label{lem:formalinverse}
+Let $x$ have length $n$. Let $a \in R[[x]]_0^n$ with $a \equiv Px \mod x$ for some matrix $A\in \GL_n(R)$. Then there is a unique $b \in R[[x]]_0^n$ such that $a \circ b = b \circ a = x$.
+\end{cor}
+\begin{proof}
+Let $F(x,y) = x - a(x)$. This satisfies the constraints of Lemma~\ref{lem:implicitfunction}, so we find a unique $b$ such that $a \circ b = x$. Applying Lemma~\ref{lem:implicitfunction} again gives a unique $c$ such that $b \circ c = x$. But then $a = a \circ (b \circ c) = (a \circ b) \circ c = c$ shows $a = c$ and hence we are done.
+\end{proof}
+So a formal group $F$ does by Lemma~\ref{lem:implicitfunction} indeed have a right inverse $\iota_F$. Also, by $F(0,0) = 0$ we have that $F(x,F(\iota_f,0)) = 0$ so $F(\iota_f,0)$ is in fact equal to $\iota_F$; as $\iota_F \equiv -x \mod (x)^2$, it has a formal inverse and hence $F(x,0) = x$, so $0$ is indeed a right unit. A standard argument now shows that $\iota_F$ is also a left inverse and $0$ is also a right unit, so $F$ gives $R[[x]]$ the structure of a group object in the category of topological rings; for two continuous morphisms $f_1,f_2$ from $R[[x]]$ to some ring $A$, given by sending $x$ to $a_1,a_2$ respectively, we define $(f_1 \oplus f_2)(x) = F(a_1,a_2)$, and by our considerations this makes $\Hom_{\text{cont}}{R,A}$ into a group, functorially in $A$.
 
 Given a smooth scheme $G$ over $\Z_p$ of relative dimension $d$, we can look at the completion along the zero section $\Hat{O}_{G,e}$. By smoothness, after picking parameters, this is isomorphic as topological $\Z_p$-algebras to the ring of power series $\Z_p[[x_1,\dots,x_d]]$. This completion naturally gives rise to a formal scheme denoted $\Spf \Hat{O}_{G,e}$; in a categorical notion, this is a functor on finite $\Z_p$-algebras sending $A$ to $\Hom_{\text{cont}}(\Hat{O}_{G,e},A)$, but we can also think of it as a locally ringed space with $\Spec \Z_p$ as topological space, and sheaf of rings $\Hat{O}_{G,e}$. 
 
@@ -301,6 +321,7 @@ Taking $F$ the multiplicative group as in Example~\ref{exmp:gmformalgroup}, Prop
 
 Now we will see how we can use this formal logarithm in our case of the formal group $F_G$ stemming from a $d$-dimensional smooth group scheme $G/\Z_p$. Recall that we have a bijection $G(\Z_p)_0 \to p\Z_p^d \to \Z_p^d$ given by evaluating at parameters $t = (t_1,\dots,t_d)$ and then dividing by $p$; furthermore, recall that the group structure on $G(\Z_p)_0$ is the same as the group structure defined by $F_G$ on $p\Z_p^d$. Let $\log \in \Z_p[[x]]^d$ denote the logarithm corresponding to $F_G$, and let $\log_p$ denote the power series $\log(px)/p = (\log_1(px)/p,\dots,\log_d(px)/p)$. We then have the following little lemma to bridge the gap between power series and maps.
 \begin{lem}
+\label{lem:formallog}
 With notation as above, we have the following statements about $\log_p$:
 \begin{enumerate}
 	\item $\log_p$ lies in $\Z_p\angle{x_1,\dots,x_d}^d$, the ring of convergent power series, and hence defines a map $\log_p: \Z_p^d \to \Z_p^d$.
@@ -309,21 +330,31 @@ With notation as above, we have the following statements about $\log_p$:
 \end{enumerate} 
 \end{lem}
 \begin{proof}
-Write $\log_{i} = \sum_{I} a_{i,I} x^I$ and $log_{p,i} = \sum_I a_{i,I} p^{|I|-1} x^I$ where $I$ ranges over the multi indices. Recall that $a_{i,0} = 0$. Also, recall that although a priori the coefficients $a_I$ lie in $\Q_p$, we have $I_j a_{i,I} \in \Z_p$ for all $I$ and $i,j$. For purposes of easy estimation, this also means $|I|a_{i,I} \in \Z_p$. As we have, with no constraint on $p$, for all $n\geq $ that $c_n\coloneqq p^{n-1}/n$ lies in $\Z_p$ and converges to $0$, this means that \[ \log_{p,i} = \sum_I a_{i,I} p^{|I|-1} x^I = \sum_I |I|a_{i,I} c_{|I|} x^I\] is indeed an element of $\Z_p\angle{x_1,\dots,x_d}^n$, and hence defines a map $\Z_p^d \to \Z_p$. Hence all the $\log_{p,i}$ together give a map $\Z_p^d \to \Z_p^d$
-
-[TODO: explain why group morphism]
+Write $\log_{i} = \sum_{I} a_{i,I} x^I$ and $log_{p,i} = \sum_I a_{i,I} p^{|I|-1} x^I$ where $I$ ranges over the multi indices. Recall that $a_{i,0} = 0$. Also, recall that although a priori the coefficients $a_I$ lie in $\Q_p$, we have $I_j a_{i,I} \in \Z_p$ for all $I$ and $i,j$. For purposes of easy estimation, this also means $|I|a_{i,I} \in \Z_p$. As we have, with no constraint on $p$, for all $n\geq $ that $c_n\coloneqq p^{n-1}/n$ lies in $\Z_p$ and converges to $0$, this means that \[ \log_{p,i} = \sum_I a_{i,I} p^{|I|-1} x^I = \sum_I |I|a_{i,I} c_{|I|} x^I\] is indeed an element of $\Z_p\angle{x_1,\dots,x_d}^n$, and hence defines a map $\Z_p^d \to \Z_p$. Hence all the $\log_{p,i}$ together give a map $\Z_p^d \to \Z_p^d$. By the equality of power series $\log(F(x,y)) = \log(x)+\log(y)$ from the definition of the logarithm, and the fact that all these powerseries converge on $p\Z_p^d$, this $\log_{p,i}$ is indeed a group morphism from $(\Z_p^d,\oplus)$ to $(\Z_p^d,+)$
 
 To study $\log_p$ modulo $p$, we note that if $n\geq 3$, then $p$ actually divides $c_n$, and for $p > 2$ we even have $p|c_2$. As $\log_{p,i} = x_i \mod (x)^2$, this means that for $p > 2$ we have \[\log_{p,i} \equiv \sum_{|I| = 1} |I|a_{i,I}c_|I| x^I \equiv x_i \bmod p.\]
-[TODO: explain how the lemma gives $\exp_p \in \Z_p[[x]]^d$, and how the construction hopefully shows it is indeed a convergent power series]
+Note that as $\log_p \equiv x \mod (x)^2$, by Lemma~\ref{lem:formalinverse} it has an inverse $\exp_p \in \Z_p[[x]]_0^n$. Modulo $p$, this $\exp_p$ must be $x$, which lies in $\Z_p\angle{x}_0^n$; as $\Z_p\angle{x}$ is $p$-adically complete, using Hensel this shows $\exp_p$ is indeed in $\Z_p\angle{x}_0^n$.
+\end{proof}
+[TODO: I'd like to study what happens modulo higher powers of $p$; for example, if $\log_p$ is at most quadratic mod $p^2$, then so is $\exp_p$; and similar for $\log_p$ at most cubic mod $p^3$. Even in general, if $\log_p$ has degree at most $d$ modulo $p^k$, then $\exp_p$ has degree at most $f = f(d,k)$ (seen most easily by working in a ``universal'' ring $\Z[p]/(p^k)$).
+
+This lemma makes the proof of Theorem~\ref{thm:kappanice} relatively easy. 
+\begin{proof}[Proof of Theorem~\ref{thm:kappanice}]
+Write $\log_p$ for the logarithm corresponding to the formal group corresponding to the The map $\kappa: \Z^d \to \Z_p^g$ given by the inclusion $J(\Z)_0$ to $J(\Z_p)_0$ is a group morphism with the group structure on $\Z^d$ being addition and the group structure on $\Z_p^g$, denoted by $\oplus$, given by the bijection with $J(\Z_p)_0$ induced by choosing parameters at $0$. Then by Lemma~\ref{lem:formallog} the map factors as in the diagram of groups
+%\[
+% https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAAoAdTgLQD0opANQBKEAF9S6TLnyEUAJnJVajFmy68A+mj4BzUtwhpmcMZOnY8BIgEZStlfWatEHbjx37h5lTCh68ESgAGYAThAAtkhkIDgQSPYgDHQARjAMAAoy1vLJMCE4INTO6m7cANZ0aGh0ElIg4VEx1PFISqoubNwMEHo6AATcAMZYYcNDnFU1dRaNEdGIHW2ISaWuINwwAB5oOhIU4kA
+\begin{tikzcd}
+{(\Z^d,+)} \arrow[rr, "\kappa"] \arrow[rd, "\log_p \circ \kappa"] &                                   & {(\Z_p^g,\oplus)} \\
+                                                                  & {(\Z_p^g,+)} \arrow[ru, "\exp_p"] &                  
+\end{tikzcd}
+%\]
+Then the arrow $\log_p \circ \kappa$ is just a linear map, and $\exp_p$ is a convergent power series that is linear modulo $p$, so their composite $\kappa$ is also a convergent power series linear modulo $p$.
 \end{proof}
 
-[TODO: proof of Theorem~\ref{thm:kappanice}, should be easy now].
-
+This immediately gives rise to the following corollary.
 \begin{cor}
 \label{cor:closurejac}
 The map $\kappa$ extends uniquely to a continuous map $\kappa: \Z_p^r \to \Z_p^g$, given by the same power series, and the closure $\overline{J(\Z)_t} \subset J(\Z_p)_t$ is given by the image of $\Z_p^r$ under $\kappa$.
 \end{cor}
-TODO: give proof. This is easy now.
 
 \subsection{From \texorpdfstring{$C(\Z_p)$}{C(Z\_p)} to \texorpdfstring{$J(\Z_p)$}{J(Z\_p)}}
 By Subsection \ref{subs:smoothzppoints}, we also know that $C(\Z_p)_P$ is in bijection with $\Z_p$, again with the bijection given by evaluating a parameter and dividing by $p$. The resulting function $\Z_p \to \Z_p^g$ is linear and non-constant modulo $p$, i.e. there are power series $f_1,...,f_{g-1} \in \Z_p\angle{z_1,...,z_g}$ such that the image of $C(\Z_p)_P$ is exactly given by $V(f_1,...,f_{g-1})$, and all $f_i$ are linear modulo $p$. Another way to think of this, is as $C(\Z/p^2\Z)_P$ being an affine line inside $J(\Z/p^2\Z)_t$.
@@ -332,7 +363,7 @@ TODO: give proof. This uses the functoriality of smooth $\Z_p$-points reducing t
 
 \subsection{Finding \texorpdfstring{$C(\Z)$}{C(Z)}}
 Clearly, as subsets of $J(\Z_p)_t$, we have the inclusion $C(\Z)_P \subset C(\Z_p)_P \cap \overline{J(\Z)_t}$. Let $\kappa^*f_1,...,\kappa^*f_{g-1}$ be the pullbacks along $\kappa$ of the $f_i$, and let $I$ be the ideal they generate inside $A := \Z_p\angle{z_1,...,z_r}$. Then $C(\Z_p)_P \cap \overline{J(\Z)_t}$ is in bijection with $\Hom(A/I,\Z_p)$. By Theorem 4.2 of Edixhoven-Lido, we just need to check whether $\overline{A}/\overline{I}$ is finite. As all $\overline{\kappa^* f_i}$ are linear, in fact, $\overline{A}/\overline{I}$ is always of the form $0$ or $\F_p[w_1,...,w_s]$ for some $s \leq r$, and $s = 0$ iff the system of linear equations $\overline{\kappa^* f_i} = 0, i \in \{1,...,g-1\}$ has a unique solution. In general, we may expect an upper bound for $|C(\Z)_P|$ of $1$ if $r \leq g-1$.
-TODO: give proof of Theorem 4.2.
+TODO: give proof of Theorem 4.12.
 % Pull back the f_i along kappa for the final theorem
 
 \subsection{Calculations modulo \texorpdfstring{$p^2$}{p\^2}}
