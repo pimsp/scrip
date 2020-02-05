@@ -83,6 +83,8 @@
 \let\S\undefined
 \DeclareMathOperator{\S}{S}
 \DeclareMathOperator{\A}{A}
+\let\div\undefined
+\DeclareMathOperator{\div}{div}
 
 \frenchspacing
 
@@ -206,7 +208,7 @@ Say how much is borrowed from the article by Bas and Guido, but with a focus on 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \section{Linear Chabauty}
-Let $p>2$ be a prime, and $C$ be a scheme over $\Z$, proper, flat, regular with $C$ smooth over $\Z_{(p)}$ and $C_\Q$ of dimension $1$ and geometrically connected, of genus $g \geq 1$ and Mordell-Weil rank $r < g$. Assume we have a $\Q$-point $b$ in $C$, or equivalently a $\Z$-point. Let $J$ be the Jacobian of $C_\Q$; we view $C_\Q$ as a subscheme of $J$, using the map $Q \mapsto Q - b$ on points. Let $P \in C(\F_p)$ be a point such that $t := P - b \in J(\F_p)$ lies in the image of $J(\Z)$.
+Let $p>2$ be a prime, and $C$ be a scheme over $\Z$, proper, flat, regular with $C$ smooth over $\Z_{(p)}$ and $C_\Q$ of dimension $1$ and geometrically connected, of genus $g \geq 1$ and with the Jacobian $J$ of $C_\Q$ having Mordell-Weil rank $r < g$. Assume we have a $\Q$-point $b$ in $C$, or equivalently a $\Z$-point. We view $C_\Q$ as a subscheme of $J$, using the map $Q \mapsto Q - b$ on points. Let $P \in C(\F_p)$ be a point such that $t := P - b \in J(\F_p)$ lies in the image of $J(\Z)$.
 
 \begin{defn}
 Let $S$ be a scheme, $T \to U$ a morphism of schemes and $x : T \to S$ a $T$-point. We define $S(U)_x$ as the morphisms from $U$ to $S$ that, after precomposing with $T \to U$, give $x$.
@@ -221,9 +223,9 @@ Let $X/\Z_p$ be a smooth scheme of relative dimension $d$, and let $x \in X(\F_p
 %TODO: give proof and define $\Z_p\angle{z_1,...,z_r}$ as the $p$-adic completion of $\Z_p[z_1,...,z_r]$, i.e. powerseries which are polynomials modulo every power of $p$.
 
 % Blow up X at x, and look at the part where p generates the maximal ideal
-Assume, by looking at a neighborhood of $x$, that $X = \Spec A$ is affine and that $p,t_1,\dots,t_d$ generate the maximal ideal of $O_{X,x}$ with $t_1,\dots,t_d$ elements of $O_X(X) = A$, also called \textit{parameters} at $x$. By shrinking $X$ even more, we may assume as $X$ is smooth that $t = (t_1,\dots,t_d): X \to \A^d_{\Z_p}$ is \'etale. Now consider the blowup $\Tilde{X}_x \to X$ of $X$ at $x$, and let $\Tilde{X}_x^p$ be the part where $p$ generates the maximal ideal. Equivalently, that is the part where $t_1,\dots,t_d$ are multiples of $p$, so informally it consists of the points that reduce to $x$ modulo $p$.
+Assume, by looking at a neighborhood of $x$, that $X = \Spec A$ is affine and that $p,t_1,\dots,t_d$ generate the maximal ideal of $O_{X,x}$ with $t_1,\dots,t_d$ elements of $O_X(X) = A$, also called \textit{parameters} at $x$. By shrinking $X$ even more, we may assume as $X$ is smooth that $t = (t_1,\dots,t_d): X \to \A^d_{\Z_p}$ is \'etale. Now consider the blowup $\Tilde{X}_x \to X$ of $X$ at $x$, and let $\Tilde{X}_x^p$ be the part where $p$ generates the inverse image of the maximal ideal of $O_{X,x}$. Equivalently, that is the part where $t_1,\dots,t_d$ are multiples of $p$, so informally it consists of the points that reduce to $x$ modulo $p$.
 
-As $t$ is \'etale, the ideal of $X$ defining $x$ is the pullback along $t$ of the ideal of $\A^d_{\Z_p}$ defining the origin $a$ over $\F_p$. That means that the blowup $\Tilde{X}_x \to X$ is the pullback of the blowup $\Tilde{\A}^d_{\Z_p,a} \to \A^d$. Then the part $\Tilde{X}_x^p$ is the pullback of the corresponding part of $\Tilde{\A}^d_{\Z_p,a}$, i.e. $\Spec \Z_p[\Tilde{x_1},\dots,\Tilde{x_d}] = \Spec \Z_p[x_1/p,\dots,x_d/p]$ with the morphism $\Z_p[x_1,\dots,x_d] \to \Z_p[\Tilde{x_1},\dots,\tilde{x_p}]$ given by $x_i \mapsto p\Tilde{x_i}$. That implies that $\Tilde{X}_x^p$ is $\Spec A[t_1/p,\dots,t_d/p]$, with the map $\Tilde{X}_x^p \to X$ given by the inclusion $A \to \Spec A[t_1/p,\dots,t_d/p]$ (remember that the $t_i$ are elements of $O_X(X) = A$).
+There is an explicit description of the map $\Tilde{X}_x^p \to X$; as $t$ is \'etale, the ideal of $X$ defining $x$ is the pullback along $t$ of the ideal of $\A^d_{\Z_p}$ defining the origin $a$ over $\F_p$. That means that the blowup $\Tilde{X}_x \to X$ is the pullback of the blowup $\Tilde{\A}^d_{\Z_p,a} \to \A_{\Z_p}^d$. Then the part $\Tilde{X}_x^p$ is the pullback of the corresponding part of $\Tilde{\A}^d_{\Z_p,a}$, i.e. $\Spec \Z_p[\Tilde{x_1},\dots,\Tilde{x_d}] = \Spec \Z_p[x_1/p,\dots,x_d/p]$ with the morphism $\Z_p[x_1,\dots,x_d] \to \Z_p[\Tilde{x_1},\dots,\tilde{x_d}]$ given by $x_i \mapsto p\Tilde{x_i}$. That implies that $\Tilde{X}_x^p$ is $\Spec A[t_1/p,\dots,t_d/p]$, with the map $\Tilde{X}_x^p \to X$ given by the inclusion $A \to \Spec A[t_1/p,\dots,t_d/p]$ (remember that the $t_i$ are elements of $O_X(X) = A$).
 
 This now enables us to characterise explicitly the $\Z_p$-points above $x$, as in the following two lemmas.
 
@@ -240,22 +242,23 @@ With $X$ as above, evaluating $t$ at $X(\Z_p)_x$ gives a bijection to $(p\Z_p)^d
 \begin{proof}
 As $t$ is locally of finite type, by (IV,17.6.3) of \cite{ega} we have an isomorphism between the $p$-adic completion $O(\Tilde{X}_x^p)^{\wedge p}$ and the completion $\Z_p\angle{\Tilde{x_1},\dots, \Tilde{x_d}}$ of $\Z_p[\Tilde{x_1},...,\Tilde{x_d}]$, with the latter completion being the ring of convergent power series, i.e.
 \[
-\Z_p\angle{\Tilde{x_1},\dots, \Tilde{x_d}} = \left\{f \in \Z_p[[\Tilde{x_1},\dots,\Tilde{x_d}]] \mid \forall n \geq 0, f + (p^n) \in \Z/p^n\Z[\Tilde{x_1},\dots,\tilde{X_d}] + (p^n) \right\}.
+\Z_p\angle{\Tilde{x_1},\dots, \Tilde{x_d}} = \left\{f \in \Z_p[[\Tilde{x_1},\dots,\Tilde{x_d}]] \mid \forall n \geq 0, f + (p^n) \in \Z/p^n\Z[\Tilde{x_1},\dots,\tilde{x_d}] + (p^n) \right\}.
 \]
-By the universal property of completions, as $t$ induces the isomorphism between completion, $t$ also induces a bijection $$\Hom(O(X(\Z_p)_x), \Z_p) \to \Hom(O(X(\Z_p)_x)^{\wedge p}, \Z_p) = \Hom(\Z_p\angle{\Tilde{x_1},\dots,\Tilde{x_d}},\Z_p) = \Z_p^d$$. Following all the bijections, we indeed get the bijection we wanted.
+By the universal property of completions, as $t$ induces the isomorphism between completion, $t$ also induces a bijection $$\Hom(O(X(\Z_p)_x), \Z_p) \to \Hom(O(X(\Z_p)_x)^{\wedge p}, \Z_p) = \Hom(\Z_p\angle{\Tilde{x_1},\dots,\Tilde{x_d}},\Z_p) = \Z_p^d.$$ Following all the bijections, we indeed get the bijection we wanted.
 \end{proof}
 
 Note that this construction is functorial, as in the following lemma:
 \begin{lem}
 \ref{lem:smoothpointfunc}
-Given two smooth schemes $X,Y$ over $\Z_p$, two $\F_p$-point $x\in X(\F_p), y\in Y(\F_p)$, there is a natural bijection between maps $f: Y \to X$ satisfying $f(y) = x$, and morphisms $\Tilde{Y}_y^p \to \Tilde{X}_Y^p$. 
+Given two smooth schemes $X,Y$ over $\Z_p$ and two $\F_p$-points $x\in X(\F_p), y\in Y(\F_p)$, a map $f: Y \to X$ satisfying $f(y) = x$ gives rise to a morphism $\Tilde{Y}_y^p \to \Tilde{X}_x^p$.
 \end{lem}
 \begin{proof}
-TODO
-Is this even necessary?
+TODO: give proof.
 \end{proof}
 
-Finally, we look at the specific case of $X$ being of relative dimension $1$ over $\Z_p$. It then turns out that there is additionally a free faithful $\F_p$-action on $X(\Z/p^2\Z)_0$. We can parametrise $X(\Z/p^2\Z)_0$ by $t = t_1 : X(\Z/p^2\Z)_0 \to p\Z/p^2\Z$; write $P_{\lambda}$ for the point with $t$-value $\lambda p$. Then as Cartier divisor, the point $P_{\lambda}$ is defined by $t - \mu p \in O(X_{\Z/p^2\Z})_x$, so $P_{\lambda} + P_{\mu}$ is defined by $(t-\lambda p)(t-\mu p) = t^2 - (\lambda + \mu)tp$, which defines the same Cartier divisor as $P_{\lambda'} + P_{\mu'}$ if and only if $\lambda + \mu = \lambda' + \mu'$. So as a Cartier divisor, $P(\lambda) + P_{\mu}$ is in fact equal to $P_{\lambda'} + P_{\mu'}$.
+[TODO: add that the map $\Tilde{Y}_y^p(\Z_p) \to \Tilde{X}_x^p(\Z_p)$ is, after choosing parameters, given by convergent power series; are these in general linear modulo $p$? And what happens modulo higher powers?]
+
+Finally, we look at the specific case of $X$ being of relative dimension $1$ over $\Z_p$. It then turns out that there is additionally a free transitive $\F_p$-action on $X(\Z/p^2\Z)_0$. [TODO: maybe replace this by an action of the tangent space of $X_{\F_p}$ at $x$]. We can parametrise $X(\Z/p^2\Z)_0$ by $t = t_1 : X(\Z/p^2\Z)_0 \to p\Z/p^2\Z$; write $P_{\lambda}$ for the point with $t$-value $\lambda p$. Then as Cartier divisor, the point $P_{\lambda}$ is defined by $t - \lambda p \in O(X_{\Z/p^2\Z})_x$, so $P_{\lambda} + P_{\mu}$ is defined by $(t-\lambda p)(t-\mu p) = t^2 - (\lambda + \mu)tp$, which defines the same Cartier divisor as $P_{\lambda'} + P_{\mu'}$ if and only if $\lambda + \mu = \lambda' + \mu'$. So as a Cartier divisor, $P_{\lambda} + P_{\mu}$ is in fact equal to $P_{\lambda'} + P_{\mu'}$.
 
 \subsection{From \texorpdfstring{$J(\Z)$}{J(Z)} to \texorpdfstring{$J(\Z_p)$}{J(Z\_p)}}
 For $p > 2$, we know that the torsion of $J(\Z)$ injects into $J(\F_p)$, by Proposition 2.3 of \cite{pierre2000}. Hence for $0 \in J(\F_p)$, we know $J(\Z)_0$ is as a group isomorphic to $\Z^r$ with $r$ the Mordell-Weil rank. By assumption, we also know $J(\Z)_t$ is in bijection with $J(\Z)_0$, with the bijection giving by translating with a lift of $t$. By Subsection \ref{subs:smoothzppoints} we know $J(\Z_p)_t$ is in bijection with $\Z_p^{g}$, with the bijection given by evaluating parameters and dividing by $p$. Let $\kappa: \Z^r \to \Z_p^g$ be the map resulting from the inclusion $J(\Z)_t \to J(\Z_p)_t$. Then $\kappa$ turns out to have a special property.
@@ -266,7 +269,6 @@ There are uniquely determined $\kappa_1,\dots,\kappa_g \in \Z_p\angle{z_1,...,z_
 \end{thm}
 
 We will prove this using results about formal group as defined in \citep{honda70}. To be able to use this theory, we first give some results about going from a group scheme over $\Z_p$ to a formal group.
-[TODO: introduce the "subscript zero" notation for power series with no constant term; $R[[x]]_0 = \{f: f \equiv 0 \mod x\}$].
 First we introduce some notation that will be used in this section. Let $R$ be a commutative ring, and $x = (x_1,\dots,x_n)$ and sometimes $y,z$ are vectors of variables. Then $R[[x]]$ denotes as usual the powerseries in the $x_i$, and $R[[x]]_0$ denotes those power series with constant term $0$. With $x = (x_1,\dots,x_n)$ and $y = (y,_1,\dots,y_m$), let $f \in R[[x]]^m$ and assume $f(0) = 0$. Then for $g \in R[[y]]^k$ for some $k\in\Z_{\geq 0}$, we can compose $g$ and $f$ to get $g\circ f := (g_1(f(x)),\dots,g_k(f(x)))\in R[[x]]]^k$. This definition makes sense because $f^i$ converges to $0$, so for any $a \in R^{\Z_{\geq 0}} $ the sum $\sum_i a_i f^i$ always converges. 
 
 \subsubsection{From group schemes to formal groups}
@@ -302,9 +304,9 @@ Let $F(x,y) = x - a(x)$. This satisfies the constraints of Lemma~\ref{lem:implic
 \end{proof}
 So a formal group $F$ does by Lemma~\ref{lem:implicitfunction} indeed have a right inverse $\iota_F$. Also, by $F(0,0) = 0$ we have that $F(x,F(\iota_f,0)) = 0$ so $F(\iota_f,0)$ is in fact equal to $\iota_F$; as $\iota_F \equiv -x \mod (x)^2$, it has a formal inverse and hence $F(x,0) = x$, so $0$ is indeed a right unit. A standard argument now shows that $\iota_F$ is also a left inverse and $0$ is also a right unit, so $F$ gives $R[[x]]$ the structure of a group object in the category of topological rings; for two continuous morphisms $f_1,f_2$ from $R[[x]]$ to some ring $A$, given by sending $x$ to $a_1,a_2$ respectively, we define $(f_1 \oplus f_2)(x) = F(a_1,a_2)$, and by our considerations this makes $\Hom_{\text{cont}}{R,A}$ into a group, functorially in $A$.
 
-Given a smooth scheme $G$ over $\Z_p$ of relative dimension $d$, we can look at the completion along the zero section $\Hat{O}_{G,e}$. By smoothness, after picking parameters, this is isomorphic as topological $\Z_p$-algebras to the ring of power series $\Z_p[[x_1,\dots,x_d]]$. This completion naturally gives rise to a formal scheme denoted $\Spf \Hat{O}_{G,e}$; in a categorical notion, this is a functor on finite $\Z_p$-algebras sending $A$ to $\Hom_{\text{cont}}(\Hat{O}_{G,e},A)$, but we can also think of it as a locally ringed space with $\Spec \Z_p$ as topological space, and sheaf of rings $\Hat{O}_{G,e}$. 
+Given a smooth scheme $G$ over $\Z_p$ of relative dimension $d$, together with a $\Z_p$-point $e$, we can look at the completion $\Hat{O}_{G,e}$ along the section $e$. By smoothness, after picking parameters, this is isomorphic as topological $\Z_p$-algebras to the ring of power series $\Z_p[[x_1,\dots,x_d]]$. This completion naturally gives rise to a formal scheme denoted $\Spf \Hat{O}_{G,e}$; in a categorical notion, this is a functor on finite length $\Z_p$-algebras sending $A$ to $\Hom_{\text{cont}}(\Hat{O}_{G,e},A)$, but we can also think of it as a locally ringed space with $\Spec \Z_p$ as topological space, and sheaf of rings $\Hat{O}_{G,e}$. 
 
-If furthermore $G$ is a group scheme over $\Z_p$, then this formal scheme promotes to a formal group scheme, i.e. for every finite $\Z_p$-algebra $A$ the set $\Hom_{\text{cont}}(\Hat{O}_{G,e},A)$ gets a group structure, functorially in $A$. By functoriality, this is the same [TODO: why exactly?] as an continuous coproduct $\mu: \Hat{O}_{G,e} \to \left(\Hat{O}_{G,e}\right)^{\tensor 2}$. After choosing an isomorphism between $\Hat{O}_{G,e}$ and $\Z_p[[x_1,\dots,x_d]]$, let $F_j \in \Z_p[x,y]$ denote $\mu(x_i)$. Then it is clear that $F_G = (F_1,\dots,F_d)$ is a $d$-dimensional formal group scheme, and commutative if $G$ was commutative.
+If furthermore $G$ is a group scheme over $\Z_p$, then this formal scheme promotes to a formal group scheme, i.e. for every finite $\Z_p$-algebra $A$ the set $\Hom_{\text{cont}}(\Hat{O}_{G,e},A)$ gets a group structure, functorially in $A$. By functoriality, this is the same [TODO: why exactly?] as an continuous coproduct $\mu: \Hat{O}_{G,e} \to \left(\Hat{O}_{G,e}\right)^{\Hat{\tensor} 2}$. After choosing an isomorphism between $\Hat{O}_{G,e}$ and $\Z_p[[x_1,\dots,x_d]]$, let $F_j \in \Z_p[[x,y]]$ denote $\mu(x_i)$. Then it is clear that $F_G = (F_1,\dots,F_d)$ is a $d$-dimensional formal group scheme, and commutative if $G$ was commutative.
 \begin{exmp}
 \label{exmp:gmtoformal} %TODO: nicely LaTeX Example bla, continued
 Take $G = \G_m$ over $\Z_p$, i.e. $\Z_p[u,u^{-1}]$. Then the zero section $e$ is the map sending $u$ to $1$, and we can identify the completion $\Hat{O}_{G,e}$ with the power series ring $\Z_p[[u-1]] \cong \Z_p[[x]]$, sending $u-1$ to $x$. The group structure on $G$ then gives rise to the coproduct $\Z_p[[u-1]] \to \Z_p[[u-1,v-1]], u \mapsto uv$ so the coproduct on $\Z_p[[x]]$ sends $x$ to $uv-1 = (x+1)(y+1) -1 = x + y + xy$. Hence the formal group $F_{\G_m}$ corresponding to this group scheme is exactly the multiplicative formal group from Example~\ref{exmp:gmformalgroup}.
@@ -356,13 +358,15 @@ This immediately gives rise to the following corollary.
 The map $\kappa$ extends uniquely to a continuous map $\kappa: \Z_p^r \to \Z_p^g$, given by the same power series, and the closure $\overline{J(\Z)_t} \subset J(\Z_p)_t$ is given by the image of $\Z_p^r$ under $\kappa$.
 \end{cor}
 
+[TODO: in general, generators of the Mordell-Weil group are computationally out of reach. But, if we only generate a subgroup of $J(\Z)_0$ of index finite and coprime to $p$, then the closure of this in $J(\Z_p)_0$ will be the same. This happens in particular if we generate a subgroup of $J(\Z)$ of index finite and coprime to $p|J(\F_p)|$.]
+
 \subsection{From \texorpdfstring{$C(\Z_p)$}{C(Z\_p)} to \texorpdfstring{$J(\Z_p)$}{J(Z\_p)}}
 By Subsection \ref{subs:smoothzppoints}, we also know that $C(\Z_p)_P$ is in bijection with $\Z_p$, again with the bijection given by evaluating a parameter and dividing by $p$. The resulting function $\Z_p \to \Z_p^g$ is linear and non-constant modulo $p$, i.e. there are power series $f_1,...,f_{g-1} \in \Z_p\angle{z_1,...,z_g}$ such that the image of $C(\Z_p)_P$ is exactly given by $V(f_1,...,f_{g-1})$, and all $f_i$ are linear modulo $p$. Another way to think of this, is as $C(\Z/p^2\Z)_P$ being an affine line inside $J(\Z/p^2\Z)_t$.
 TODO: give proof. This uses the functoriality of smooth $\Z_p$-points reducing to a point. That $C(\Z/p^2\Z)_P$ is an affine line inside $J(\Z/p^2\Z)_t$ can also be seen more easily, using Lemma~\ref{lem:smoothpointsfunc}. 
 % Say something about the f_i defining C(Z_p) in J(Z_p)
 
 \subsection{Finding \texorpdfstring{$C(\Z)$}{C(Z)}}
-Clearly, as subsets of $J(\Z_p)_t$, we have the inclusion $C(\Z)_P \subset C(\Z_p)_P \cap \overline{J(\Z)_t}$. Let $\kappa^*f_1,...,\kappa^*f_{g-1}$ be the pullbacks along $\kappa$ of the $f_i$, and let $I$ be the ideal they generate inside $A := \Z_p\angle{z_1,...,z_r}$. Then $C(\Z_p)_P \cap \overline{J(\Z)_t}$ is in bijection with $\Hom(A/I,\Z_p)$. By Theorem 4.2 of Edixhoven-Lido, we just need to check whether $\overline{A}/\overline{I}$ is finite. As all $\overline{\kappa^* f_i}$ are linear, in fact, $\overline{A}/\overline{I}$ is always of the form $0$ or $\F_p[w_1,...,w_s]$ for some $s \leq r$, and $s = 0$ iff the system of linear equations $\overline{\kappa^* f_i} = 0, i \in \{1,...,g-1\}$ has a unique solution. In general, we may expect an upper bound for $|C(\Z)_P|$ of $1$ if $r \leq g-1$.
+Clearly, as subsets of $J(\Z_p)_t$, we have the inclusion $C(\Z)_P \subset C(\Z_p)_P \cap \overline{J(\Z)_t}$. Let $\kappa^*f_1,...,\kappa^*f_{g-1}$ be the pullbacks along $\kappa$ of the $f_i$, and let $I$ be the ideal they generate inside $A := \Z_p\angle{z_1,...,z_r}$. Then $C(\Z_p)_P \cap \overline{J(\Z)_t}$ is in bijection with $\Hom(A/I,\Z_p)$. By Theorem 4.2 of Edixhoven-Lido, we just need to check whether $\overline{A}/\overline{I}$ is finite. As all $\overline{\kappa^* f_i}$ are linear, in fact, $\overline{A}/\overline{I}$ is always of the form $0$ (meaning no solutions) or $\F_p[w_1,...,w_s]$ for some $s \leq r$, and $s = 0$ iff the system of linear equations $\overline{\kappa^* f_i} = 0, i \in \{1,...,g-1\}$ has a unique solution. In general, we may hope an upper bound for $|C(\Z)_P|$ of $1$ if $r \leq g-1$.
 TODO: give proof of Theorem 4.12.
 % Pull back the f_i along kappa for the final theorem
 
@@ -372,11 +376,12 @@ Say something about how, for the right set of points $\{p_1,...,p_g\}$, the map 
 An important part of this, is that there is a parametrisation $P_\mu, \mu \in \F_p$ of the points in $C(\Z/p^2\Z)_P$ such that $P_\mu + P_\nu = P_{\mu + \nu} + P_0$ as Cartier divisors.
 
 \section{Implementations of linear Chabauty and an explicit example}
+[TODO: make sure I clearly differentiate divisors and divisor classes]
 We now assume that $C$ is hyperelliptic, i.e. given by the degree $2g+2$ homogenisation of an equation of the form
 \[
 y^2 = f(x)
 \]
-inside $\P(1,g+1,1)$ where $f$ is a monic polynomial of degree $2g+1$ or $2g+2$. An alternative way of defining such a curve, and the one we will be using mainly, is as a glueing of two affine charts: $y^2 = f(x)$, and $w^2 = f^{r}(v)$, where $f^{r}(v)$ is the polynomial $v^{2g + 2} f(1/v)$, and a birational map between them is given by $(x,y) \mapsto (\frac{1}{x},\frac{y}{x^{-g-1}})$. We also have the coordinates $X,Y,Z$ of $\P(1,g+1,1)$, with $x = X/Z, y = Y/Z^{g+1}, v = Z/X, w = Y/X^{g+1}$, but beware; these coordinates do not behave nicely on the origin of the patch $D(Y)$. We mainly use the first chart; we call any point that lies on it an affine point of $C$. We will treat the case that $f$ has degree $2g+2$ (this can be done by translating $f$ until the constant coefficient is non-zero, and then looking at $f^r$). In that case, writing , the line at infinity $C$ looks like $Y^2 = X^{2g+2}$, i.e. $(Y-X^{g+1})(Y+X^{g+1}) = 0$, and we see there are two points $\infty_+ = (1:1:0)$ and $\infty_- = (1:-1:0)$. Finally, we note that there is an involution on $C$ given by $\sigma(x,y) = (x,-y)$ and $\sigma(v,w) = (v,-w)$.
+inside $\P(1,g+1,1)$ where $f$ is a monic polynomial of degree $2g+1$ or $2g+2$. An alternative way of defining such a curve, and the one we will be using mainly, is as a glueing of two affine charts: $y^2 = f(x)$, and $w^2 = f^{r}(v)$, where $f^{r}(v)$ is the polynomial $v^{2g + 2} f(1/v)$, and a birational map between them is given by $(x,y) \mapsto (\frac{1}{x},\frac{y}{x^{-g-1}})$. We also have the coordinates $X,Y,Z$ of $\P(1,g+1,1)$, with $x = X/Z, y = Y/Z^{g+1}, v = Z/X, w = Y/X^{g+1}$, but beware; these coordinates do not behave nicely on the origin of the patch $D(Y)$. We mainly use the first chart; we call any point that lies on it an affine point of $C$. We will treat the case that $f$ has degree $2g+2$ (this can be done by translating $f$ until the constant coefficient is non-zero, and then looking at $f^r$). In that case, near the line at infinity $C$ looks like $Y^2 = X^{2g+2}$, i.e. $(Y-X^{g+1})(Y+X^{g+1}) = 0$, and we see there are two points $\infty_+ = (1:1:0)$ and $\infty_- = (1:-1:0)$. Finally, we note that there is an involution on $C$ given by $\sigma(x,y) = (x,-y)$ and $\sigma(v,w) = (v,-w)$.
 
 \subsection{Makdisis algorithms}
 Say something about how Makdisis algorithms work (i.e., give an introduction to the terminology) \cite{makdisi2004}.
@@ -387,31 +392,32 @@ We first look at representing $J(k)$ where $k$ is a field. Given a divisor $D$ o
 \[
 \Lcal(D) = \{f \in k(C)^\times : \div(f) + D \geq 0 \} \sqcup \{0\}.
 \]
-We pick $D_0$ an effective divisor of degree $d_0 \geq 2g+1$; in the case of hyperelliptic curves, this will be $(g+1)(\infty_+ + \infty_-)$. We set $V_n = \Lcal(nD_0)$. We let $n_Z$ be an integer $\geq 5d_0 + 1$, and assume, if necessary passing to an extension of $k$, that we have a set $Z$ of size $n_Z$ of distinct points in $C(k)$ outside the support of $D_0$; in fact, this will consist of affine points in our case. We have an evaluation map $V_5 \to k^Z$, evaluating a rational function at $Z$. By our choice of $n_Z$, this is an injective map, i.e. we can represent rational functions in $V_5$ by their values in $k^Z$. In this representation, we can even add, subtract, or multiply rational function, by respectively adding, subtracting or multiplying the correspondig vectors in $k^Z$. It is now also possible to represent subspaces of $V_5$ by giving a basis in $k^Z$.
+We pick $D_0$ an effective divisor of degree $d_0 \geq 2g+1$; in the case of hyperelliptic curves, this will be $(g+1)(\infty_+ + \infty_-)$. We set $V_n = \Lcal(nD_0)$. We let $n_Z$ be an integer $\geq 5d_0 + 1$, and assume, if necessary passing to an extension of $k$, that we have a set $Z$ of size $n_Z$ of distinct points in $C(k)$ outside the support of $D_0$; in fact, this will consist of affine points in our case. We have an evaluation map $V_5 \to k^Z$, evaluating a rational function at $Z$. By our choice of $n_Z$, this is an injective map, i.e. we can represent rational functions in $V_5$ by their values in $k^Z$. In this representation, we can add, subtract, or, if the degree at infinity is not too large, even multiply rational functions, by respectively adding, subtracting or multiplying the correspondig vectors in $k^Z$. It is now also possible to represent subspaces of $V_5$ by giving a basis in $k^Z$. (Instead of passing to an extension of $k$, one could also evaluate functions on infinitesemal neighborhoods of $k$-points, i.e. compute Taylor expansions near those points.)
 
-We now explain the representation of $J(k)$. Note that for any $x \in J(k)$, we have that $x + D_0$ is of degree at least $2g+1$ and hence is equivalent to an effective divisor $E \geq 0$. Then we represent $x$ by $\Lcal(2D_0 - E)$ inside $V_2$; by Riemann-Roch this is a $d_W$-dimensional subspace of $V_2$ where $d_W = d_0 + 1 - g$, and in particular we can represent it as a $n_z \times d_W$ matrix, itself representing a subspace of $k^Z$. This representation is nowhere near unique; there are many different effective divisors $E$ equivalent to $x + D_0$, and many bases for a subspace of $k^Z$.
+We now explain the representation of $J(k)$. Note that for any $x \in J(k)$, we have that $x + [D_0]$ is a divisor class of degree at least $2g+1$ and hence is equivalent to an effective divisor $E \geq 0$ of degree $d_0$. Then we represent $x$ by $\Lcal(2D_0 - E)$ inside $V_2$; by Riemann-Roch this is a $d_W$-dimensional subspace of $V_2$ where $d_W = d_0 + 1 - g$, and in particular we can represent it as a $n_z \times d_W$ matrix, itself representing a subspace of $k^Z$. This representation is nowhere near unique; there are many different effective divisors $E$ equivalent to $x + D_0$, and many bases for a subspace of $k^Z$.
 
-As explained in Mascots article, using this representation one can do all relevant computations in $J(k)$; adding, subtracting, finding the zero element, and most importantly: checking equality.
+As explained in Mascot's article, using this representation one can do all relevant computations in $J(k)$; adding, subtracting, finding the zero element, and most importantly: checking equality.
 
 \subsubsection{Going from \texorpdfstring{$\F_p$}{Fp} to \texorpdfstring{$\Z/p^e\Z$}{Z/peZ}}
-We now know how to compute in $J(k)$ for $k$ a field such that $C(k)$ is big enough. In practice, if we want to calculate in $J(\F_p)$, this means passing to $J(\F_q)$ for some $q = p^a$ with $a$ large enough; by the Hasse-Weil bound this will work. However, for Chabauty we want to compute inside $J(\Z/p^e\Z)$. Luckily, Mascots code takes care of this too, by passing from vector spaces over $\F_p$ to free $R$-submodules of $R^n$ with $R = Z/p^e\Z$; in fact, all submodules of $R^n$ we will be seeing are free. That means all these submodules will have good reduction, i.e. the rank remains the same when tensoring with $\F_p$. If the maps between such modules also have good reduction, then all kernels, images, et cetera will also have these properties, and can be calculated by Hensel lifting the kernels, images, et cetera of these maps modulo $p$.
+We now know how to compute in $J(k)$ for $k$ a field such that $C(k)$ is big enough. In practice, if we want to calculate in $J(\F_p)$, this means passing to $J(\F_q)$ for some $q = p^a$ with $a$ large enough; by the Hasse-Weil bound this will work. However, for Chabauty we want to compute inside $J(\Z/p^e\Z)$. Luckily, Mascots code takes care of this too, by passing from vector spaces over $\F_p$ to free $R$-submodules of $R^n$ with $R = \Z/p^e\Z$; in fact, all submodules of $R^n$ we will be seeing are free. That means all these submodules will have good reduction, i.e. they will remain free and of the same rank after tensoring with $\F_p$. If the maps between such modules also have good reduction, then all kernels, images, et cetera will also have these properties, and can first be calculated modulo $p$ using linear algebra and then by Hensel lifting modulo higher powers of $p$.
 
 The final trick we need is extensions of $\Z/p^e\Z$. As said before, we need $n_Z$ affine points that are distinct modulo $p$, so we passed from $\F_p$ to an extension of $\F_q$. The corresponding notion of an extension of $\Z/p^e\Z$ is given by taking an irreducible polynomial $\overline{T} \in \F_p[t]$ with $\F_q \cong \F_p[t]/\overline{T}$, arbitrarily lifting $\overline{T}$ to a polynomial $T \in \Z/p^e\Z$, and looking at $R = \Z/p^e\Z[t]/T$. Again, we will only be looking at free submodules of $R^n$, so we can again do normal linear algebra over $R \tensor \F_p = \F_q$, and using Hensel to lift.
 
 \subsection{Implementing the Abel-Jacobi map}
 Say something about implementing the Abel-Jacobi map $C \to J, Q \mapsto Q - \infty_+$. Right now, information about this (the implementation and why it works) can be found in Hyper2RR.gp.
 
-Now that we can do computations with elements in the Jacobian over $\Z/p^2\Z$, it only remains to construct elements in the Jacobian. Explicitly, we want to go from a degree zero divisor to an element in Mascots representation. Since we can add elements in the Jacobian, for this it is enough to compute the Abel-Jacobi embedding
+Now that we can do computations with elements in the Jacobian over $\Z/p^2\Z$, it only remains to construct elements in the Jacobian. Explicitly, we want to go from a degree zero divisor to an element in Mascots representation. In our case, we will only need this in cases where divisors are sums of points, and since we can add elements in the Jacobian, for this it is enough to compute the Abel-Jacobi embedding
 \begin{align*}
 j_{\infty_+}: C &\to J \\
               P &\mapsto P-\infty_+.
 \end{align*}
+If the degree zero divisor is not a sum of points, one can pass to an extension, knowing that the result at the end will be defined over the ring we started with.
 We will only need $j_{\infty_+}(P)$ and $j_{\infty_-}(P)$ for affine points $P$; as the calculation of $j_{\infty_-}(P)$ is entirely similar to $j_{\infty_+}(P)$, we only focus on $j_{\infty_+}(P)$. For this, we present the following algorithm:
 
 \begin{algorithm}[H]
 \label{alg:abeljacobi}
  \KwData{$C,J$, an affine point $P \in C(R)$ where $R = \Z/p^e\Z)$}
- \KwResult{A space of the form $\Lcal(2D_0 - E)$ where $E-D_0 = P - \infty_+$ as divisors and $E \geq 0$}
+ \KwResult{A space of the form $\Lcal(2D_0 - E)$ where $[E-D_0] = [P - \infty_+]$ as divisors and $E \geq 0$}
  $Z' \leftarrow Z \sqcup \{P\}$\;
  $B = (b_1,\dots,b_{g+3}) \leftarrow$ a basis of $\Lcal(D_0)$\; \label{alg:abeljacobi:basisLD0}
  \eIf{$(f^r)'(0) \not= 0$}{
