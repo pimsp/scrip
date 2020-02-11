@@ -1,0 +1,17 @@
+TODO's:
+
+Write about functoriality of \Tilde{X}_x^p
+
+Write about how the image of C(\Z_p)_0 \to J(\Z_p)_0 is given by equations linear modulo $p$, and for the right choice of parameters even linear. For the wrong choice: probably just linear and nothing else can be said? Or maybe better?
+
+Generalise the formal power group stuff to show exp and log behave nicely modulo higher powers of p
+
+Generalise 4.12 to deal with calculations modulo higher powers of p. Do this using either
+* Newton polytopes, if they exist
+* Generalising the proof of 4.12, and work with (I : p^{\infty}) = Z_p<> \cap (Q_p \tensor I). Does that last trick always work?
+
+Write a remark about the Edixhoven method versus the Coleman method
+
+Write about the Jacobian, and computing J(Z)_0 (complexity?). Maybe Jacobian Varieties by Milne in Arithmetic Geometry, Cornell & Silverman
+
+Write the example at the end. Maybe treat different primes.
