@@ -332,6 +332,7 @@ With notation as above, we have the following statements about $\log_p$:
 	\item $\log_p$ lies in $\Z_p\angle{x_1,\dots,x_d}^d$, the ring of convergent power series, and hence defines a map $\log_p: \Z_p^d \to \Z_p^d$.
 	\item Letting $\oplus$ denote the group structure on $\Z_p^d$ coming from the bijection $G(\Z_p)_0 \to p\Z_p^d \to \Z_p^d$, the map $\log_p$ is a group morphism from $(\Z_p^d,\oplus)$ to $(\Z_p^d,+)$.
 	\item If $p > 2$, the map $\log_{p,i}$ reduces to $x_i$ modulo $p$ and hence $\log_p$ has an inverse $\exp_p$, which is also an element of $\Z_p\angle{x_1,\dots,x_d}$. Then this $\exp_p$ is a two-sided inverse of $\log_p$, and hence $\log_p: \Z_p^d \to \Z_p^d$ is a bijection.
+	\item Let $m \in \Z_{>0}$. For $p > m+1$, the map $\log_p$ and $\exp_p$ are of degree at most $m$ modulo $p^m$.
 \end{enumerate} 
 \end{lem}
 \begin{proof}
@@ -339,6 +340,8 @@ Write $\log_{i} = \sum_{I} a_{i,I} x^I$ and $log_{p,i} = \sum_I a_{i,I} p^{|I|-1
 
 To study $\log_p$ modulo $p$, we note that if $n\geq 3$, then $p$ actually divides $c_n$, and for $p > 2$ we even have $p|c_2$. As $\log_{p,i} = x_i \mod (x)^2$, this means that for $p > 2$ we have \[\log_{p,i} \equiv \sum_{|I| = 1} |I|a_{i,I}c_|I| x^I \equiv x_i \bmod p.\]
 Note that as $\log_p \equiv x \mod (x)^2$, by Lemma~\ref{lem:formalinverse} it has an inverse $\exp_p \in \Z_p[[x]]_0^n$. Modulo $p$, this $\exp_p$ must be $x$, which lies in $\Z_p\angle{x}_0^n$; as $\Z_p\angle{x}$ is $p$-adically complete, using Hensel this shows $\exp_p$ is indeed in $\Z_p\angle{x}_0^n$.
+
+As $c_n$ has $p$-adic valuation $n-1$ for $...$
 \end{proof}
 [TODO: I'd like to study what happens modulo higher powers of $p$; for example, if $\log_p$ is at most quadratic mod $p^2$, then so is $\exp_p$; and similar for $\log_p$ at most cubic mod $p^3$. Even in general, if $\log_p$ has degree at most $d$ modulo $p^k$, then $\exp_p$ has degree at most $f = f(d,k)$ (seen most easily by working in a ``universal'' ring $\Z[p]/(p^k)$).
 
