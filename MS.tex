@@ -341,7 +341,7 @@ Write $\log_{i} = \sum_{I} a_{i,I} x^I$ and $log_{p,i} = \sum_I a_{i,I} p^{|I|-1
 To study $\log_p$ modulo $p$, we note that if $n\geq 3$, then $p$ actually divides $c_n$, and for $p > 2$ we even have $p|c_2$. As $\log_{p,i} = x_i \mod (x)^2$, this means that for $p > 2$ we have \[\log_{p,i} \equiv \sum_{|I| = 1} |I|a_{i,I}c_|I| x^I \equiv x_i \bmod p.\]
 Note that as $\log_p \equiv x \mod (x)^2$, by Lemma~\ref{lem:formalinverse} it has an inverse $\exp_p \in \Z_p[[x]]_0^n$. Modulo $p$, this $\exp_p$ must be $x$, which lies in $\Z_p\angle{x}_0^n$; as $\Z_p\angle{x}$ is $p$-adically complete, using Hensel this shows $\exp_p$ is indeed in $\Z_p\angle{x}_0^n$.
 
-As $c_n$ has $p$-adic valuation $n-1$ for $...$
+Finally, let $m \in \Z_{>0}$ with $p > m+1$. As $c_n$ has $p$-adic valuation $n-1$ for $n < p$, and $p$-adic valuation at least $p-2 \geq m$ for $n \geq p$, indeed $\log_p$ has degree at most $m$ modulo $p^m$. Then the statement that $\exp_p$ has degree at most $m$ modulo $p^m$ is easily proven by the formula in $\Z/p^m\Z[x,\varepsilon]$ that $\log_p(g(x) -\varepsilon)+\varepsilon$
 \end{proof}
 [TODO: I'd like to study what happens modulo higher powers of $p$; for example, if $\log_p$ is at most quadratic mod $p^2$, then so is $\exp_p$; and similar for $\log_p$ at most cubic mod $p^3$. Even in general, if $\log_p$ has degree at most $d$ modulo $p^k$, then $\exp_p$ has degree at most $f = f(d,k)$ (seen most easily by working in a ``universal'' ring $\Z[p]/(p^k)$).
 
