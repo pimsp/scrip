@@ -211,6 +211,7 @@ Say how much is borrowed from the article by Bas and Guido, but with a focus on 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \section{Linear Chabauty}
+\label{section:linchab}
 Let $p>2$ be a prime, and $C$ be a scheme over $\Z$, proper, flat, regular with $C$ smooth over $\Z_{(p)}$ and $C_\Q$ of dimension $1$ and geometrically connected, of genus $g \geq 1$ and with the Jacobian $J$ of $C_\Q$ having Mordell-Weil rank $r < g$. Assume we have a $\Q$-point $b$ in $C$, or equivalently a $\Z$-point. We view $C_\Q$ as a subscheme of $J$, using the map $Q \mapsto Q - b$ on points. Let $P \in C(\F_p)$ be a point such that $t := P - b \in J(\F_p)$ lies in the image of $J(\Z)$.
 
 \begin{defn}
@@ -268,7 +269,7 @@ For $p > 2$, we know that the torsion of $J(\Z)$ injects into $J(\F_p)$, by Prop
 
 \begin{thm}
 \label{thm:kappanice}
-There are uniquely determined $\kappa_1,\dots,\kappa_g \in \Z_p\angle{z_1,...,z_r}$ such that for all $x \in \Z^r$ we have $\kappa(x) = (\kappa_1(x),\dots,\kappa_g(x))$ and the image $\overline{\kappa_i}$ of $\kappa_i$ in $\F_p[z_1,...,z_r]$ has degree at most $1$.
+There are uniquely determined $\kappa_1,\dots,\kappa_g \in \Z_p\angle{z_1,...,z_r}$ such that for all $x \in \Z^r$ we have $\kappa(x) = (\kappa_1(x),\dots,\kappa_g(x))$ and the image $\overline{\kappa_i}$ of $\kappa_i$ in $\F_p[z_1,...,z_r]$ has degree at most $1$; furthermore, for $m \in \Z_{>0}$ with $m<p-1$, these $\kappa$ are also of degree at most $m$ modulo $p^m$.
 \end{thm}
 
 We will prove this using results about formal group as defined in \citep{honda70}. To be able to use this theory, we first give some results about going from a group scheme over $\Z_p$ to a formal group.
@@ -338,12 +339,22 @@ With notation as above, we have the following statements about $\log_p$:
 \begin{proof}
 Write $\log_{i} = \sum_{I} a_{i,I} x^I$ and $log_{p,i} = \sum_I a_{i,I} p^{|I|-1} x^I$ where $I$ ranges over the multi indices. Recall that $a_{i,0} = 0$. Also, recall that although a priori the coefficients $a_I$ lie in $\Q_p$, we have $I_j a_{i,I} \in \Z_p$ for all $I$ and $i,j$. For purposes of easy estimation, this also means $|I|a_{i,I} \in \Z_p$. As we have, with no constraint on $p$, for all $n\geq $ that $c_n\coloneqq p^{n-1}/n$ lies in $\Z_p$ and converges to $0$, this means that \[ \log_{p,i} = \sum_I a_{i,I} p^{|I|-1} x^I = \sum_I |I|a_{i,I} c_{|I|} x^I\] is indeed an element of $\Z_p\angle{x_1,\dots,x_d}^n$, and hence defines a map $\Z_p^d \to \Z_p$. Hence all the $\log_{p,i}$ together give a map $\Z_p^d \to \Z_p^d$. By the equality of power series $\log(F(x,y)) = \log(x)+\log(y)$ from the definition of the logarithm, and the fact that all these powerseries converge on $p\Z_p^d$, this $\log_{p,i}$ is indeed a group morphism from $(\Z_p^d,\oplus)$ to $(\Z_p^d,+)$
 
-To study $\log_p$ modulo $p$, we note that if $n\geq 3$, then $p$ actually divides $c_n$, and for $p > 2$ we even have $p|c_2$. As $\log_{p,i} = x_i \mod (x)^2$, this means that for $p > 2$ we have \[\log_{p,i} \equiv \sum_{|I| = 1} |I|a_{i,I}c_|I| x^I \equiv x_i \bmod p.\]
+To study $\log_p$ modulo $p$, we note that if $n\geq 3$, then $p$ actually divides $c_n$, and for $p > 2$ we even have $p|c_2$. As $\log_{p,i} = x_i \mod (x)^2$, this means that for $p > 2$ we have \[\log_{p,i} \equiv \sum_{|I| = 1} |I|a_{i,I}c_{|I|} x^I \equiv x_i \bmod p.\]
 Note that as $\log_p \equiv x \mod (x)^2$, by Lemma~\ref{lem:formalinverse} it has an inverse $\exp_p \in \Z_p[[x]]_0^n$. Modulo $p$, this $\exp_p$ must be $x$, which lies in $\Z_p\angle{x}_0^n$; as $\Z_p\angle{x}$ is $p$-adically complete, using Hensel this shows $\exp_p$ is indeed in $\Z_p\angle{x}_0^n$.
 
-Finally, let $m \in \Z_{>0}$ with $p > m+1$. As $c_n$ has $p$-adic valuation $n-1$ for $n < p$, and $p$-adic valuation at least $p-2 \geq m$ for $n \geq p$, indeed $\log_p$ has degree at most $m$ modulo $p^m$. Then the statement that $\exp_p$ has degree at most $m$ modulo $p^m$ is easily proven by the formula in $\Z/p^m\Z[x,\varepsilon]$ that $\log_p(g(x) -\varepsilon)+\varepsilon$
+Finally, let $m \in \Z_{>0}$ with $p > m+1$. As $c_n$ has $p$-adic valuation $n-1$ for $n < p$, and $p$-adic valuation at least $p-2 \geq m$ for $n \geq p$, indeed $\log_p$ has degree at most $m$ modulo $p^m$. Then we use induction to prove that $\exp_p$ has degree at most $m$ modulo $p^m$. This will follow immediately from the following considerations; firstly, for $f,g,g_m \in \Z/p^m\Z[x]_0^d$ satisfying $f(g(x)) = x \bmod p^{m-1}$, with $f,g$ linear modulo $p$ and $f,g$ having as derivative at $0$ invertible $d\times d$-matrices $C_f,C_g$ we have the formula
+\[
+f(g(x) + p^{m-1}g_m(x))+p^{m-1}f_m(g(x)) = f(g(x)) + p^{m-1}(C_f g_m(x))x^m
+\]
+and as $C_f$ is invertible, there is a unique value of $p^{m-1}g_m$ such that $f((g+p^{m-1}g_m)(x)) = x$, and then $p^{m-1}g_m$ has degree at most $\deg f(g(x))$. Secondly, if furthermore we can write $f,g$ in the forms $f = \sum_{i=1}^m p^{i-1}a_i x^i,g = \sum_{i=1}^{m-1} p^{i-1}b_i x^i$ with $p^{i-1}\mid a_i,b_i$, then we have
+\begin{align*}
+%f(g(x)) &= \sum_{i=1}^m p^{i-1} a_i g^i \\
+%        &= \sum_{i=1}^m p^{i-1} a_i \sum_{I_1,\dots,I_{i}} \prod_{j=1}^i p^{I_j-1} b_{I_j} x^{I_j} \\
+%        &= \sum_{i=1}^m \sum_n p^{n-1} x^n \left(\sum_{I_1 + \cdots +I_{i} = n} a_i \prod_{j=1}^i b_{I_j}\right) \\
+\end{align*}
+which is clearly of degree at most $m$. In total, there is a unique $\tilde{g} \in \Z/p^m\Z[x]_0^d$ satisfying $\tilde{g} \equiv g \bmod p^{m-1}$ and $f(\tilde{g}(x))=x$, and this $\tilde{g}$ has degree at most $m$. This finishes the proof.
+[TODO: This is clearly a Hensel like proof, and I would prefer to just outright use Hensels lemma in some way. Is this doable? I think so... Maybe multiply $g$ by $p$ and divide coefficients of $f$ by powers of $p$, and use that $\Z_p[[px]]$ is $p$-adically complete. Also, try to get rid of the calculation at the end.]
 \end{proof}
-[TODO: I'd like to study what happens modulo higher powers of $p$; for example, if $\log_p$ is at most quadratic mod $p^2$, then so is $\exp_p$; and similar for $\log_p$ at most cubic mod $p^3$. Even in general, if $\log_p$ has degree at most $d$ modulo $p^k$, then $\exp_p$ has degree at most $f = f(d,k)$ (seen most easily by working in a ``universal'' ring $\Z[p]/(p^k)$).
 
 This lemma makes the proof of Theorem~\ref{thm:kappanice} relatively easy. 
 \begin{proof}[Proof of Theorem~\ref{thm:kappanice}]
@@ -355,7 +366,7 @@ Write $\log_p$ for the logarithm corresponding to the formal group corresponding
                                                                   & {(\Z_p^g,+)} \arrow[ru, "\exp_p"] &                  
 \end{tikzcd}
 \]
-Then the arrow $\log_p \circ \kappa$ is just a linear map, and $\exp_p$ is a convergent power series that is linear modulo $p$, so their composite $\kappa$ is also a convergent power series linear modulo $p$.
+Then the arrow $\log_p \circ \kappa$ is just a linear map, and $\exp_p$ is a convergent power series that is of degree at most $m$ modulo $p^m$ for $m < p-1$, so their composite $\kappa$ is also a convergent power series of degree at most $m$ modulo $p^m$ for $m < p-1$
 \end{proof}
 
 This immediately gives rise to the following corollary.
@@ -367,14 +378,38 @@ The map $\kappa$ extends uniquely to a continuous map $\kappa: \Z_p^r \to \Z_p^g
 [TODO: in general, generators of the Mordell-Weil group are computationally out of reach. But, if we only generate a subgroup of $J(\Z)_0$ of index finite and coprime to $p$, then the closure of this in $J(\Z_p)_0$ will be the same. This happens in particular if we generate a subgroup of $J(\Z)$ of index finite and coprime to $p|J(\F_p)|$. Preferably, find a source for this? ]
 
 \subsection{From \texorpdfstring{$C(\Z_p)$}{C(Z\_p)} to \texorpdfstring{$J(\Z_p)$}{J(Z\_p)}}
-By Subsection \ref{subs:smoothzppoints}, we also know that $C(\Z_p)_P$ is in bijection with $\Z_p$, again with the bijection given by evaluating a parameter and dividing by $p$. The resulting function $\Z_p \to \Z_p^g$ is linear and non-constant modulo $p$, i.e. there are power series $f_1,...,f_{g-1} \in \Z_p\angle{z_1,...,z_g}$ such that the image of $C(\Z_p)_P$ is exactly given by $V(f_1,...,f_{g-1})$, and all $f_i$ are linear modulo $p$. Another way to think of this, is as $C(\Z/p^2\Z)_P$ being an affine line inside $J(\Z/p^2\Z)_t$.
+\label{subsection:czptojzp}
+By Subsection \ref{subs:smoothzppoints}, we also know that $C(\Z_p)_P$ is in bijection with $\Z_p$, again with the bijection given by evaluating a parameter and dividing by $p$. The resulting function $\Z_p \to \Z_p^g$ is linear and non-constant modulo $p$, i.e. there are power series $f_1,\dots,f_{g-1} \in \Z_p\angle{z_1,...,z_g}$ such that the image of $C(\Z_p)_P$ is exactly given by $V(f_1,...,f_{g-1})$, and all $f_i$ are linear modulo $p$. Another way to think of this, is as $C(\Z/p^2\Z)_P$ being an affine line inside $J(\Z/p^2\Z)_t$.
 TODO: give proof. This uses the functoriality of smooth $\Z_p$-points reducing to a point. That $C(\Z/p^2\Z)_P$ is an affine line inside $J(\Z/p^2\Z)_t$ can also be seen more easily, using Lemma~\ref{lem:smoothpointsfunc}. 
 % Say something about the f_i defining C(Z_p) in J(Z_p)
 
-\subsection{Finding \texorpdfstring{$C(\Z)$}{C(Z)}}
-Clearly, as subsets of $J(\Z_p)_t$, we have the inclusion $C(\Z)_P \subset C(\Z_p)_P \cap \overline{J(\Z)_t}$. Let $\kappa^*f_1,...,\kappa^*f_{g-1}$ be the pullbacks along $\kappa$ of the $f_i$, and let $I$ be the ideal they generate inside $A := \Z_p\angle{z_1,...,z_r}$. Then $C(\Z_p)_P \cap \overline{J(\Z)_t}$ is in bijection with $\Hom(A/I,\Z_p)$. By Theorem 4.2 of Edixhoven-Lido, we just need to check whether $\overline{A}/\overline{I}$ is finite. As all $\overline{\kappa^* f_i}$ are linear, in fact, $\overline{A}/\overline{I}$ is always of the form $0$ (meaning no solutions) or $\F_p[w_1,...,w_s]$ for some $s \leq r$, and $s = 0$ iff the system of linear equations $\overline{\kappa^* f_i} = 0, i \in \{1,...,g-1\}$ has a unique solution. In general, we may hope an upper bound for $|C(\Z)_P|$ of $1$ if $r \leq g-1$.
+\begin{rem}
+\label{rem:fislinear}
+We can pick our parameters right such that $C(\Z_p)_P \to J(\Z_p)_t$ is given by $\Z_p \to \Z_p^g$, mapping $\Z_p$ to the last coordinate. Then $f_1,\dots,f_{g-1}$ are just the other parameters at $t$, so they are linear.
+\end{rem}
 
-% Pull back the f_i along kappa for the final theorem
+\subsection{Finding \texorpdfstring{$C(\Z)$}{C(Z)}}
+Clearly, as subsets of $J(\Z_p)_t$, we have the inclusion $C(\Z)_P \subset C(\Z_p)_P \cap \overline{J(\Z)_t}$. The theory we have built so far enables the following method, which is in sharp contrast with Colemans method; instead of pulling back equations for $\overline{J(\Z)_t}$ to $C(\Z_p)_P$, we pull back equations for $C(\Z_p)_P$ to $\overline{J(\Z)_t}$ to arrive at the following theorem.
+\begin{thm}
+Let $C,J,p,P,t$ be as in Section~\ref{section:linchab}, let $\kappa$ be as in Theorem~\ref{thm:kappanice} and let $f_1,\cdots,f_{g-1}$ be as in Subsection~\ref{subsection:czptojzp}. Define $\lambda_1 = \kappa^*f_1,\dots,\lambda_{g-1} = \kappa^*f_{g-1}$ to be the pullbacks along $\kappa$ of the $f_i$. Then $\kappa$ induces a surjection from $Z(\lambda_1,\dots,\lambda_{g-1})$ to $C(\Z_p)_P \cap \overline{J(\Z)_t}$.
+\end{thm}
+
+The $\lambda_i$ are in general not computationally available, as they are power series, but we can approximate them modulo powers of $p$. For example, we know that the $\lambda_i$ are linear modulo $p$. And in particular, if $f_1,\dots,f_{g-1}$ are as in Remark~\ref{rem:fislinear}, then $\lambda_i = \kappa_i$ for $i \leq g-1$, so they are also of degree at most $m$ modulo $p^m$ for $m < p-1$. Knowing this, we can compute $\lambda_i$ modulo powers of $p$. [TODO: explain]
+
+[TODO: explain how to use these power series. Explain 4.12, $(I : p^\infty)$ and Newton polygons.]
+By Theorem 4.12 of Edixhoven-Lido, we just need to check whether $\overline{A}/\overline{I}$ is finite. As all $\overline{\kappa^* f_i}$ are linear, in fact, $\overline{A}/\overline{I}$ is always of the form $0$ (meaning no solutions) or $\F_p[w_1,...,w_s]$ for some $s \leq r$, and $s = 0$ iff the system of linear equations $\overline{\kappa^* f_i} = 0, i \in \{1,...,g-1\}$ has a unique solution. In general, we may hope an upper bound for $|C(\Z)_P|$ of $1$ if $r \leq g-1$.
+
+
+\subsection{Complications and improvements}
+$\overline{J(\Z)_0}$ open in $J(\Z_p)_0$.
+
+Calculations in $J(\Z)$.
+
+According to McCallum\&Poonen, it can be that $J(\Z)_0$ and $C(\Z)_P$ are tangent as $p$-adic manifolds and then finite-precision calculations will never be enough. I don't see what's happening there. Maybe give an example? 
+
+It is possible that $C(\Z_p)_P \cap \overline{J(\Z)_t}$ is bigger than $C(\Z)_P$; give an example. Refer to \citep{Balakrishnan19}.
+
+Explain Mordell-Weil sieve
 
 \subsection{Calculations modulo \texorpdfstring{$p^2$}{p\^2}}
 Say something about how, for the right set of points $\{p_1,...,p_g\}$, the map $C^{g} \to J$ is etale at that set of points. Then say something about what that implies about $J(\Z_p)_0$ (equal to $\sum q_i - p_i$ where $q_i \in C(\Z_p)_{p_i}$), and $J(\Z/p^2\Z)_0$, which becomes isomorphic as vector spaces to $\F_p^g$, and how we can find $\kappa$ by expressing elements of $J(\Z)_0$ in that basis, and similarly $f_1,...,f_{g-1}$ by finding $P_1 - P_2$ in that basis for some $Q_1,Q_2 \in C(\Z/p^2\Z)_P$ not equal.
@@ -410,8 +445,6 @@ We now know how to compute in $J(k)$ for $k$ a field such that $C(k)$ is big eno
 The final trick we need is extensions of $\Z/p^e\Z$. As said before, we need $n_Z$ affine points that are distinct modulo $p$, so we passed from $\F_p$ to an extension of $\F_q$. The corresponding notion of an extension of $\Z/p^e\Z$ is given by taking an irreducible polynomial $\overline{T} \in \F_p[t]$ with $\F_q \cong \F_p[t]/\overline{T}$, arbitrarily lifting $\overline{T}$ to a polynomial $T \in \Z/p^e\Z$, and looking at $R = \Z/p^e\Z[t]/T$. Again, we will only be looking at free submodules of $R^n$, so we can again do normal linear algebra over $R \tensor \F_p = \F_q$, and using Hensel to lift.
 
 \subsection{Implementing the Abel-Jacobi map}
-Say something about implementing the Abel-Jacobi map $C \to J, Q \mapsto Q - \infty_+$. Right now, information about this (the implementation and why it works) can be found in Hyper2RR.gp.
-
 Now that we can do computations with elements in the Jacobian over $\Z/p^2\Z$, it only remains to construct elements in the Jacobian. Explicitly, we want to go from a degree zero divisor to an element in Mascots representation. Generally these divisors are not always sums of points over the ring we are working with, but if $J(\Z)$ is generated by $C(\Z)$, then we only need this in cases where divisors are sums of points. Since we can add elements in the Jacobian, for this it is enough to compute the Abel-Jacobi embedding
 \begin{align*}
 j_{\infty_+}: C &\to J \\
