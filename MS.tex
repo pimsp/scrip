@@ -23,6 +23,7 @@
 \usepackage{caption}
 \usepackage[square, longnamesfirst,numbers]{natbib}
 \usepackage[ruled,linesnumbered]{algorithm2e}
+\usepackage{todonotes}
 
 %\usepackage{hyperref}
 \usepackage{amstext} % for \text macro
@@ -188,7 +189,7 @@ Mathematical Institute\\
 \end{center}
 \thispagestyle{empty}
 \newpage
-
+\listoftodos
 \tableofcontents
 \newpage
 
@@ -196,6 +197,7 @@ Mathematical Institute\\
 
 \section{Introduction}
 \label{section:intro}
+In mathematics a fundamental problem is solving polynomial equations over the rationals, dating back to Diophantus. An important special case in algebraic geometry is that of curves. The behavior of the rational points of curves depends enormously on the \textit{genus} of the curve, a numerical invariant of a curve. For $g = 0$, there are either no or infinitely many solutions, and their behavior is well understood.
 Say something about the problem, Faltings, et cetera
 
 Say something about Chabauty's general idea
@@ -206,7 +208,7 @@ Say something about linear Chabauty geometric style.
 
 Say something about quadratic Chabauty geometric style.
 
-Say how much is borrowed from the article by Bas and Guido, but with a focus on the linear part, and more explanations.
+Say how much is borrowed from the article by Bas and Guido, but with a focus on the linear part, and more explanations. It is meant as a full guide to linear Chabauty, including both theoretical and practical components, focussing partly on explicit computations.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
@@ -348,9 +350,9 @@ f(g(x) + p^{m-1}g_m(x))+p^{m-1}f_m(g(x)) = f(g(x)) + p^{m-1}(C_f g_m(x))x^m
 \]
 and as $C_f$ is invertible, there is a unique value of $p^{m-1}g_m$ such that $f((g+p^{m-1}g_m)(x)) = x$, and then $p^{m-1}g_m$ has degree at most $\deg f(g(x))$. Secondly, if furthermore we can write $f,g$ in the forms $f = \sum_{i=1}^m p^{i-1}a_i x^i,g = \sum_{i=1}^{m-1} p^{i-1}b_i x^i$ with $p^{i-1}\mid a_i,b_i$, then we have
 \begin{align*}
-%f(g(x)) &= \sum_{i=1}^m p^{i-1} a_i g^i \\
-%        &= \sum_{i=1}^m p^{i-1} a_i \sum_{I_1,\dots,I_{i}} \prod_{j=1}^i p^{I_j-1} b_{I_j} x^{I_j} \\
-%        &= \sum_{i=1}^m \sum_n p^{n-1} x^n \left(\sum_{I_1 + \cdots +I_{i} = n} a_i \prod_{j=1}^i b_{I_j}\right) \\
+f(g(x)) &= \sum_{i=1}^m p^{i-1} a_i g^i \\
+        &= \sum_{i=1}^m p^{i-1} a_i \sum_{I_1,\dots,I_{i}} \prod_{j=1}^i p^{I_j-1} b_{I_j} x^{I_j} \\
+        &= \sum_{i=1}^m \sum_n p^{n-1} x^n \left(\sum_{I_1 + \cdots +I_{i} = n} a_i \prod_{j=1}^i b_{I_j}\right) \\
 \end{align*}
 which is clearly of degree at most $m$. In total, there is a unique $\tilde{g} \in \Z/p^m\Z[x]_0^d$ satisfying $\tilde{g} \equiv g \bmod p^{m-1}$ and $f(\tilde{g}(x))=x$, and this $\tilde{g}$ has degree at most $m$. This finishes the proof.
 [TODO: This is clearly a Hensel like proof, and I would prefer to just outright use Hensels lemma in some way. Is this doable? I think so... Maybe multiply $g$ by $p$ and divide coefficients of $f$ by powers of $p$, and use that $\Z_p[[px]]$ is $p$-adically complete. Also, try to get rid of the calculation at the end.]
@@ -358,7 +360,7 @@ which is clearly of degree at most $m$. In total, there is a unique $\tilde{g} \
 
 This lemma makes the proof of Theorem~\ref{thm:kappanice} relatively easy. 
 \begin{proof}[Proof of Theorem~\ref{thm:kappanice}]
-Write $\log_p$ for the logarithm corresponding to the formal group corresponding to the The map $\kappa: \Z^d \to \Z_p^g$ given by the inclusion $J(\Z)_0$ to $J(\Z_p)_0$ is a group morphism with the group structure on $\Z^d$ being addition and the group structure on $\Z_p^g$, denoted by $\oplus$, given by the bijection with $J(\Z_p)_0$ induced by choosing parameters at $0$. Then by Lemma~\ref{lem:formallog} the map factors as in the diagram of groups
+Write $\log_p$ for the logarithm corresponding to the formal group corresponding to the The map $\kappa_0: \Z^d \to \Z_p^g$ given by the inclusion $J(\Z)_0$ to $J(\Z_p)_0$ is a group morphism with the group structure on $\Z^d$ being addition and the group structure on $\Z_p^g$, denoted by $\oplus$, given by the bijection with $J(\Z_p)_0$ induced by choosing parameters at $0$, and $\kappa$ is $\kappa_0 \oplus t$. Then by Lemma~\ref{lem:formallog} the map $\kappa$ factors as in the diagram of groups
 \[
 % https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAAoAdTgLQD0opANQBKEAF9S6TLnyEUAJnJVajFmy68A+mj4BzUtwhpmcMZOnY8BIgEZStlfWatEHbjx37h5lTCh68ESgAGYAThAAtkhkIDgQSPYgDHQARjAMAAoy1vLJMCE4INTO6m7cANZ0aGh0ElIg4VEx1PFISqoubNwMEHo6AATcAMZYYcNDnFU1dRaNEdGIHW2ISaWuINwwAB5oOhIU4kA
 \begin{tikzcd}
@@ -374,8 +376,6 @@ This immediately gives rise to the following corollary.
 \label{cor:closurejac}
 The map $\kappa$ extends uniquely to a continuous map $\kappa: \Z_p^r \to \Z_p^g$, given by the same power series, and the closure $\overline{J(\Z)_t} \subset J(\Z_p)_t$ is given by the image of $\Z_p^r$ under $\kappa$.
 \end{cor}
-
-[TODO: in general, generators of the Mordell-Weil group are computationally out of reach. But, if we only generate a subgroup of $J(\Z)_0$ of index finite and coprime to $p$, then the closure of this in $J(\Z_p)_0$ will be the same. This happens in particular if we generate a subgroup of $J(\Z)$ of index finite and coprime to $p|J(\F_p)|$. Preferably, find a source for this? ]
 
 \subsection{From \texorpdfstring{$C(\Z_p)$}{C(Z\_p)} to \texorpdfstring{$J(\Z_p)$}{J(Z\_p)}}
 \label{subsection:czptojzp}
@@ -394,22 +394,30 @@ Clearly, as subsets of $J(\Z_p)_t$, we have the inclusion $C(\Z)_P \subset C(\Z_
 Let $C,J,p,P,t$ be as in Section~\ref{section:linchab}, let $\kappa$ be as in Theorem~\ref{thm:kappanice} and let $f_1,\cdots,f_{g-1}$ be as in Subsection~\ref{subsection:czptojzp}. Define $\lambda_1 = \kappa^*f_1,\dots,\lambda_{g-1} = \kappa^*f_{g-1}$ to be the pullbacks along $\kappa$ of the $f_i$. Then $\kappa$ induces a surjection from $Z(\lambda_1,\dots,\lambda_{g-1})$ to $C(\Z_p)_P \cap \overline{J(\Z)_t}$.
 \end{thm}
 
-The $\lambda_i$ are in general not computationally available, as they are power series, but we can approximate them modulo powers of $p$. For example, we know that the $\lambda_i$ are linear modulo $p$. And in particular, if $f_1,\dots,f_{g-1}$ are as in Remark~\ref{rem:fislinear}, then $\lambda_i = \kappa_i$ for $i \leq g-1$, so they are also of degree at most $m$ modulo $p^m$ for $m < p-1$. Knowing this, we can compute $\lambda_i$ modulo powers of $p$. [TODO: explain]
+The $\lambda_i$ are in general not computationally available, as they are power series, but we can approximate them modulo powers of $p$. For example, we know that the $\lambda_i$ are linear modulo $p$. And in particular, if $f_1,\dots,f_{g-1}$ are as in Remark~\ref{rem:fislinear}, then $\lambda_i = \kappa_i$ for $i \leq g-1$, so they are also of degree at most $m$ modulo $p^m$ for $m < p-1$. Knowing this, we can compute $\lambda_i$ modulo powers of $p$ by extrapolation, and the following lemma, an immediate consequence of Lagrange interpolation, tells us how.
+\begin{lem}
+\label{lem:interpolate}
+Let $R$ be a ring, and assume operations in $R$ are $O(1)$, $f \in R[x]$ with $x = (x_1,\dots,x_n)$ a polynomial of degree at most $m$, and $S$ a subset of $R$ with $S-S \subset \{0\} \cup R^*$ and $|S| > m$. Then $f$ is uniquely determinable in $O(nm^{n+1})$ by its values on $S^n$.
+\end{lem} %complexity easily 
+\begin{proof}
+Both uniqueness and construction follow from the case with $n=1$; uniqueness from the fact that the ideals $\{(x-s) \mid s \in S\}$ are pairwise coprime, and the construction is Lagrange interpolation. The complexity follows easily from induction on $n$ and the formula for Lagrange interpolation.
+\end{proof}
+
+Note that evaluating $\lambda_i$ at a point in $J(\Z)_t$ comes down to calculating the value of a parameter at that point. More about this can be found in Section~\ref{subs:paramj}
 
 [TODO: explain how to use these power series. Explain 4.12, $(I : p^\infty)$ and Newton polygons.]
 By Theorem 4.12 of Edixhoven-Lido, we just need to check whether $\overline{A}/\overline{I}$ is finite. As all $\overline{\kappa^* f_i}$ are linear, in fact, $\overline{A}/\overline{I}$ is always of the form $0$ (meaning no solutions) or $\F_p[w_1,...,w_s]$ for some $s \leq r$, and $s = 0$ iff the system of linear equations $\overline{\kappa^* f_i} = 0, i \in \{1,...,g-1\}$ has a unique solution. In general, we may hope an upper bound for $|C(\Z)_P|$ of $1$ if $r \leq g-1$.
 
 
-\subsection{Complications and improvements}
-$\overline{J(\Z)_0}$ open in $J(\Z_p)_0$.
-
-Calculations in $J(\Z)$.
-
-According to McCallum\&Poonen, it can be that $J(\Z)_0$ and $C(\Z)_P$ are tangent as $p$-adic manifolds and then finite-precision calculations will never be enough. I don't see what's happening there. Maybe give an example? 
-
-It is possible that $C(\Z_p)_P \cap \overline{J(\Z)_t}$ is bigger than $C(\Z)_P$; give an example. Refer to \citep{Balakrishnan19}.
-
-Explain Mordell-Weil sieve
+\section{Complications and improvements}
+\begin{itemize}
+\item $\overline{J(\Z)_0}$ open in $J(\Z_p)_0$.
+\item Calculations in $J(\Z)$.
+\item According to McCallum\&Poonen, it can be that $J(\Z)_0$ and $C(\Z)_P$ are tangent as $p$-adic manifolds and then finite-precision calculations will never be enough. I don't see what's happening there. Maybe give an example? 
+\item It is possible that $C(\Z_p)_P \cap \overline{J(\Z)_t}$ is bigger than $C(\Z)_P$; give an example. Refer to \citep{Balakrishnan19}.
+\item Explain Mordell-Weil sieve. Maybe "The Mordell-Weil sieve: Proving non-existence of rational points on curves" for a short explanation? Nice to also treat this in the final example.
+\item in general, generators of the Mordell-Weil group are computationally out of reach. But, if we only generate a subgroup of $J(\Z)_0$ of index finite and coprime to $p$, then the closure of this in $J(\Z_p)_0$ will be the same. This happens in particular if we generate a subgroup of $J(\Z)$ of index finite and coprime to $p|J(\F_p)|$. Preferably, find a source for this?
+\end{itemize}
 
 \subsection{Calculations modulo \texorpdfstring{$p^2$}{p\^2}}
 Say something about how, for the right set of points $\{p_1,...,p_g\}$, the map $C^{g} \to J$ is etale at that set of points. Then say something about what that implies about $J(\Z_p)_0$ (equal to $\sum q_i - p_i$ where $q_i \in C(\Z_p)_{p_i}$), and $J(\Z/p^2\Z)_0$, which becomes isomorphic as vector spaces to $\F_p^g$, and how we can find $\kappa$ by expressing elements of $J(\Z)_0$ in that basis, and similarly $f_1,...,f_{g-1}$ by finding $P_1 - P_2$ in that basis for some $Q_1,Q_2 \in C(\Z/p^2\Z)_P$ not equal.
@@ -444,13 +452,29 @@ We now know how to compute in $J(k)$ for $k$ a field such that $C(k)$ is big eno
 
 The final trick we need is extensions of $\Z/p^e\Z$. As said before, we need $n_Z$ affine points that are distinct modulo $p$, so we passed from $\F_p$ to an extension of $\F_q$. The corresponding notion of an extension of $\Z/p^e\Z$ is given by taking an irreducible polynomial $\overline{T} \in \F_p[t]$ with $\F_q \cong \F_p[t]/\overline{T}$, arbitrarily lifting $\overline{T}$ to a polynomial $T \in \Z/p^e\Z$, and looking at $R = \Z/p^e\Z[t]/T$. Again, we will only be looking at free submodules of $R^n$, so we can again do normal linear algebra over $R \tensor \F_p = \F_q$, and using Hensel to lift.
 
-\subsection{Implementing the Abel-Jacobi map}
-Now that we can do computations with elements in the Jacobian over $\Z/p^2\Z$, it only remains to construct elements in the Jacobian. Explicitly, we want to go from a degree zero divisor to an element in Mascots representation. Generally these divisors are not always sums of points over the ring we are working with, but if $J(\Z)$ is generated by $C(\Z)$, then we only need this in cases where divisors are sums of points. Since we can add elements in the Jacobian, for this it is enough to compute the Abel-Jacobi embedding
+\subsection{Implementing the Abel-Jacobi map and Mumford representations}
+Now that we can do computations with elements in the Jacobian over $\Z/p^2\Z$, it only remains to construct elements in the Jacobian. Explicitly, we want to go from a degree zero divisor to an element in Mascots representation. Most of the times these divisors are sums of points over the ring we are working with, but sometimes they are given as a Mumford representation.
+\begin{defn}
+Let $C$ be any (hyper)elliptic curve given by $y^2 = f(x)$ with $f$ of degree $2g+2$ where $g$ is the genus of $C$. A Mumford representation is a pair $(a,b)$ with $a,b$ polynomials in $x$, representing the degree $0$ divisor $D(a,b)$ on $C$, given on the first affine chart by the equation $a(x) = 0, y = b(x)$ and on the line at infinity by $-\deg a\infty_+$. Such a pair $a,b$ is required to satisfy that
+\begin{enumerate}
+\item the polynomial $b$ is of degree at most $\deg a -1$;
+\item the polynomial $a$ is monic of degree at most $g+1$;
+\item the polynomial $a$ divides $f - h^2$.
+\end{enumerate}
+\end{defn}
+\begin{rem}
+If $b$ does not satisfy the first condition, we can reduce $b$ modulo $a$. If $a$ does not satisfy the second condition, we can use the formula that on the first affine chart, we have
+\[
+D(a,b) + D(\frac{f-b^2}{a},b) = (y-h)
+\]
+meaning that with additional calculations of the behaviour of $(y-h)$ at infinity we can express $[D(a,b)]$ in the Jacobian in terms of $D(\frac{f-b^2}{a},b)$, and if $\deg a$ is strictly bigger than $g+1$, the degree of $\frac{f-b^2}{a}$ is at most $\deg a -2$.
+\end{rem}
+
+We will treat both how to explicitly compute the Abel-Jacobi embedding and divisors in Mumford represenation in Makdisi's representation for the Jacobian. We start with the Abel-Jacobi embedding 
 \begin{align*}
 j_{\infty_+}: C &\to J \\
               P &\mapsto P-\infty_+.
 \end{align*}
-If the degree zero divisor is not a sum of points, one can temporarily pass to an extension, knowing that the result at the end will be defined over the ring we started with.
 We will only need $j_{\infty_+}(P)$ and $j_{\infty_-}(P)$ for affine points $P$; as the calculation of $j_{\infty_-}(P)$ is entirely similar to $j_{\infty_+}(P)$, we only focus on $j_{\infty_+}(P)$. For this, we present the following algorithm:
 
 \begin{algorithm}[H]
@@ -496,22 +520,39 @@ First note that by Riemann-Roch, the dimension of $\Lcal(D_0)$ is $g + 3$, and w
 Evaluating $\Lcal(D_0 + \infty_+)$ on $P$ gives a linear map $\Lcal(D_0 + \infty_+) \to R$, and the kernel is exactly $\Lcal(D_0 + \infty_+ - P)$; this is the resulting $U$ in line~\ref{alg:abeljacobi:kerp}. Furthermore we have the equality of divisors $P-\infty_+ = E - D_0$ where $E = P + D_0 - \infty_+ \geq 0$, so $\Lcal(D_0 + \infty_+ - P)$ is as a subspace of $V_2$ equal to $\Lcal(2D_0 - E)$. This last term is in fact in Mascots representation, so this represents $P-\infty_+$ in the Jacobian.
 \end{proof}
 
+Now we move on to the Mumford representation. We present a way to go from the Mumford representation of a divisor to a Makdisi representation for the corresponding point on the Jacobian. This is based on private correspondence between Mascot and the author.
+\begin{proof}[Algorithm/proof]
+Let $(a,b)$ be the Mumford representation of a divisor $D = D(a,b)$. Let $\deg a = d \leq g$, and denote $D_{\text{aff}}$ for the affine part of $D$. Note that $E-D_0 = D$ for $E = D_0 - D_{\text{aff}} + d\infty_+$ an effective divisor, so $\Lcal(2D_0 - E) = \Lcal(D_0 - D)$ is a Makdisi representation for $[D]$.
+
+Of course, we can rewrite $\Lcal(D_0 -D)$ as 
+\[
+\Lcal((g+1)\infty_- + (g+1+d)\infty_+ - D_{\text{aff}}) = \Lcal(2D_0 - D_{\text{aff}} ) \cap \Lcal((g+1)\infty_- + (g+1+d)\infty_+).
+\]
+
+We first calculate $\Lcal(2D_0 - D_{\text{aff}})$. Note that \todo{Compute this, currently talking with Mascot about this.}
+
+For $\Lcal((g+1)\infty_- + (g+1+d)\infty_+)$, we first inductively calculate $W_n := \Lcal(2D_0 - n\infty_-)$. For $W_1$ we have a basis $1,x,\dots,x^{2g+1},y,xy,\dots,x^g y, x^{g+1}y+x^{2g+2}$, and for $n \geq 0$ we have by a simple use of Lemma 2.2 of \citep{makdisi04} that for $1 \leq n \leq g+1$ we have $W_{n} = \{s \in \Lcal(2D_0) \mid s\Lcal(2D_0) \in W_1 \cdot W_{n-1}\}$. This is a purely linear constraint, hence simple linear algebra allows us to calculate all $W_n$ for $n \leq g+1$. Finally, we have
+\[
+\Lcal((g+1)\infty_- + (g+1+d)\infty_+) = \{ s \in \Lcal((g+1+d)(\infty_+ + \infty_-)) \mid sx^{g+1-d} \in W_d).
+\] 
+Once again noting that we can write down an explicit basis for $\Lcal((g+1+d)(\infty_+ + \infty_-))$, this allows us to calculate $\Lcal((g+1)\infty_- + (g+1+d)\infty_+)$ and to finish the computation.
+\end{proof}
+
+\subsection{Parameters at $J$}
+\label{subs:paramj}
+Being able to calculate in the Jacobian, we can move on to the final ingredient for explicit computations: parameters at points of $J$. For any nice curve $C$ over $\Z$, smooth over $\Z_{(p)}$, with a $\Z$-point $b$, we have a birational map from $C^{(g)}$, the $g$-fold symmetric product of $C$, to $J$, given on points by sending $[(P_1,\dots,P_g)]$ to $[\sum P_i - gb]$. This map is \'etale at $[(P_1,\dots,P_g)]$ if $H^0(P_1 + \cdots + P_g)$ has dimension $1$ \todo{find a reference for this}, and if all $P_i$ are distinct, then the map $C^g \to C^{(g)}$ is \'etale at $P_1,\dots,P_g$ as well. Then finding parameters at $x := \sum P_i - gb$ just comes down to finding parameters at each of the $P_i$. In our case of a hyperellptic curve, this is just an easy computation.
+
+Tell about how $J(\Z_p)_x$ is now parametrised as the product of $C(\Z_p)_{P_i}$, \todo{what this means for mod $p^2$}
+
 Say something about how with just this map and Mascots code, one can already find the $\overline{\kappa^* f_i} $ and compute an upper bound for $C(\Z)_P$ using brute force.
 
-\subsection{Speeding up the calculations}
 Say something about how one express an element in $J(\Z/p^2\Z)_0$ on the basis in something like $O(g)$ hopefully (ignoring the time for adding,multiplying, et cetera in the Jacobian), identify $J(Z/p^2)_0$ with $F_p^g$ using $g$ generators of the ideal of the zero section of $J_{Z/p^2}$, then the group structure that $J$ induces on $F_p^g$ is the usual addition. This is currently done using code from Mascot. Say what the final complexity is.
 
-\subsection{An explicit example}
+\section{An explicit example}
 Treat the example in ExChabauty.gp.
 
-\section{The Poincare torsor}
-Define and cite theorems about the Poincare Torsor
-
-\section{Quadratic Chabauty using the Poincare torsor}
-Explain how to do Chabauty in the case $r < g + \rho - 1$, where $\rho$ is the N\'eron-Severirank.
-
-\section{Implementations of quadratic Chabauty and an explicit example}
-Explain something about implementing quadratic Chabauty.
+\section{Quadratic Chabauty}
+Maybe treat how the Poincare torsor fits into this context; perhaps give an overview? Not sure if I can say enough while keeping it interesting. I would like to give a simpler introduction to \citep{edixhoven20}, saying a few things about the similarities and differences with linear Chabauty. I am not going to go in much detail, and am not going to do an example.
 
 \newpage
 \bibliographystyle{alpha}

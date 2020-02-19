@@ -8,8 +8,6 @@ Generalise 4.12 to deal with calculations modulo higher powers of p. Do this usi
 * Newton polytopes, if they exist
 * Generalising the proof of 4.12, and work with (I : p^{\infty}) = Z_p<> \cap (Q_p \tensor I). Does that last trick always work? I.e, if Hom(Z_p<>/I,Z_p) is finite, is Z_p<>/(I : p^\infty) a fin. gen. Z_p module? Or maybe less strict: can we always determine this using some finite precision?
 
-
-
 Write a remark about the Edixhoven method versus the Coleman method
 
 Write about the Jacobian, and computing J(Z)_0 (complexity?). Maybe Jacobian Varieties by Milne in Arithmetic Geometry, Cornell & Silverman
