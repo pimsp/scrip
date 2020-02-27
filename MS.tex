@@ -24,6 +24,7 @@
 \usepackage[square, longnamesfirst,numbers]{natbib}
 \usepackage[ruled,linesnumbered]{algorithm2e}
 \usepackage{todonotes}
+\usepackage[all]{nowidow}
 
 %\usepackage{hyperref}
 \usepackage{amstext} % for \text macro
@@ -152,7 +153,7 @@ P.\ Spelier
 \vspace{1em} 
 
 {\LARGE\bf 
-A geometric approach to linear and quadratic Chabauty
+A geometric approach to linear Chabauty
 } 
 
 \vspace{10em} 
@@ -205,9 +206,9 @@ Before it was proven, one of the major partial results was a theorem from Chabau
 
 This was later made into an effective argument by Coleman in 1985. This was done by finding explicitly, as a power series, a differential form $\omega$ on $J_{\Z_p}$ whose Coleman integral vanishes on $J(\Z)$. Pulling $\omega$ back to $C_{\Z_p}$ and looking at the fibre of reduction to a single $\F_p$-point $P$, one can in certain cases give an upper bound for the number of points in $C(\Z)$ reducing to $P$ based only on finite-precision calculations of $\omega$.
 
-This Coleman-Chabauty method has been greatly generalised by Kim to so called non-abelian Chabauty. He interprets working in the Jacobian as dealing with the abelianised fundamental group of the curve $C$, and works with larger, non-abelian quotients of the fundamental group. Using quadratic Chabauty, a special case of non-abelian Chabauty, Balakrishnan, Dogra, M\"uller, Tuitman and Vonk famously calculated in May of 2019 all rational points of the ``cursed curve'', the modular curve $X_s(13)$. They use an endomorphism of the Jacobian, and do $p$-adic analysis on $p$-adic local height to accomplish this fact. \todo{Bas, is dit de goede samenvatting? Voornamelijk mijn vraag: is het nog steeds een specifiek geval van Coleman-Chabauty?}
+This Coleman-Chabauty method has been greatly generalised by Kim to so called non-abelian Chabauty. He interprets working in the Jacobian as dealing with the abelianised fundamental group of the curve $C$, and works with larger, non-abelian quotients of the fundamental group. Using quadratic Chabauty, a special case of non-abelian Chabauty, Balakrishnan, Dogra, M\"uller, Tuitman and Vonk famously mcalculated in May of 2019 all rational points of the ``cursed curve'', the modular curve $X_s(13)$. They use an endomorphism of the Jacobian, and do $p$-adic analysis on $p$-adic local heights to make non-abelian Chabauty explicit. \todo{Bas, is dit de goede samenvatting? Voornamelijk mijn vraag: is het nog steeds een specifiek geval van Coleman-Chabauty?}
 
-Very recently, Edixhoven and Lido made available a preprint of their article ``Geometric quadratic Chabauty''. Their goal in this article is to make a more geometric approach to quadratic Chabauty, by working in a pullback $T$ of the Poincar\'e torsor of the Jacobian. They also abandon the Coleman method for Chabauty; instead they parametrise the map $T(\Z) \to T(\Z_p)$ with power series, and pull back equations for the curve along this map. 
+Very recently, Edixhoven and Lido made available a preprint of their article ``Geometric quadratic Chabauty''. Their goal in this article is to make a more geometric approach to effective quadratic Chabauty, by working in a pullback $T$ of the Poincar\'e torsor of the Jacobian. They also abandon the Coleman method for Chabauty; instead they parametrise the map $T(\Z) \to T(\Z_p)$ with power series, and pull back equations for the curve along this map. 
 
 The purpose of this thesis is to make the work bij Edixhoven and Lido more accessible by applying geometric Chabauty to the linear case, i.e. when working with $J(\Z)$ and $J(\Z_p)$. In this thesis, we go into more detail of what is happening throughout the process, including both theoretical and practical components. We hope to provide the reader with a clear overview of geometric Chabauty, and a new way to do explicit computations.
 
@@ -217,17 +218,36 @@ We first present the context in which we will perform Chabauty. Let $p>2$ be a p
 \begin{defn}
 Let $S$ be a scheme, $T \to U$ a morphism of schemes and $x : T \to S$ a $T$-point. We define $S(U)_x$ as the morphisms from $U$ to $S$ that, after precomposing with $T \to U$, give $x$.
 \end{defn}
+\begin{exmp}
+If we have a projective variety $X$ over $\Z$, then $X(\Z)$ is in bijection with $X(\Q)$. The natural map $X(\Z) \to X(\F_p)$ reduces a point modulo $p$ and for $x \in X(\F_p)$, the set $X(\Z)_x$ consists of the $\Z$-points reducing to $x$.
+\end{exmp}
 
-We want to find an upper bound for the cardinality of $C(\Z)_P$.
+Geometric chabauty works by finding an upper bound for the cardinality of $C(\Z)_P$. For this, we use the following diagram.
+\[
+\begin{tikzcd}
+C(\Z)_P \arrow[d] \arrow[r, "a"] & J(\Z)_t \arrow[d] \\
+C(\Z_p)_P \arrow[r]              & J(\Z_p)_t        
+\end{tikzcd}
+\]
+where the two vertical maps are inclusions, and the two horizontal maps are subtraction of $b$. We will in fact compute upper bounds for the larger set $C(\Z_p)_P \cup \overline{J(\Z)_t}$, where $\overline{J(\Z)_t}$ is the closure of $J(\Z)_t$ in $J(\Z_p)_t$. 
+
+In Section~\ref{section:smoothzppoints}, we treat the structure of $C(\Z_p)_P$ and $J(\Z_p)_t$; we will show that, after choosing parameters, they are canonically in bijection with respectively $\Z_p$ and $\Z_p^g$. We also discuss the resulting map $\Z_p \to \Z_p^g$.
+
+In Section~\ref{section:kappa} we further look at the map $J(\Z)_t \to J(\Z_p)_t$. This is a translation of the group morphism $J(\Z)_0 \to J(\Z_p)_0$ between kernels of reduction; it turns out that for our choice of $p$, the subgroup $J(\Z)_0$ is free of rank $r$. We study the properties of the resulting map $\Z^r \to \Z_p^g$, using the theory of formal groups to determine the group structure on $\Z_p^g$ induced by the bijection $J(\Z_p)_t \to \Z_p^g$.
+
+In Section~\ref{section:intersection}, we put all of this information together, culminating in several methods to compute upper bounds on $\left|C(\Z_p)_P \cup \overline{J(\Z)_t}\right|$ with finite precision calculations.
+
+These methods are not always guaranteed to prove finiteness of $C(\Z)_P$. In Section~\ref{section:remarks} we treat several possible complications and improvements, partially with explicit examples. We also look at the specific case of calculations modulo $p$, i.e. in $J(\Z/p^2\Z)_t$, in which the theory simplifies. \todo{Bas, wat vind je van het bestaan van dit hoofdstuk?}
+
+Next, in Section~\ref{section:explicit} we focus on how to perform these calculations happening in the Jacobian. Here, we use Makdisi's approach of representing a divisor by a subspace of a large Riemann-Roch space. We partially follow the article \citep{mascot2018} by Mascot, and also give an original algorithm for explicitly computing the map $C(\Z_p)_P \to J(\Z_p)_t$ in Makdisi's representation.
+
+We end with an explicit example in Section~\ref{section:example}, a genus $2$ curve whose Jacobian has Mordell-Weil rank $1$. We use both Magma and Pari/GP to do our calculations, and end up with a complete list of all rational points of the curve.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\section{Linear Chabauty}
-\label{section:linchab}
-
 % Say something about smooth schemes over Z_p, and their Z_p points
-\subsection{Points on a smooth scheme over \texorpdfstring{$\Z_p$}{Z\_p}}
-\label{subs:smoothzppoints}
+\section{Points on a smooth scheme over \texorpdfstring{$\Z_p$}{Z\_p}}
+\label{section:smoothzppoints}
 Let $X/\Z_p$ be a smooth scheme of relative dimension $d$, and let $x \in X(\F_p)$ be a point. Then $X(\Z_p)_x$ is in bijection with $\Z_p^d$. This bijection is given by choosing parameters at $x$; evaluating at $X(\Z_p)_x$ gives a bijection with $(p\Z_p)^d$, and then we divide by $p$. For putting up a nice framework to work in, we start with blowing up $X$ at $x$.
 %TODO: give proof and define $\Z_p\angle{z_1,...,z_r}$ as the $p$-adic completion of $\Z_p[z_1,...,z_r]$, i.e. powerseries which are polynomials modulo every power of $p$.
 
@@ -269,8 +289,20 @@ TODO: give proof.
 
 Finally, we look at the specific case of $X$ being of relative dimension $1$ over $\Z_p$. It then turns out that there is additionally a free transitive $\F_p$-action on $X(\Z/p^2\Z)_0$. [TODO: maybe replace this by an action of the tangent space of $X_{\F_p}$ at $x$]. We can parametrise $X(\Z/p^2\Z)_0$ by $t = t_1 : X(\Z/p^2\Z)_0 \to p\Z/p^2\Z$; write $P_{\lambda}$ for the point with $t$-value $\lambda p$. Then as Cartier divisor, the point $P_{\lambda}$ is defined by $t - \lambda p \in O(X_{\Z/p^2\Z})_x$, so $P_{\lambda} + P_{\mu}$ is defined by $(t-\lambda p)(t-\mu p) = t^2 - (\lambda + \mu)tp$, which defines the same Cartier divisor as $P_{\lambda'} + P_{\mu'}$ if and only if $\lambda + \mu = \lambda' + \mu'$. So as a Cartier divisor, $P_{\lambda} + P_{\mu}$ is in fact equal to $P_{\lambda'} + P_{\mu'}$.
 
-\subsection{From \texorpdfstring{$J(\Z)$}{J(Z)} to \texorpdfstring{$J(\Z_p)$}{J(Z\_p)}}
-For $p > 2$, we know that the torsion of $J(\Z)$ injects into $J(\F_p)$, by Proposition 2.3 of \cite{pierre2000}. Hence for $0 \in J(\F_p)$, we know $J(\Z)_0$ is as a group isomorphic to $\Z^r$ with $r$ the Mordell-Weil rank. By assumption, we also know $J(\Z)_t$ is in bijection with $J(\Z)_0$, with the bijection giving by translating with a lift of $t$. By Subsection \ref{subs:smoothzppoints} we know $J(\Z_p)_t$ is in bijection with $\Z_p^{g}$, with the bijection given by evaluating parameters and dividing by $p$. Let $\kappa: \Z^r \to \Z_p^g$ be the map resulting from the inclusion $J(\Z)_t \to J(\Z_p)_t$. Then $\kappa$ turns out to have a special property.
+\subsection{From \texorpdfstring{$C(\Z_p)$}{C(Z\_p)} to \texorpdfstring{$J(\Z_p)$}{J(Z\_p)}}
+\label{subsection:czptojzp}
+We know that $C(\Z_p)_P$ is in bijection with $\Z_p$, again with the bijection given by evaluating a parameter and dividing by $p$. The resulting function $\Z_p \to \Z_p^g$ is linear and non-constant modulo $p$, i.e. there are power series $f_1,\dots,f_{g-1} \in \Z_p\angle{z_1,...,z_g}$ such that the image of $C(\Z_p)_P$ is exactly given by $V(f_1,...,f_{g-1})$, and all $f_i$ are linear modulo $p$. Another way to think of this, is as $C(\Z/p^2\Z)_P$ being an affine line inside $J(\Z/p^2\Z)_t$.
+TODO: give proof. This uses the functoriality of smooth $\Z_p$-points reducing to a point. That $C(\Z/p^2\Z)_P$ is an affine line inside $J(\Z/p^2\Z)_t$ can also be seen more easily, using Lemma~\ref{lem:smoothpointsfunc}. 
+% Say something about the f_i defining C(Z_p) in J(Z_p)
+
+\begin{rem}
+\label{rem:fislinear}
+We can pick our parameters right such that $C(\Z_p)_P \to J(\Z_p)_t$ is given by $\Z_p \to \Z_p^g$, mapping $\Z_p$ to the last coordinate. Then $f_1,\dots,f_{g-1}$ are just the other parameters at $t$, so they are linear.
+\end{rem}
+
+\section{From \texorpdfstring{$J(\Z)$}{J(Z)} to \texorpdfstring{$J(\Z_p)$}{J(Z\_p)}}
+\label{section:kappa}
+For $p > 2$, we know that the torsion of $J(\Z)$ injects into $J(\F_p)$, by Proposition 2.3 of \cite{pierre2000}. Hence for $0 \in J(\F_p)$, we know $J(\Z)_0$ is as a group isomorphic to $\Z^r$ with $r$ the Mordell-Weil rank. By assumption, we also know $J(\Z)_t$ is in bijection with $J(\Z)_0$, with the bijection giving by translating with a lift of $t$. By Subsection \ref{section:smoothzppoints} we know $J(\Z_p)_t$ is in bijection with $\Z_p^{g}$, with the bijection given by evaluating parameters and dividing by $p$. Let $\kappa: \Z^r \to \Z_p^g$ be the map resulting from the inclusion $J(\Z)_t \to J(\Z_p)_t$. Then $\kappa$ turns out to have a special property.
 
 \begin{thm}
 \label{thm:kappanice}
@@ -280,7 +312,7 @@ There are uniquely determined $\kappa_1,\dots,\kappa_g \in \Z_p\angle{z_1,...,z_
 We will prove this using results about formal group as defined in \citep{honda70}. To be able to use this theory, we first give some results about going from a group scheme over $\Z_p$ to a formal group.
 First we introduce some notation that will be used in this section. Let $R$ be a commutative ring, and $x = (x_1,\dots,x_n)$ and sometimes $y,z$ are vectors of variables. Then $R[[x]]$ denotes as usual the powerseries in the $x_i$, and $R[[x]]_0$ denotes those power series with constant term $0$. With $x = (x_1,\dots,x_n)$ and $y = (y,_1,\dots,y_m$), let $f \in R[[x]]^m$ and assume $f(0) = 0$. Then for $g \in R[[y]]^k$ for some $k\in\Z_{\geq 0}$, we can compose $g$ and $f$ to get $g\circ f := (g_1(f(x)),\dots,g_k(f(x)))\in R[[x]]]^k$. This definition makes sense because $f^i$ converges to $0$, so for any $a \in R^{\Z_{\geq 0}} $ the sum $\sum_i a_i f^i$ always converges. 
 
-\subsubsection{From group schemes to formal groups}
+\subsection{From group schemes to formal groups}
 We first recall the definition of a formal group. For this entire section, $R$ is a ring, and $x,y,z$ are vectors of variables.
 \begin{defn}
 \label{defn:formalgroup}
@@ -380,28 +412,18 @@ This immediately gives rise to the following corollary.
 The map $\kappa$ extends uniquely to a continuous map $\kappa: \Z_p^r \to \Z_p^g$, given by the same power series, and the closure $\overline{J(\Z)_t} \subset J(\Z_p)_t$ is given by the image of $\Z_p^r$ under $\kappa$.
 \end{cor}
 
-\subsection{From \texorpdfstring{$C(\Z_p)$}{C(Z\_p)} to \texorpdfstring{$J(\Z_p)$}{J(Z\_p)}}
-\label{subsection:czptojzp}
-By Subsection \ref{subs:smoothzppoints}, we also know that $C(\Z_p)_P$ is in bijection with $\Z_p$, again with the bijection given by evaluating a parameter and dividing by $p$. The resulting function $\Z_p \to \Z_p^g$ is linear and non-constant modulo $p$, i.e. there are power series $f_1,\dots,f_{g-1} \in \Z_p\angle{z_1,...,z_g}$ such that the image of $C(\Z_p)_P$ is exactly given by $V(f_1,...,f_{g-1})$, and all $f_i$ are linear modulo $p$. Another way to think of this, is as $C(\Z/p^2\Z)_P$ being an affine line inside $J(\Z/p^2\Z)_t$.
-TODO: give proof. This uses the functoriality of smooth $\Z_p$-points reducing to a point. That $C(\Z/p^2\Z)_P$ is an affine line inside $J(\Z/p^2\Z)_t$ can also be seen more easily, using Lemma~\ref{lem:smoothpointsfunc}. 
-% Say something about the f_i defining C(Z_p) in J(Z_p)
-
-\begin{rem}
-\label{rem:fislinear}
-We can pick our parameters right such that $C(\Z_p)_P \to J(\Z_p)_t$ is given by $\Z_p \to \Z_p^g$, mapping $\Z_p$ to the last coordinate. Then $f_1,\dots,f_{g-1}$ are just the other parameters at $t$, so they are linear.
-\end{rem}
-
-\subsection{Finding \texorpdfstring{$C(\Z)$}{C(Z)}}
+\section{Computing the intersection}
+\label{section:intersection}
 Clearly, as subsets of $J(\Z_p)_t$, we have the inclusion $C(\Z)_P \subset C(\Z_p)_P \cap \overline{J(\Z)_t}$. The theory we have built so far enables the following method, which is in sharp contrast with Colemans method; instead of pulling back equations for $\overline{J(\Z)_t}$ to $C(\Z_p)_P$, we pull back equations for $C(\Z_p)_P$ to $\overline{J(\Z)_t}$ to arrive at the following theorem.
 \begin{thm}
-Let $C,J,p,P,t$ be as in Section~\ref{section:linchab}, let $\kappa$ be as in Theorem~\ref{thm:kappanice} and let $f_1,\cdots,f_{g-1}$ be as in Subsection~\ref{subsection:czptojzp}. Define $\lambda_1 = \kappa^*f_1,\dots,\lambda_{g-1} = \kappa^*f_{g-1}$ to be the pullbacks along $\kappa$ of the $f_i$. Then $\kappa$ induces a surjection from $Z(\lambda_1,\dots,\lambda_{g-1})$ to $C(\Z_p)_P \cap \overline{J(\Z)_t}$.
+Let $C,J,p,P,t$ be as in the overview, let $\kappa$ be as in Theorem~\ref{thm:kappanice} and let $f_1,\cdots,f_{g-1}$ be as in Subsection~\ref{subsection:czptojzp}. Define $\lambda_1 = \kappa^*f_1,\dots,\lambda_{g-1} = \kappa^*f_{g-1}$ to be the pullbacks along $\kappa$ of the $f_i$. Then $\kappa$ induces a surjection from $Z(\lambda_1,\dots,\lambda_{g-1})$ to $C(\Z_p)_P \cap \overline{J(\Z)_t}$.
 \end{thm}
 
 The $\lambda_i$ are in general not computationally available, as they are power series, but we can approximate them modulo powers of $p$. For example, we know that the $\lambda_i$ are linear modulo $p$. And in particular, if $f_1,\dots,f_{g-1}$ are as in Remark~\ref{rem:fislinear}, then $\lambda_i = \kappa_i$ for $i \leq g-1$, so they are also of degree at most $m$ modulo $p^m$ for $m < p-1$. Knowing this, we can compute $\lambda_i$ modulo powers of $p$ by extrapolation, and the following lemma, an immediate consequence of Lagrange interpolation, tells us how.
 \begin{lem}
 \label{lem:interpolate}
 Let $R$ be a ring, and assume operations in $R$ are $O(1)$, $f \in R[x]$ with $x = (x_1,\dots,x_n)$ a polynomial of degree at most $m$, and $S$ a subset of $R$ with $S-S \subset \{0\} \cup R^*$ and $|S| > m$. Then $f$ is uniquely determinable in $O(nm^{n+1})$ by its values on $S^n$.
-\end{lem} %complexity easily 
+\end{lem}
 \begin{proof}
 Both uniqueness and construction follow from the case with $n=1$; uniqueness from the fact that the ideals $\{(x-s) \mid s \in S\}$ are pairwise coprime, and the construction is Lagrange interpolation. The complexity follows easily from induction on $n$ and the formula for Lagrange interpolation.
 \end{proof}
@@ -413,22 +435,17 @@ By Theorem 4.12 of Edixhoven-Lido, we just need to check whether $\overline{A}/\
 
 
 \section{Complications and improvements}
+\label{section:remarks}
 \begin{itemize}
 \item $\overline{J(\Z)_0}$ open in $J(\Z_p)_0$.
 \item Calculations in $J(\Z)$.
 \item According to McCallum\&Poonen, it can be that $J(\Z)_0$ and $C(\Z)_P$ are tangent as $p$-adic manifolds and then finite-precision calculations will never be enough. I don't see what's happening there. Maybe give an example? 
 \item It is possible that $C(\Z_p)_P \cap \overline{J(\Z)_t}$ is bigger than $C(\Z)_P$; give an example. Refer to \citep{Balakrishnan19}.
 \item Explain Mordell-Weil sieve. Maybe "The Mordell-Weil sieve: Proving non-existence of rational points on curves" for a short explanation? Nice to also treat this in the final example.
-\item in general, generators of the Mordell-Weil group are computationally out of reach. But, if we only generate a subgroup of $J(\Z)_0$ of index finite and coprime to $p$, then the closure of this in $J(\Z_p)_0$ will be the same. This happens in particular if we generate a subgroup of $J(\Z)$ of index finite and coprime to $p|J(\F_p)|$. Preferably, find a source for this?
+\item in general, generators of the Mordell-Weil group are computationally out of reach. But, if we only generate a subgroup of $J(\Z)_0$ of index finite and coprime to $p$, then the closure of this in $J(\Z_p)_0$ will be the same. This happens in particular if we generate a subgroup of $J(\Z)$ of index finite and coprime to $p|J(\F_p)|$. Preferably, find a source for this? Bas, do you have a reference for the complexity of such calculations?
 \end{itemize}
 
-\subsection{Calculations modulo \texorpdfstring{$p^2$}{p\^2}}
-Say something about how, for the right set of points $\{p_1,...,p_g\}$, the map $C^{g} \to J$ is etale at that set of points. Then say something about what that implies about $J(\Z_p)_0$ (equal to $\sum q_i - p_i$ where $q_i \in C(\Z_p)_{p_i}$), and $J(\Z/p^2\Z)_0$, which becomes isomorphic as vector spaces to $\F_p^g$, and how we can find $\kappa$ by expressing elements of $J(\Z)_0$ in that basis, and similarly $f_1,...,f_{g-1}$ by finding $P_1 - P_2$ in that basis for some $Q_1,Q_2 \in C(\Z/p^2\Z)_P$ not equal.
-
-An important part of this, is that there is a parametrisation $P_\mu, \mu \in \F_p$ of the points in $C(\Z/p^2\Z)_P$ such that $P_\mu + P_\nu = P_{\mu + \nu} + P_0$ as Cartier divisors.
-
-\section{Implementations of linear Chabauty and an explicit example}
-[TODO: make sure I clearly differentiate divisors and divisor classes]
+\section{Implementations of linear Chabauty}
 We now assume that $C$ is hyperelliptic, i.e. given by the degree $2g+2$ homogenisation of an equation of the form
 \[
 y^2 = f(x)
@@ -532,7 +549,11 @@ Of course, we can rewrite $\Lcal(D_0 -D)$ as
 \Lcal((g+1)\infty_- + (g+1+d)\infty_+ - D_{\text{aff}}) = \Lcal(2D_0 - D_{\text{aff}} ) \cap \Lcal((g+1)\infty_- + (g+1+d)\infty_+).
 \]
 
-We first calculate $\Lcal(2D_0 - D_{\text{aff}})$. Note that \todo{Compute this, currently talking with Mascot about this.}
+We first calculate $\Lcal(2D_0 - D_{\text{aff}})$. Both over $\Q_p$ and over $\F_p$ we have the equality
+\[
+\Lcal(2D_0 - D_{\text{aff}) = a(x)\Lcal((2g+2-d)(\infty_- + \infty_+)) + (y-b(x))\Lcal((g+1)(\infty_- + \infty_+))
+\]
+and then it should follow over $\Z_p$ so over $\Z/p^k\Z$. \todo{Give more details, currently talking with Mascot about this.}
 
 For $\Lcal((g+1)\infty_- + (g+1+d)\infty_+)$, we first inductively calculate $W_n := \Lcal(2D_0 - n\infty_-)$. For $W_1$ we have a basis $1,x,\dots,x^{2g+1},y,xy,\dots,x^g y, x^{g+1}y+x^{2g+2}$, and for $n \geq 0$ we have by a simple use of Lemma 2.2 of \citep{makdisi04} that for $1 \leq n \leq g+1$ we have $W_{n} = \{s \in \Lcal(2D_0) \mid s\Lcal(2D_0) \in W_1 \cdot W_{n-1}\}$. This is a purely linear constraint, hence simple linear algebra allows us to calculate all $W_n$ for $n \leq g+1$. Finally, we have
 \[
@@ -543,19 +564,28 @@ Once again noting that we can write down an explicit basis for $\Lcal((g+1+d)(\i
 
 \subsection{Parameters at $J$}
 \label{subs:paramj}
-Being able to calculate in the Jacobian, we can move on to the final ingredient for explicit computations: parameters at points of $J$. For any nice curve $C$ over $\Z$, smooth over $\Z_{(p)}$, with a $\Z$-point $b$, we have a birational map from $C^{(g)}$, the $g$-fold symmetric product of $C$, to $J$, given on points by sending $[(P_1,\dots,P_g)]$ to $[\sum P_i - gb]$. This map is \'etale at $[(P_1,\dots,P_g)]$ if $H^0(P_1 + \cdots + P_g)$ has dimension $1$ \todo{find a reference for this}, and if all $P_i$ are distinct, then the map $C^g \to C^{(g)}$ is \'etale at $P_1,\dots,P_g$ as well. Then finding parameters at $x := \sum P_i - gb$ just comes down to finding parameters at each of the $P_i$. In our case of a hyperellptic curve, this is just an easy computation.
+Being able to calculate in the Jacobian, we can move on to the final ingredient for explicit computations: parameters at points of $J$. For any nice curve $C$ over $\Z$, smooth over $\Z_{(p)}$, with a $\Z$-point $b$, we have a birational map from $C^{(g)}$, the $g$-fold symmetric product of $C$, to $J$, given on points by sending $[(P_1,\dots,P_g)]$ to $[\sum P_i - gb]$. This map is \'etale at $[(P_1,\dots,P_g)]$ if $H^0(P_1 + \cdots + P_g)$ has dimension $1$ \todo{find a reference for this}, and if all $P_i$ are distinct, then the map $C^g \to C^{(g)}$ is \'etale at $P_1,\dots,P_g$ as well. Then finding parameters $t_1,\dots,t_g$ at $Q := [\sum_{i=1}^g P_i - gb]$ just comes down to finding parameters at each of the $P_i$. In our case of a hyperellptic curve, this is just an easy computation; for a point $(a,b)$ on the first affine chart, we can take $x-a$ if $b$ is non-zero and $y$ if $a$ is zero.
 
-Tell about how $J(\Z_p)_x$ is now parametrised as the product of $C(\Z_p)_{P_i}$, \todo{what this means for mod $p^2$}
+This now means $J(\Z_p)_Q$ is parametrised as the product of $C(\Z_p)_{P_i}$. In particular, we have a bijection
+\[
+\prod_{i=1}^g C(\Z/p^k\Z)_{P_i} \to J(\Z/p^k\Z)_{Q}.
+\] As we are able to explicitly compute this map using the Abel-Jacobi map, and we are able to test equality in $J(\Z/p^k\Z)$, we can compute the map $(t_1,\dots,t_g): J(\Z/p^k\Z)_Q \to (\Z/p^{k-1}\Z)^g$.
+
+\todo{what this means for mod $p^2$}
 
 Say something about how with just this map and Mascots code, one can already find the $\overline{\kappa^* f_i} $ and compute an upper bound for $C(\Z)_P$ using brute force.
 
-Say something about how one express an element in $J(\Z/p^2\Z)_0$ on the basis in something like $O(g)$ hopefully (ignoring the time for adding,multiplying, et cetera in the Jacobian), identify $J(Z/p^2)_0$ with $F_p^g$ using $g$ generators of the ideal of the zero section of $J_{Z/p^2}$, then the group structure that $J$ induces on $F_p^g$ is the usual addition. This is currently done using code from Mascot. Say what the final complexity is.
+Say something about how one express an element in $J(\Z/p^2\Z)_0$ on the basis in something like $O(g)$ hopefully (ignoring the time for adding,multiplying, et cetera in the Jacobian), identify $J(\Z/p^2)_0$ with $\F_p^g$ using $g$ generators of the ideal of the zero section of $J_{\Z/p^2}$, then the group structure that $J$ induces on $\F_p^g$ is the usual addition. This is currently done using code from Mascot.
+
+\subsection{Complexity}
+Say what the final complexity is.
 
 \section{An explicit example}
-Treat the example in ExChabauty.gp.
+\label{section:example}
+Treat the example in ExChabauty.gp. Bas, what do I do with my code? Do I just paste it in at the end, give a link to the github page, or just not give it all?
 
 \section{Quadratic Chabauty}
-Maybe treat how the Poincare torsor fits into this context; perhaps give an overview? Not sure if I can say enough while keeping it interesting. I would like to give a simpler introduction to \citep{edixhoven20}, saying a few things about the similarities and differences with linear Chabauty. I am not going to go in much detail, and am not going to do an example.
+Maybe treat how the Poincare torsor fits into this context; perhaps give an overview? Not sure if I can say enough while keeping it interesting. I would like to give a simpler introduction to \citep{edixhoven20}, saying a few things about the similarities and differences with linear Chabauty. I am not going to go in much detail, and am not going to do an example. Bas, do you think this would be useful?
 
 \newpage
 \bibliographystyle{alpha}
