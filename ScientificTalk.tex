@@ -1,0 +1,425 @@
+\documentclass[15pt]{beamer}
+\usepackage[T1]{fontenc}
+\usepackage{multicol}
+\usepackage{ragged2e}   %new code
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{varioref}
+\usepackage[square,sort,comma,super,authoryear]{natbib}
+\usepackage{xmpmulti}
+\usepackage{epsfig}
+\usepackage{subcaption}
+\captionsetup{compatibility=false}
+\usepackage{ru,graphicx,hyperref,url} % 
+\usepackage{amsthm}
+\usepackage{eucal}
+\usepackage{amssymb}
+%\usepackage{mdsymbol}
+\usepackage{mathrsfs}
+\usepackage{dsfont}
+%\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{tikz,tikz-cd}
+\usepackage{wrapfig,lipsum,booktabs}
+\usepackage{caption}
+\usepackage[ruled,linesnumbered]{algorithm2e}
+\usepackage[all]{nowidow}
+
+%\usepackage{hyperref}
+\usepackage{amstext} % for \text macro
+\usepackage{array}   % for \newcolumntype macro
+\usepackage{mathtools}
+
+% Enable colored hyperlinks
+\hypersetup{colorlinks=true}
+
+% The following three lines are for crossmarks & checkmarks
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+\newcommand{\den}{\mathop{\mathgroup\symoperators den}\nolimits}
+\newcommand{\ggd}{\mathop{\mathgroup\symoperators ggd}\nolimits}
+\newcommand{\des}{\text{d.e.s.d.a.\ }}
+%\newcommand{\opg}{\text{d.e.s.d.a.\ }}
+\newcommand{\blokje}{\hfill $\Box$\\}
+%Om je bewijs of je antwoord af te sluiten.
+\newcommand{\header}[1]{\vspace{0.5cm}\framebox[\linewidth]{\textsc{Exercise #1}}\\}
+\newcommand{\deel}[1]{\textbf{#1)}\ }
+\newcommand{\macht}[1]{\mathcal{P}(#1)}
+\newcommand{\entier}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\G}{\mathbb{G}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\vx}{\mathbf{x}}
+\newcommand{\vy}{\mathbf{y}}
+\newcommand{\vz}{\mathbf{z}}
+\newcommand{\Fcal}{\mathcal{F}}
+\newcommand{\Lcal}{\mathcal{L}}
+\renewcommand{\O}{\mathcal{O}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\Pcal}{\mathcal{P}}
+\newcommand{\NP}{\mathcal{NP}}
+\newcommand{\NPC}{\mathcal{NPC}}
+\newcommand{\F}{\mathbb{F}}
+\renewcommand{\angle}[1]{\hspace{-2pt}\left\langle #1 \right\rangle}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand{\rad}{\text{rad}}
+\newcommand{\x}{x}
+\newcommand{\m}{\mathfrak{m}}
+\newcommand{\tensor}{\otimes}
+\newcommand{\Ring}{\textbf{Rings}}
+\newcommand{\Sets}{\textbf{Sets}}
+
+\DeclareMathOperator{\mon}{mon}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\trdeg}{trdeg}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\Fun}{Fun}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\sm}{sm}
+\DeclareMathOperator{\pr}{pr}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\MaxSpec}{MaxSpec}
+\DeclareMathOperator{\Spf}{Spf}
+\DeclareMathOperator{\sep}{sep}
+\DeclareMathOperator{\Ann}{Ann}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\Jac}{Jac}
+\let\S\undefined
+\DeclareMathOperator{\S}{S}
+\let\div\undefined
+\DeclareMathOperator{\div}{div}
+
+
+\addtobeamertemplate{block begin}{}{\justifying}
+\setbeamertemplate{section in toc}[sections numbered]
+\AtBeginSection[]
+{
+  \begin{frame}{Table of Contents}
+  \begin{multicols}{2}
+      \tableofcontents[currentsection]
+    \end{multicols}
+  \end{frame}
+
+}
+
+% The title of the presentation:
+%  - first a short version which is visible at the bottom of each slide;
+%  - second the full title shown on the title slide;
+
+\title[Geometric linear Chabauty]{Geometric linear Chabauty}
+
+% Optional: a subtitle to be dispalyed on the title slide
+% \subtitle{Show where you're from}
+
+% The author(s) of the presentation:
+%  - again first a short version to be displayed at the bottom;
+%  - next the full list of authors, which may include contact information;
+\author[Pim Spelier]{
+  Pim Spelier\\\medskip
+  {\small {spelier.pim@gmail.com}
+  }}
+
+% The institute:
+%  - to start the name of the university as displayed on the top of each slide
+%    this can be adjusted such that you can also create a Dutch version
+%  - next the institute information as displayed on the title slide
+\institute[Leiden University]{
+  Mathematical Institute \\
+  }
+
+% Add a date and possibly the name of the event to the slides
+%  - again first a short version to be shown at the bottom of each slide
+%  - second the full date and event name for the title slide
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+%\begin{frame}{Table of Contents}
+%    \begin{multicols}{2}
+%    \tableofcontents
+%    \end{multicols}
+%\end{frame}
+
+% Section titles are shown in at the top of the slides with the current section 
+% highlighted. Note that the number of sections determines the size of the top 
+% bar, and hence the university name and logo. If you do not add any sections 
+% they will not be visible.
+\section{Introduction}
+\begin{frame}
+    \frametitle{Introduction}
+    \framesubtitle{Problem}
+    \begin{block}{Problem}
+        Let $C_\Q$ a proper, smooth, geometrically connected curve over $\Q$ of genus $g \geq 2$. Find $C_\Q(\Q)$.
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Introduction}
+    \framesubtitle{Classical solutions}
+    $C_\Q$ a proper, smooth, geometrically connected curve over $\Q$ of genus $g \geq 2$.
+    \begin{block}{Faltings's theorem (1983)} 
+        $C_\Q(\Q)$ is finite.
+    \end{block}\pause
+    \begin{itemize}[<+->]
+	\item This is not effective.
+	\item Can be made effective by Chabauty.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Introduction}
+    \framesubtitle{Chabauty}
+    $C_\Q$ a proper, smooth, geometrically connected curve over $\Q$ of genus $g \geq 2$.\\
+    Let $J_\Q$ be the Jacobian of $C_\Q$, $p$ a prime of good reduction, $r$ the rank of Mordell-Weil group $J_\Q(\Q)$, $b\in C_\Q(\Q)$ and $j_b: C_\Q \to J_\Q$ subtracting $b$ on points.\\ \pause
+    \[
+\begin{tikzcd}[ampersand replacement=\&]
+C_\Q(\Q) \arrow[d] \arrow[r] \& J_\Q(\Q) \arrow[d] \\
+C_\Q(\Q_p) \arrow[r]              \& J_\Q(\Q_p)        
+\end{tikzcd}
+\]
+\vspace{50pt}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Introduction}
+    \framesubtitle{Chabauty}
+    $C_\Q$ a proper, smooth, geometrically connected curve over $\Q$ of genus $g \geq 2$.\\
+    Let $J_\Q$ be the Jacobian of $C_\Q$, $p$ a prime of good reduction, $r$ the rank of Mordell-Weil group $J_\Q(\Q)$, $b\in C_\Q(\Q)$ and $j_b: C_\Q \to J_\Q$ subtracting $b$ on points.\\ 
+    \[
+\begin{tikzcd}[ampersand replacement=\&]
+\& C_\Q(\Q) \arrow[d] \arrow[r] \& \overline{J_\Q(\Q)} \arrow[d] \arrow[r, no head] \& \dim r\\
+\dim 1 \arrow[r, no head] \& C_\Q(\Q_p) \arrow[r]              \& J_\Q(\Q_p)   \arrow[r, no head]  \& \dim g   
+\end{tikzcd}
+\]\pause
+    \begin{block}{Definition}
+        Let $C_\Q(\Q_p)_1 = C_\Q(\Q_p) \cap \overline{J_\Q(\Q)} \supset C_\Q(\Q)$.
+    \end{block}\pause
+\end{frame}
+
+\begin{frame}
+    \frametitle{Introduction}
+    \framesubtitle{Chabauty}
+    $C_\Q(\Q_p)_1 = C_\Q(\Q_p) \cap \overline{J_\Q(\Q)}$.
+    \begin{block}{Chabauty's theorem (1941)}
+        If $r < g$, then $C_\Q(\Q_p)_1$ is finite (and hence so is $C_\Q(\Q)$).
+    \end{block}\pause
+    Classically, Coleman-Chabauty (1985): find $1$-forms on $J_{\Q_p}$ whose Coleman integral vanish on the Mordell-Weil group $J_{\Q}(\Q)$, and pull back to $C_\Q$ to make effective.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Recent developments}
+    \framesubtitle{Kim-Chabauty and quadratic Chabauty}
+    \begin{itemize}[<+->]
+        \item Coleman has been generalised by Kim (2009), by replacing $J_\Q$ with Selmer variety.
+        \item Gives infinite chain\[ C_\Q(\Q_p)_1 \supset C_\Q(\Q_p)_2 \supset \cdots \supset C_\Q(\Q).\]
+        \item Quadratic Chabauty focuses on $C_\Q(\Q_p)_2$, which is finite if $r < g + \rho - 1$ where $\rho$ is the N\'eron-Severi rank of $J_\Q$
+        \item Used by Balakrishnan, Dogra, M\"uller, Tuitman, Vonk (2019) to calculate rational points of $X_s(13)$.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Recent developments}
+    \framesubtitle{Geometric quadratic Chabauty}
+    Edixhoven and Lido replace $J_\Q$ by $T$, another geometric object, and spread out over $\Z$.\\\pause
+    In contrast with Coleman-Chabauty, pull back equations for $C(\Z_p)$ inside $T(\Z_p)$ to $T(\Z)$. \\\pause
+    Question: what happens when we pull apply this to $J$, the linear case?\\\pause
+    Aim of thesis: describe what happens in the linear case +  heuristics + how to implement + example.
+\end{frame}
+
+\section{Setting and strategy}
+\begin{frame}
+    \frametitle{Setting}
+    $C/\Z_{(p)}$ proper, smooth curve with generic fibre $C_\Q$, with $p > 2$.\\\pause
+    $J/\Z_{(p)}$ relative Jacobian, with embedding $j_b: C \to J$, subtracting $b \in C(\Z_{(p)})$.\\\pause
+    $P \in C(\F_p)$ with $t = P - b \in J(\F_p)$ lifting to a $\Z_{(p)}$-point.\\\pause
+    Consider the diagram of residue discs:\[
+    \begin{tikzcd}[ampersand replacement=\&]
+        C(\Z_{(p)})_P \arrow[d] \arrow[r] \& J(\Z_{(p)})_t \arrow[d] \\
+        C(\Z_p)_P \arrow[r]              \& J(\Z_p)_t        
+    \end{tikzcd} \]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Strategy}
+    \[
+    \begin{tikzcd}[ampersand replacement=\&]
+        C(\Z_{(p)})_P \arrow[d] \arrow[r] \& J(\Z_{(p)})_t \arrow[d] \\
+        C(\Z_p)_P \arrow[r]              \& J(\Z_p)_t        
+    \end{tikzcd} \]
+    Strategy:
+    \begin{itemize}[<+->]
+        \item Describe $C(\Z_p)_P$ and $J(\Z_p)_t$
+        \item Describe the inclusion $C(\Z_p)_P \to J(\Z_p)_t  $
+        \item Describe the map $\kappa: J(\Z_{(p)})_t \to J(\Z_p)_t$
+    \end{itemize}
+\end{frame}
+
+\section{Method}
+\begin{frame}
+    \frametitle{$\Z_p$-points in a residue disc}
+    Let $X$ be a smooth $\Z_p$-scheme of relative dimension $n$. Let $x \in X(\F_p)$.\\\pause
+    Then $O_{X,x}$ has maximal ideal generated by $p$ and parameters $t_1,\dots,t_n$.
+    \begin{block}{Fact (generalisation of Hensel's Lemma)}
+    Evaluating $t = (t_1,\dots,t_n)$  gives a bijection $X(\Z_p)_x \to p\Z_p^n$.
+    \end{block}\pause
+    Dividing by $p$ gives $X(\Z_p)_x \xrightarrow{~} \Z_p^n$.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Abel-Jacobi map $C \to J$}
+    Hence $C(\Z_p)_P \to J(\Z_p)_t$ induces a map $\Z_p \to \Z_p^g$.
+    \begin{definition}
+    The ring $\Z_p\angle{x_1,\dots,x_n}$ consists of those elements of $\Z_p[[x_1,\dots,x_n]]$ converging on all of $\Z_p^n$.
+    \end{definition}
+    \begin{block}{Fact}
+    There are $f_1,\dots,f_{g-1} \in \Z_p\angle{x_1,\dots,x_{g}}$ whose zero-set cut out the image of $\Z_p \to \Z_p^g$. These are linear modulo $p$ and when the parameters are chosen correctly, are linear.
+    \end{block}\pause
+\end{frame}
+
+\begin{frame}
+    \frametitle{Inclusion Mordell-Weil group $J(\Z_{(p)})$}
+    What about $J(\Z_{(p)})_0 \to J(\Z_p)_0$? This is $\kappa: (\Z^r,+) \to (\Z_p^g,\oplus)$.\\\pause
+    Group structure on $J(\Z_p)_0 \cong p\Z_p^g$ given by formal group $F \in \Z_p[[\vx,\vy]]^g$.\pause
+    This induces a formal logarithm.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Logarithm}
+    \begin{block}{Proposition}
+    The formal logarithm for the formal group corresponding to $J(\Z_p)_0$ induces an isomorphism $\log_p: J(\Z_p)_0 = (\Z_p^g,\oplus) \to (\Z_p^g,+)$ with inverse $\exp_p$, with both $\exp_p,\log_p \in \Z_p\angle{x_1,\dots,x_{g}}^g$ linear mod $p$ (and also well behaved mod higher powers).
+    \end{block}\pause
+    \begin{block}{Theorem}
+    The map $\kappa: \Z^r \to \Z_p^g$ is given by $g$ convergent power series, linear mod $p$, and can hence be extended to $\kappa: \Z_p^r \to \Z_p^g$ with $\im \kappa = \overline{J(\Z_{(p)})_0}$
+    \end{block}\pause
+    Proof:\[
+    \begin{tikzcd}[ampersand replacement=\&]
+{(\Z^d,+)} \arrow[rr, "\kappa"] \arrow[rd, "\log_p \circ \kappa"] \&                                   \& {(\Z_p^g,\oplus)} \\
+                                                                  \& {(\Z_p^g,+)} \arrow[ru, "\exp_p"] \&                  
+\end{tikzcd}\]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Final theorems}
+    \begin{definition}
+        Let $\lambda_1,\dots,\lambda_{g-1} = \kappa^* f_1,\dots,\kappa^* f_{g-1} \in \Z_p\angle{x_1,\dots,x_r}$, i.e. the pullback to $\overline{J(\Z_{(p)})_P}$ of the equations defining $C(\Z_p)_P$ inside $J(\Z_p)_t$. Then $Z(\lambda_1,\dots,\lambda_{g-1}) \subset \Z_p^r$ surjects onto $C(\Z_p)_{1,P} = C(\Z_p)_P \cap \overline{J(\Z_{(p)})_t}$. \pause I.e., with $A = \Z_p\angle{x_1,\dots,x_r}/(\lambda_1,\dots,\lambda_{g-1})$, then $|C(\Z_{(p)})_P| \leq |\Hom(A,\Z_p)| = |Z(\lambda_1,\dots,\lambda_{g-1})|$
+    \end{definition}\pause
+    \begin{block}{Proposition (Edixhoven-Lido)}
+    If \[\overline{A} = \F_p[x_1,\dots,x_r]/(\overline{\lambda_1},\dots,\overline{\lambda_{g-1}})\] is finite, then $|\Hom(A,\Z_p)| \leq |\dim_{\F_p} \overline{A}|$
+    \end{block}\pause
+    Proof: $A$ is complete.\\\pause
+    Important: our $\lambda_i$ are linear mod $p$.
+\end{frame}
+
+\begin{frame}{Final theorems}
+    \begin{definition}
+        Let $\lambda_1,\dots,\lambda_{g-1} = \kappa^* f_1,\dots,\kappa^* f_{g-1} \in \Z_p\angle{x_1,\dots,x_r}$, i.e. the pullback to $\overline{J(\Z_{(p)})_P}$ of the equations defining $C(\Z_p)_P$ inside $J(\Z_p)_t$. Then $Z(\lambda_1,\dots,\lambda_{g-1}) \subset \Z_p^r$ surjects onto $C(\Z_p)_{1,P} = C(\Z_p)_P \cap \overline{J(\Z_{(p)})_t}$. I.e., with $A = \Z_p\angle{x_1,\dots,x_r}/(\lambda_1,\dots,\lambda_{g-1})$, then $|C(\Z_{(p)})_P| \leq |\Hom(A,\Z_p)| = |Z(\lambda_1,\dots,\lambda_{g-1})|$
+    \end{definition}
+    \begin{block}{Proposition (Single digit precision geometric linear Chabauty)}
+    If for all points $P \in C(\F_p)$, the linear system $\overline{\lambda_1}=\dots=\overline{\lambda_n} = 0$ defining $C(\Z_p)_P \subset J(\Z_p)_t$ pulled back to $\overline{J(\Z_{(p)})_t}$ has $n_P \leq 1$ solutions, we get the inequality
+    \[
+    |C_{\Q}(\Q)| = |C(\Z_{(p)})| \leq \sum_{P \in C(\F_p)} n_P \leq |C(\F_p)|. 
+    \]
+    \end{block}
+\end{frame}
+
+\section{Heuristics}
+\begin{frame}
+    \frametitle{Modelling}
+    Recall: for each point $P$ in $C(\F_p)$, we have an affine linear system of $g-1$ equations $\overline{\lambda_i} = 0$ in $r$ variables.\\\pause
+    Note: $\F_p[x_1,\dots,x_r]/(\overline{\lambda_1},\dots,\overline{\lambda_{g-1}})$ is finite $\Leftrightarrow \overline{\lambda_1} = \cdots = \overline{\lambda_{g-1}} = 0$ has 0 or 1 solution.\\\pause
+    If $P$ comes from a $\Z_{(p)}$ point, we model as random homogenous.\\\pause
+    Otherwise we assume it to be model as affine.\\\pause
+    Question: under these assumptions, what is the probability that our method gives a (good) upper bound?
+\end{frame}
+
+\begin{frame}
+    \frametitle{Random linear system}
+    \begin{block}{Lemma}
+    Let $A \in \Mat_{(n+k)\times n}(\F_q)$ be random. Then the probability of $A$ having non-trivial kernel is at most $\frac{1}{(p-1)p^k}$
+    \end{block}\pause
+    \begin{proof}
+    Denote the columns by $A_0,\cdots,A_{n-1}$, let $V_i = \angle{A_0,\dots,A_{i-1}}$ and denote $E_i$ for the event $A_i \in V_i$. Then 
+    \begin{align*}
+    \P(\ker A \not= 0) &= \P(E_0 \vee \cdots \vee E_{n-1}) \\
+                       &\leq \sum_{i=0}^{n-1} \P(E_i) \\
+                       &\leq \sum_{i=0}^{n-1} p^{i-(n+k)} \\
+                       &\leq \frac{1}{(p-1)p^k}.
+    \end{align*}
+    \end{proof}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Heuristic}
+    \begin{block}{Lemma}
+    Let $A \in \Mat_{(n+k)\times n}(\F_q)$ be random. Then the probability of $A$ having non-trivial kernel is at most $\frac{1}{(p-1)p^k}$
+    \end{block}
+    \begin{block}{Proposition}
+    Under all of our assumptions (+ some technical assumptions), single-digit-precision calculations don't work with probability at most\[
+    (|C(\Z_{(p)})|+2p^{-(g-r-1)})(p-1)^{-1}p^{-(g-r-1)}.
+    \]
+    \end{block}\pause
+    \begin{block}{Corollary}
+    We expect our method to work for a set of primes with density $1$; if $r < g-1$, for all but finitely many primes.
+    For $r < g-1$, we expect to find with probability at least $1/e$ the clearly optimal upper bound of $|C(\Z_{(p)})|$ for $|C(\Z_{(p)})|$.
+    \end{block}
+\end{frame}
+
+\section{Implementation}
+\begin{frame}
+    \frametitle{Implementation}
+    \framesubtitle{General remarks}
+    Parameters at $C$: easy.\\ \pause
+    Parameters at $J$: use birationality with $C^{(g)}$.\\ \pause
+    Problem: we need to easily represent elements of $J(\Z/p^2\Z)$\\\pause
+    Solution: Makdisi's representation
+\end{frame}
+
+\begin{frame}
+    \frametitle{Implementation}
+    \framesubtitle{Makdisi's representation}
+    Let $k$ be a field, and $C/k$ a curve.\\\pause
+    Let $D_0$ be an effective divisor of degree $d_0 \geq 2g+1$.\\\pause
+    Let $V = \Lcal(5D_0)$. Let $S$ be a set of points of size $\geq 5d_0 + 1$ on $C$ not meeting $D_0$, and note $V \hookrightarrow k^S$. \\\pause
+    Let $[x] \in J(k)$, pick $E\geq 0$ with $[x] = [D_0 - E]$, and represent $[x]$ by $\Lcal(2D_0 - E) \subset V \subset k^S$.\\\pause
+    This is non-unique, but equality can be tested. \\\pause
+    Also addition, subtraction, $\dots$. All linear algebra inside $V \subset k^S$.\\\pause
+    For $k = \F_p$ this lifts easily to $\Z/p^2\Z$; everything is a free $\Z/p^2\Z$-module inside $(\Z/p^2\Z)^S$, hence still just linear algebra.\\\pause
+    Hence all operations in $O(g^\omega) $ where $\omega = 2.37...$.
+\end{frame}
+
+\begin{frame}    
+    \frametitle{Implementation}
+    \framesubtitle{Complexity}
+    \begin{block}{Proposition}
+        If $C$ is hyperelliptic, the Abel-Jacobi map $C \to J$ can be computed in $O(g^\omega)$.
+    \end{block}\pause
+    
+    \begin{block}{Proposition}
+    	Assume we have a set of $r$ elements of $J(\Z_{(p)})$ that generate a subgroup of index finite and coprime to $p|J(\F_p)|$ (+ other technical assumptions). Then the complexity of executing single-digit-precision geometric linear Chabauty on hyperelliptic curves is $O(|C(\F_p)|rg^{\omega+1})$.
+    \end{block}\pause
+\end{frame}
+
+\begin{frame}
+    \frametitle{Example}
+    \begin{block}{Example}
+        \[C\colon y^2 = x^6 + 8x^5 + 22x^4 + 22x^3 + 5x^2 + 6x + 1\]
+        with $g = 2, r = 1$ and $|C_\Q(\Q)_{\text{known}}| = 6$. Choose $p = 5$. We find $|C(\Z_{(5)})| \leq 7$. By the hyperelliptic involution having two fixed points, $|C_\Q(\Q)|$ is even and hence $C_\Q(\Q)_{\text{known}} = C_\Q(\Q)$.
+    \end{block}
+\end{frame}
+
+
+\end{document}
+
